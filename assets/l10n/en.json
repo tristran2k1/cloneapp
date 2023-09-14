@@ -1,0 +1,18 @@
+{
+    "common_cancel":"Cancel",
+    
+    "log_in": "Log In",
+    "log_in_no_space": "Login",
+    "sign_up":"Sign Up",
+    "password":"Password",
+    "email":"Email",
+
+    "facebook":"Facebook",
+    "google":"Google",
+    
+    "welcome":"Hi, Welcome back!",
+    "or_login_with":"or log in with ",
+    "dont_have_account": "Don’t have an account? ",
+    "forgot_password":"Forgot password?",
+    "remember_me":"Remember me"
+}

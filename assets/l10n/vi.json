@@ -1,0 +1,18 @@
+{
+    "common_cancel":"Hủy",
+    
+    "log_in": "Đăng nhập",
+    "log_in_no_space": "Đăng nhập",
+    "sign_up":"Đăng ký",
+    "password":"Mật khẩu",
+    "email":"Email",
+ 
+    "facebook":"Facebook",
+    "google":"Google",
+    
+    "welcome":"Chào mừng bạn đến với Travo!",
+    "or_login_with":"hoặc đăng nhập với ",
+    "dont_have_account": "Bạn chưa có tài khoản? ",
+    "forgot_password":"Quên mật khẩu?",
+    "remember_me":"Ghi nhớ"
+}
