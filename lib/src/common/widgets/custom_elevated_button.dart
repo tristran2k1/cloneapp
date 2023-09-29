@@ -8,6 +8,9 @@ class CustomElevatedButton extends BaseButton {
     this.decoration,
     this.leftIcon,
     this.rightIcon,
+    this.contentPadding,
+    this.mainAxisContentAlignment,
+    this.isLoading = false,
     super.margin,
     super.onTap,
     super.buttonStyle,
@@ -22,6 +25,9 @@ class CustomElevatedButton extends BaseButton {
   final BoxDecoration? decoration;
   final Widget? leftIcon;
   final Widget? rightIcon;
+  final bool isLoading;
+  final EdgeInsets? contentPadding;
+  final MainAxisAlignment? mainAxisContentAlignment;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +36,7 @@ class CustomElevatedButton extends BaseButton {
 
   Widget get buildElevatedButtonWidget => Container(
         height: height ?? 50,
-        width: width ?? double.maxFinite,
+        width: width,
         margin: margin,
         decoration: decoration,
         child: ElevatedButton(
@@ -40,18 +46,37 @@ class CustomElevatedButton extends BaseButton {
                 shadowColor: Colors.transparent,
               ),
           onPressed: isDisabled ?? false ? null : onTap ?? () {},
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              leftIcon ?? const SizedBox.shrink(),
-              Text(
-                text,
-                style: buttonTextStyle ?? theme.textTheme.titleMedium,
-              ),
-              rightIcon ?? const SizedBox.shrink(),
-            ],
-          ),
+          child: isLoading
+              ? const CircularProgressIndicator(
+                  color: Colors.white,
+                )
+              : Padding(
+                  padding: contentPadding ?? EdgeInsets.zero,
+                  child: Row(
+                    mainAxisAlignment:
+                        mainAxisContentAlignment ?? MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      leftIcon ?? const SizedBox.shrink(),
+                      leftIcon != null || rightIcon != null
+                          ? Flexible(
+                              child: Text(
+                                overflow: TextOverflow.ellipsis,
+                                text,
+                                style: buttonTextStyle ??
+                                    theme.textTheme.titleMedium,
+                              ),
+                            )
+                          : Text(
+                              overflow: TextOverflow.ellipsis,
+                              text,
+                              style: buttonTextStyle ??
+                                  theme.textTheme.titleMedium,
+                            ),
+                      rightIcon ?? const SizedBox.shrink(),
+                    ],
+                  ),
+                ),
         ),
       );
 }

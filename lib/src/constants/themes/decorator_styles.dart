@@ -6,6 +6,10 @@ class AppDecoration {
   static BoxDecoration get fillBlueGray => BoxDecoration(
         color: appTheme.blueGray50,
       );
+
+  static BoxDecoration get fillGray400 => BoxDecoration(
+        color: appTheme.gray400,
+      );
   static BoxDecoration get fillBluegray100 => BoxDecoration(
         color: appTheme.blueGray100,
       );
@@ -20,6 +24,12 @@ class AppDecoration {
       );
   static BoxDecoration get fillWhiteA => BoxDecoration(
         color: appTheme.whiteA700,
+      );
+  static BoxDecoration get fillpuffyLittleCloud => BoxDecoration(
+        color: appTheme.puffyLittleCloud,
+      );
+  static BoxDecoration get fillindigo40001 => BoxDecoration(
+        color: appTheme.indigo40001,
       );
 
   // Gradient decorations
@@ -55,4 +65,10 @@ class BorderRadiusStyle {
   static BorderRadius get roundedBorder12 => BorderRadius.circular(12);
   static BorderRadius get roundedBorder20 => BorderRadius.circular(20);
   static BorderRadius get roundedBorder28 => BorderRadius.circular(28);
+  static BorderRadius get customBorderTL12 => const BorderRadius.only(
+      topLeft: Radius.circular(12), bottomRight: Radius.circular(12));
+  static BorderRadius get customBorderT12 => const BorderRadius.only(
+      topLeft: Radius.circular(12), topRight: Radius.circular(12));
+  static BorderRadius get customBorderT28 => const BorderRadius.only(
+      topLeft: Radius.circular(28), topRight: Radius.circular(28));
 }

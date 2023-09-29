@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:travo_app/src/common/widgets/custom_divider.dart';
+import 'package:travo_app/src/common/widgets/divider/custom_divider.dart';
 import 'package:travo_app/src/constants/constants.dart';
 
 // ignore: must_be_immutable

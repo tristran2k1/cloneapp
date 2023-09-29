@@ -11,12 +11,6 @@ enum AuthRoute {
 
 class AuthCoordinator extends BaseCoordinator {
   static final router = [
-    // GoRoute(
-    //   name: AuthRoute.logIn.name,
-    //   path: 'login',
-    //   pageBuilder: (context, state) =>
-    //       DefaultTransition(child: const LoginScreen()),
-    // ),
     GoRoute(
       name: AuthRoute.signUp.name,
       path: 'signup',
@@ -30,10 +24,6 @@ class AuthCoordinator extends BaseCoordinator {
           DefaultTransition(child: const ForgotPasswordScreen()),
     ),
   ];
-
-  void showSignInPage() {
-    goNamed(AuthRoute.logIn.name);
-  }
 
   void showSignUpPage() {
     goNamed(AuthRoute.signUp.name);

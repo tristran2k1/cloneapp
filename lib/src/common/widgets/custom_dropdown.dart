@@ -26,6 +26,7 @@ class CustomDropDown extends StatelessWidget {
     this.onChanged,
     this.labelText,
     this.labelStyle,
+    this.value,
   });
 
   final Alignment? alignment;
@@ -50,7 +51,7 @@ class CustomDropDown extends StatelessWidget {
   final bool? filled;
   final FormFieldValidator<String>? validator;
   final Function(String)? onChanged;
-
+  final String? value;
   @override
   Widget build(BuildContext context) {
     return alignment != null
@@ -73,6 +74,7 @@ class CustomDropDown extends StatelessWidget {
             borderRadius: BorderRadiusStyle.roundedBorder8,
           ),
           child: DropdownButtonFormField(
+            value: value,
             focusNode: focusNode ?? FocusNode(),
             icon: icon,
             autofocus: autofocus!,

@@ -1,18 +1,55 @@
 {
     "common_cancel":"Hủy",
+    "common_success":"Thành công",
     
     "log_in": "Đăng nhập",
     "log_in_no_space": "Đăng nhập",
     "sign_up":"Đăng ký",
     "password":"Mật khẩu",
     "email":"Email",
- 
+    "phone_number":"Số điện thoại",
+    "name":"Họ tên",
+    "country":"Quốc tịch",
+    "send":"Gửi",
+    "hotels":"Khách sạn",
+    "flights":"Chuyến bay",
+    "all":"Tất cả",
+    "see_all":"Tất cả",
+    "search":"Tìm kiếm",
+    "home":"Trang chủ",
+    "favourite":"Yêu thích",
+    "payment":"Thanh toán",
+    "user":"Cá nhân",
+
+    "hint_name":"Tên của bạn",
+    "popular_destinations":"Địa điểm phổ biến",
+
+    "please_enter_your_email":"Vui lòng nhập email của bạn",
+    "please_enter_your_password":"Vui lòng nhập mật khẩu của bạn",
+    "please_enter_your_name":"Vui lòng nhập họ tên của bạn",
+    "please_enter_your_phone_number":"Vui lòng nhập số điện thoại của bạn",
+    "please_enter_your_country":"Vui lòng nhập quốc tịch của bạn",
+    "please_enter_valid_email":"Vui lòng nhập email hợp lệ",
+    "please_enter_valid_password":"Vui lòng nhập mật khẩu hợp lệ",
+    "please_enter_valid_phone_number":"Vui lòng nhập số điện thoại hợp lệ",
+
     "facebook":"Facebook",
     "google":"Google",
     
+    "hi":"Chào",
     "welcome":"Chào mừng bạn đến với Travo!",
     "or_login_with":"hoặc đăng nhập với ",
     "dont_have_account": "Bạn chưa có tài khoản? ",
     "forgot_password":"Quên mật khẩu?",
-    "remember_me":"Ghi nhớ"
+    "remember_me":"Ghi nhớ",
+    "let_create_your_account":"Hãy tạo tài khoản nào!",
+    "or_sign_up_with":"hoặc đăng ký với",
+    "by_tapping_sign_up":"Bấm vào đăng ký là bạn đồng ý với",
+    "terms_and_conditions":"Điều khoản và Điều kiện",
+    "privacy_policy":"Chính sách riêng tư",
+    "and":"và",
+    "of_this_app":"của chúng tôi"   ,
+    "forgot_password_subtitle":"Bạn sẽ nhận được tin nhắn trong email của bạn",
+    "where_are_you_going_next":"Sắp tới bạn đi đâu?",
+    "search_destination":"Tìm kiếm địa điểm"
 }

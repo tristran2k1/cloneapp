@@ -6,6 +6,6 @@ class LocalizationState with _$LocalizationState {
   const factory LocalizationState.error(String message) =
       LocalizationStateError;
   const factory LocalizationState.waiting() = LocalizationStateWaiting;
-  const factory LocalizationState.changedLanguage(Locale locale) =
+  const factory LocalizationState.changedLanguage() =
       LocalizationStateChangedLanguage;
 }

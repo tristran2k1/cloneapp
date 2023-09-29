@@ -13,21 +13,25 @@ class AppBarWith2Text extends StatelessWidget {
       required this.header,
       required this.subscription,
       this.headerStyle,
-      this.subscriptionStyle});
+      this.subscriptionStyle,
+      this.leading});
   final String header;
   final String subscription;
 
   final Widget? child;
   final TextStyle? headerStyle;
   final TextStyle? subscriptionStyle;
+  final Widget? leading;
 
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
         SliverAppBar(
+          toolbarHeight: kToolbarHeight + customToolbarHeight,
           backgroundColor: Colors.transparent,
-          expandedHeight: 200,
+          expandedHeight: expandedHeight,
+          leading: leading,
           flexibleSpace: LayoutBuilder(builder: (context, constraints) {
             return FlexibleSpaceBar(
               centerTitle: true,
@@ -40,25 +44,21 @@ class AppBarWith2Text extends StatelessWidget {
             );
           }),
           actions: [
-            BlocBuilder<ThemeBloc, ThemeState>(
-              builder: (context, state) {
-                return IconButton(
-                    onPressed: () =>
-                        GetIt.I<ThemeBloc>().add(const ChangeThemePressed()),
-                    icon: const Icon(Icons.dark_mode));
-              },
-            ),
-            BlocBuilder<LocalizationBloc, LocalizationState>(
-              builder: (context, state) {
-                return IconButton(
-                    onPressed: () {
-                      print("object");
-                      GetIt.I<LocalizationBloc>()
-                          .add(const ChangeLanguageEvent(Locale('vi', '')));
-                    },
-                    icon: const Icon(Icons.language));
-              },
-            )
+            // BlocBuilder<ThemeBloc, ThemeState>(
+            //   builder: (context, state) {
+            //     return IconButton(
+            //         onPressed: () =>
+            //             GetIt.I<ThemeBloc>().add(const ChangeThemePressed()),
+            //         icon: const Icon(Icons.dark_mode));
+            //   },
+            // ),
+            // IconButton(
+            //     onPressed: () {
+            //       GetIt.I<LocalizationBloc>().add(
+            //         LocalizationEvent.changeLanguageEvent(context),
+            //       );
+            //     },
+            //     icon: const Icon(Icons.language))
           ],
         ),
         SliverToBoxAdapter(child: child),

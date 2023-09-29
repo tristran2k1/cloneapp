@@ -16,20 +16,20 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$LocalizationEvent {
-  Locale get locale => throw _privateConstructorUsedError;
+  BuildContext get context => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Locale locale) changeLanguageEvent,
+    required TResult Function(BuildContext context) changeLanguageEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Locale locale)? changeLanguageEvent,
+    TResult? Function(BuildContext context)? changeLanguageEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Locale locale)? changeLanguageEvent,
+    TResult Function(BuildContext context)? changeLanguageEvent,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -61,7 +61,7 @@ abstract class $LocalizationEventCopyWith<$Res> {
           LocalizationEvent value, $Res Function(LocalizationEvent) then) =
       _$LocalizationEventCopyWithImpl<$Res, LocalizationEvent>;
   @useResult
-  $Res call({Locale locale});
+  $Res call({BuildContext context});
 }
 
 /// @nodoc
@@ -77,13 +77,13 @@ class _$LocalizationEventCopyWithImpl<$Res, $Val extends LocalizationEvent>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? locale = null,
+    Object? context = null,
   }) {
     return _then(_value.copyWith(
-      locale: null == locale
-          ? _value.locale
-          : locale // ignore: cast_nullable_to_non_nullable
-              as Locale,
+      context: null == context
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
     ) as $Val);
   }
 }
@@ -96,7 +96,7 @@ abstract class _$$ChangeLanguageEventCopyWith<$Res>
       __$$ChangeLanguageEventCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Locale locale});
+  $Res call({BuildContext context});
 }
 
 /// @nodoc
@@ -110,13 +110,13 @@ class __$$ChangeLanguageEventCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? locale = null,
+    Object? context = null,
   }) {
     return _then(_$ChangeLanguageEvent(
-      null == locale
-          ? _value.locale
-          : locale // ignore: cast_nullable_to_non_nullable
-              as Locale,
+      null == context
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
     ));
   }
 }
@@ -124,14 +124,14 @@ class __$$ChangeLanguageEventCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ChangeLanguageEvent implements ChangeLanguageEvent {
-  const _$ChangeLanguageEvent(this.locale);
+  const _$ChangeLanguageEvent(this.context);
 
   @override
-  final Locale locale;
+  final BuildContext context;
 
   @override
   String toString() {
-    return 'LocalizationEvent.changeLanguageEvent(locale: $locale)';
+    return 'LocalizationEvent.changeLanguageEvent(context: $context)';
   }
 
   @override
@@ -139,11 +139,11 @@ class _$ChangeLanguageEvent implements ChangeLanguageEvent {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ChangeLanguageEvent &&
-            (identical(other.locale, locale) || other.locale == locale));
+            (identical(other.context, context) || other.context == context));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, locale);
+  int get hashCode => Object.hash(runtimeType, context);
 
   @JsonKey(ignore: true)
   @override
@@ -155,27 +155,27 @@ class _$ChangeLanguageEvent implements ChangeLanguageEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Locale locale) changeLanguageEvent,
+    required TResult Function(BuildContext context) changeLanguageEvent,
   }) {
-    return changeLanguageEvent(locale);
+    return changeLanguageEvent(context);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Locale locale)? changeLanguageEvent,
+    TResult? Function(BuildContext context)? changeLanguageEvent,
   }) {
-    return changeLanguageEvent?.call(locale);
+    return changeLanguageEvent?.call(context);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Locale locale)? changeLanguageEvent,
+    TResult Function(BuildContext context)? changeLanguageEvent,
     required TResult orElse(),
   }) {
     if (changeLanguageEvent != null) {
-      return changeLanguageEvent(locale);
+      return changeLanguageEvent(context);
     }
     return orElse();
   }
@@ -210,11 +210,11 @@ class _$ChangeLanguageEvent implements ChangeLanguageEvent {
 }
 
 abstract class ChangeLanguageEvent implements LocalizationEvent {
-  const factory ChangeLanguageEvent(final Locale locale) =
+  const factory ChangeLanguageEvent(final BuildContext context) =
       _$ChangeLanguageEvent;
 
   @override
-  Locale get locale;
+  BuildContext get context;
   @override
   @JsonKey(ignore: true)
   _$$ChangeLanguageEventCopyWith<_$ChangeLanguageEvent> get copyWith =>
@@ -228,7 +228,7 @@ mixin _$LocalizationState {
     required TResult Function() initial,
     required TResult Function(String message) error,
     required TResult Function() waiting,
-    required TResult Function(Locale locale) changedLanguage,
+    required TResult Function() changedLanguage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -236,7 +236,7 @@ mixin _$LocalizationState {
     TResult? Function()? initial,
     TResult? Function(String message)? error,
     TResult? Function()? waiting,
-    TResult? Function(Locale locale)? changedLanguage,
+    TResult? Function()? changedLanguage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -244,7 +244,7 @@ mixin _$LocalizationState {
     TResult Function()? initial,
     TResult Function(String message)? error,
     TResult Function()? waiting,
-    TResult Function(Locale locale)? changedLanguage,
+    TResult Function()? changedLanguage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -336,7 +336,7 @@ class _$LocalizationStateInitial implements LocalizationStateInitial {
     required TResult Function() initial,
     required TResult Function(String message) error,
     required TResult Function() waiting,
-    required TResult Function(Locale locale) changedLanguage,
+    required TResult Function() changedLanguage,
   }) {
     return initial();
   }
@@ -347,7 +347,7 @@ class _$LocalizationStateInitial implements LocalizationStateInitial {
     TResult? Function()? initial,
     TResult? Function(String message)? error,
     TResult? Function()? waiting,
-    TResult? Function(Locale locale)? changedLanguage,
+    TResult? Function()? changedLanguage,
   }) {
     return initial?.call();
   }
@@ -358,7 +358,7 @@ class _$LocalizationStateInitial implements LocalizationStateInitial {
     TResult Function()? initial,
     TResult Function(String message)? error,
     TResult Function()? waiting,
-    TResult Function(Locale locale)? changedLanguage,
+    TResult Function()? changedLanguage,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -478,7 +478,7 @@ class _$LocalizationStateError implements LocalizationStateError {
     required TResult Function() initial,
     required TResult Function(String message) error,
     required TResult Function() waiting,
-    required TResult Function(Locale locale) changedLanguage,
+    required TResult Function() changedLanguage,
   }) {
     return error(message);
   }
@@ -489,7 +489,7 @@ class _$LocalizationStateError implements LocalizationStateError {
     TResult? Function()? initial,
     TResult? Function(String message)? error,
     TResult? Function()? waiting,
-    TResult? Function(Locale locale)? changedLanguage,
+    TResult? Function()? changedLanguage,
   }) {
     return error?.call(message);
   }
@@ -500,7 +500,7 @@ class _$LocalizationStateError implements LocalizationStateError {
     TResult Function()? initial,
     TResult Function(String message)? error,
     TResult Function()? waiting,
-    TResult Function(Locale locale)? changedLanguage,
+    TResult Function()? changedLanguage,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -600,7 +600,7 @@ class _$LocalizationStateWaiting implements LocalizationStateWaiting {
     required TResult Function() initial,
     required TResult Function(String message) error,
     required TResult Function() waiting,
-    required TResult Function(Locale locale) changedLanguage,
+    required TResult Function() changedLanguage,
   }) {
     return waiting();
   }
@@ -611,7 +611,7 @@ class _$LocalizationStateWaiting implements LocalizationStateWaiting {
     TResult? Function()? initial,
     TResult? Function(String message)? error,
     TResult? Function()? waiting,
-    TResult? Function(Locale locale)? changedLanguage,
+    TResult? Function()? changedLanguage,
   }) {
     return waiting?.call();
   }
@@ -622,7 +622,7 @@ class _$LocalizationStateWaiting implements LocalizationStateWaiting {
     TResult Function()? initial,
     TResult Function(String message)? error,
     TResult Function()? waiting,
-    TResult Function(Locale locale)? changedLanguage,
+    TResult Function()? changedLanguage,
     required TResult orElse(),
   }) {
     if (waiting != null) {
@@ -680,8 +680,6 @@ abstract class _$$LocalizationStateChangedLanguageCopyWith<$Res> {
           _$LocalizationStateChangedLanguage value,
           $Res Function(_$LocalizationStateChangedLanguage) then) =
       __$$LocalizationStateChangedLanguageCopyWithImpl<$Res>;
-  @useResult
-  $Res call({Locale locale});
 }
 
 /// @nodoc
@@ -693,53 +691,28 @@ class __$$LocalizationStateChangedLanguageCopyWithImpl<$Res>
       _$LocalizationStateChangedLanguage _value,
       $Res Function(_$LocalizationStateChangedLanguage) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? locale = null,
-  }) {
-    return _then(_$LocalizationStateChangedLanguage(
-      null == locale
-          ? _value.locale
-          : locale // ignore: cast_nullable_to_non_nullable
-              as Locale,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$LocalizationStateChangedLanguage
     implements LocalizationStateChangedLanguage {
-  const _$LocalizationStateChangedLanguage(this.locale);
-
-  @override
-  final Locale locale;
+  const _$LocalizationStateChangedLanguage();
 
   @override
   String toString() {
-    return 'LocalizationState.changedLanguage(locale: $locale)';
+    return 'LocalizationState.changedLanguage()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LocalizationStateChangedLanguage &&
-            (identical(other.locale, locale) || other.locale == locale));
+            other is _$LocalizationStateChangedLanguage);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, locale);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$LocalizationStateChangedLanguageCopyWith<
-          _$LocalizationStateChangedLanguage>
-      get copyWith => __$$LocalizationStateChangedLanguageCopyWithImpl<
-          _$LocalizationStateChangedLanguage>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
@@ -747,9 +720,9 @@ class _$LocalizationStateChangedLanguage
     required TResult Function() initial,
     required TResult Function(String message) error,
     required TResult Function() waiting,
-    required TResult Function(Locale locale) changedLanguage,
+    required TResult Function() changedLanguage,
   }) {
-    return changedLanguage(locale);
+    return changedLanguage();
   }
 
   @override
@@ -758,9 +731,9 @@ class _$LocalizationStateChangedLanguage
     TResult? Function()? initial,
     TResult? Function(String message)? error,
     TResult? Function()? waiting,
-    TResult? Function(Locale locale)? changedLanguage,
+    TResult? Function()? changedLanguage,
   }) {
-    return changedLanguage?.call(locale);
+    return changedLanguage?.call();
   }
 
   @override
@@ -769,11 +742,11 @@ class _$LocalizationStateChangedLanguage
     TResult Function()? initial,
     TResult Function(String message)? error,
     TResult Function()? waiting,
-    TResult Function(Locale locale)? changedLanguage,
+    TResult Function()? changedLanguage,
     required TResult orElse(),
   }) {
     if (changedLanguage != null) {
-      return changedLanguage(locale);
+      return changedLanguage();
     }
     return orElse();
   }
@@ -818,12 +791,6 @@ class _$LocalizationStateChangedLanguage
 }
 
 abstract class LocalizationStateChangedLanguage implements LocalizationState {
-  const factory LocalizationStateChangedLanguage(final Locale locale) =
+  const factory LocalizationStateChangedLanguage() =
       _$LocalizationStateChangedLanguage;
-
-  Locale get locale;
-  @JsonKey(ignore: true)
-  _$$LocalizationStateChangedLanguageCopyWith<
-          _$LocalizationStateChangedLanguage>
-      get copyWith => throw _privateConstructorUsedError;
 }

@@ -96,6 +96,12 @@ class ThemeHelper {
 /// Class containing the supported text theme styles.
 class TextThemes {
   static TextTheme textTheme(ColorScheme colorScheme) => TextTheme(
+        bodyLarge: TextStyle(
+          color: appTheme.black900,
+          fontSize: 16,
+          fontFamily: FontFamily.rubikBold,
+          fontWeight: FontWeight.w400,
+        ),
         bodyMedium: TextStyle(
           color: appTheme.black900,
           fontSize: 14,
@@ -126,9 +132,27 @@ class TextThemes {
           fontFamily: FontFamily.rubikBold,
           fontWeight: FontWeight.w500,
         ),
+        labelSmall: TextStyle(
+          color: appTheme.whiteA700,
+          fontSize: 10,
+          fontFamily: FontFamily.rubikBold,
+          fontWeight: FontWeight.w400,
+        ),
+        labelMedium: TextStyle(
+          color: appTheme.whiteA700,
+          fontSize: 10,
+          fontFamily: FontFamily.rubikBold,
+          fontWeight: FontWeight.w500,
+        ),
         labelLarge: TextStyle(
           color: appTheme.indigo40001,
           fontSize: 12,
+          fontFamily: FontFamily.rubikBold,
+          fontWeight: FontWeight.w500,
+        ),
+        titleLarge: TextStyle(
+          color: appTheme.blueGray90001,
+          fontSize: 20,
           fontFamily: FontFamily.rubikBold,
           fontWeight: FontWeight.w500,
         ),
@@ -139,7 +163,7 @@ class TextThemes {
           fontWeight: FontWeight.w500,
         ),
         titleSmall: TextStyle(
-          color: appTheme.blueGray900,
+          color: appTheme.blueGray90001,
           fontSize: 14,
           fontFamily: FontFamily.rubikBold,
           fontWeight: FontWeight.w500,
@@ -154,7 +178,7 @@ class ColorSchemes {
     primary: Color(0XFF8F67E8),
     primaryContainer: Color(0XFF232323),
     secondary: Color(0XFF232323),
-    secondaryContainer: Color(0XFF8F67E8),
+    secondaryContainer: Color(0XFF838383),
     tertiary: Color(0XFF232323),
     tertiaryContainer: Color(0XFF8F67E8),
 
@@ -255,13 +279,16 @@ class PrimaryColors {
   Color get blueGray100 => const Color(0XFFD7D7D7);
   Color get blueGray400 => const Color(0XFF888888);
   Color get blueGray50 => const Color(0XFFEFF2F5);
-  Color get blueGray900 => const Color(0XFF313131);
+  Color get blueGray900 => const Color(0XFF2D3142);
+  Color get blueGray90001 => const Color(0XFF313131);
 
   // DeepOrange
   Color get deepOrange300 => const Color(0XFFFE9C5E);
 
   // Gray
+  Color get gray300 => const Color(0XFFE5E5E5);
   Color get gray400 => const Color(0XFFBDBDBD);
+  Color get gray500 => const Color(0XFFA5A5A7);
   Color get gray700 => const Color(0XFF636363);
 
   // Indigo
@@ -276,9 +303,13 @@ class PrimaryColors {
 
   // Teal
   Color get teal300 => const Color(0XFF3EC8BC);
+  Color get puffyLittleCloud => const Color(0xFFD9EDEB);
 
   // White
   Color get whiteA700 => const Color(0XFFFFFFFF);
+
+  // yellow
+  Color get marigold => const Color(0XFFFFC107);
 }
 
 PrimaryColors get appTheme => ThemeHelper().themeColor();

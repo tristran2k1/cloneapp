@@ -170,7 +170,7 @@ mixin _$ThemeState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() waiting,
-    required TResult Function() themeChangedSuccess,
+    required TResult Function(ThemeData theme) themeChangedSuccess,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -178,7 +178,7 @@ mixin _$ThemeState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? waiting,
-    TResult? Function()? themeChangedSuccess,
+    TResult? Function(ThemeData theme)? themeChangedSuccess,
     TResult? Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -186,7 +186,7 @@ mixin _$ThemeState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? waiting,
-    TResult Function()? themeChangedSuccess,
+    TResult Function(ThemeData theme)? themeChangedSuccess,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
@@ -276,7 +276,7 @@ class _$ThemeStateInitial implements ThemeStateInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() waiting,
-    required TResult Function() themeChangedSuccess,
+    required TResult Function(ThemeData theme) themeChangedSuccess,
     required TResult Function(String message) error,
   }) {
     return initial();
@@ -287,7 +287,7 @@ class _$ThemeStateInitial implements ThemeStateInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? waiting,
-    TResult? Function()? themeChangedSuccess,
+    TResult? Function(ThemeData theme)? themeChangedSuccess,
     TResult? Function(String message)? error,
   }) {
     return initial?.call();
@@ -298,7 +298,7 @@ class _$ThemeStateInitial implements ThemeStateInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? waiting,
-    TResult Function()? themeChangedSuccess,
+    TResult Function(ThemeData theme)? themeChangedSuccess,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -390,7 +390,7 @@ class _$ThemeStateWaiting implements ThemeStateWaiting {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() waiting,
-    required TResult Function() themeChangedSuccess,
+    required TResult Function(ThemeData theme) themeChangedSuccess,
     required TResult Function(String message) error,
   }) {
     return waiting();
@@ -401,7 +401,7 @@ class _$ThemeStateWaiting implements ThemeStateWaiting {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? waiting,
-    TResult? Function()? themeChangedSuccess,
+    TResult? Function(ThemeData theme)? themeChangedSuccess,
     TResult? Function(String message)? error,
   }) {
     return waiting?.call();
@@ -412,7 +412,7 @@ class _$ThemeStateWaiting implements ThemeStateWaiting {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? waiting,
-    TResult Function()? themeChangedSuccess,
+    TResult Function(ThemeData theme)? themeChangedSuccess,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -469,6 +469,8 @@ abstract class _$$ThemeChangedSuccessCopyWith<$Res> {
   factory _$$ThemeChangedSuccessCopyWith(_$ThemeChangedSuccess value,
           $Res Function(_$ThemeChangedSuccess) then) =
       __$$ThemeChangedSuccessCopyWithImpl<$Res>;
+  @useResult
+  $Res call({ThemeData theme});
 }
 
 /// @nodoc
@@ -478,36 +480,61 @@ class __$$ThemeChangedSuccessCopyWithImpl<$Res>
   __$$ThemeChangedSuccessCopyWithImpl(
       _$ThemeChangedSuccess _value, $Res Function(_$ThemeChangedSuccess) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? theme = null,
+  }) {
+    return _then(_$ThemeChangedSuccess(
+      null == theme
+          ? _value.theme
+          : theme // ignore: cast_nullable_to_non_nullable
+              as ThemeData,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$ThemeChangedSuccess implements ThemeChangedSuccess {
-  const _$ThemeChangedSuccess();
+  const _$ThemeChangedSuccess(this.theme);
+
+  @override
+  final ThemeData theme;
 
   @override
   String toString() {
-    return 'ThemeState.themeChangedSuccess()';
+    return 'ThemeState.themeChangedSuccess(theme: $theme)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$ThemeChangedSuccess);
+        (other.runtimeType == runtimeType &&
+            other is _$ThemeChangedSuccess &&
+            (identical(other.theme, theme) || other.theme == theme));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, theme);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ThemeChangedSuccessCopyWith<_$ThemeChangedSuccess> get copyWith =>
+      __$$ThemeChangedSuccessCopyWithImpl<_$ThemeChangedSuccess>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() waiting,
-    required TResult Function() themeChangedSuccess,
+    required TResult Function(ThemeData theme) themeChangedSuccess,
     required TResult Function(String message) error,
   }) {
-    return themeChangedSuccess();
+    return themeChangedSuccess(theme);
   }
 
   @override
@@ -515,10 +542,10 @@ class _$ThemeChangedSuccess implements ThemeChangedSuccess {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? waiting,
-    TResult? Function()? themeChangedSuccess,
+    TResult? Function(ThemeData theme)? themeChangedSuccess,
     TResult? Function(String message)? error,
   }) {
-    return themeChangedSuccess?.call();
+    return themeChangedSuccess?.call(theme);
   }
 
   @override
@@ -526,12 +553,12 @@ class _$ThemeChangedSuccess implements ThemeChangedSuccess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? waiting,
-    TResult Function()? themeChangedSuccess,
+    TResult Function(ThemeData theme)? themeChangedSuccess,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (themeChangedSuccess != null) {
-      return themeChangedSuccess();
+      return themeChangedSuccess(theme);
     }
     return orElse();
   }
@@ -575,7 +602,13 @@ class _$ThemeChangedSuccess implements ThemeChangedSuccess {
 }
 
 abstract class ThemeChangedSuccess implements ThemeState {
-  const factory ThemeChangedSuccess() = _$ThemeChangedSuccess;
+  const factory ThemeChangedSuccess(final ThemeData theme) =
+      _$ThemeChangedSuccess;
+
+  ThemeData get theme;
+  @JsonKey(ignore: true)
+  _$$ThemeChangedSuccessCopyWith<_$ThemeChangedSuccess> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -644,7 +677,7 @@ class _$ThemeStateError implements ThemeStateError {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() waiting,
-    required TResult Function() themeChangedSuccess,
+    required TResult Function(ThemeData theme) themeChangedSuccess,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -655,7 +688,7 @@ class _$ThemeStateError implements ThemeStateError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? waiting,
-    TResult? Function()? themeChangedSuccess,
+    TResult? Function(ThemeData theme)? themeChangedSuccess,
     TResult? Function(String message)? error,
   }) {
     return error?.call(message);
@@ -666,7 +699,7 @@ class _$ThemeStateError implements ThemeStateError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? waiting,
-    TResult Function()? themeChangedSuccess,
+    TResult Function(ThemeData theme)? themeChangedSuccess,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {

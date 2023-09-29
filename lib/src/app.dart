@@ -1,3 +1,4 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,23 +27,25 @@ class MyApp extends StatelessWidget {
         listener: (context, state) {
           state.maybeWhen(
               orElse: () {},
+              authenticated: (user) {
+                LCoordinator().showHomeScreen();
+              },
               unauthenticated: () {
-                if (!LCoordinator().location.contains('/login')) {
-                  LCoordinator().showLoginScreen();
-                }
+                LCoordinator().showLoginScreen();
               },
               error: (mess) {
                 logger.e(mess);
               });
         },
-        child: BlocBuilder<LocalizationBloc, LocalizationState>(
+        child: BlocBuilder<ThemeBloc, ThemeState>(
           builder: (context, state) {
             return MaterialApp.router(
-              locale: state.maybeWhen(
-                orElse: () => context.locale,
-                changedLanguage: (l) => l,
+              locale: context.locale,
+              theme: state.maybeWhen(
+                orElse: () => theme,
+                themeChangedSuccess: (theme) => theme,
               ),
-              theme: theme,
+              builder: BotToastInit(),
               routerConfig: XAppRouter.router,
               debugShowCheckedModeBanner: false,
               supportedLocales: context.supportedLocales,

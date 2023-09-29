@@ -9,7 +9,6 @@ import 'package:get_it/get_it.dart';
 import 'package:travo_app/firebase_options.dart';
 import 'package:travo_app/l10n/localization.dart';
 import 'package:travo_app/l10n/localization_bloc.dart';
-import 'package:travo_app/src/constants/constants.dart';
 import 'package:travo_app/src/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:travo_app/src/local_data/share_preference.dart';
 import 'package:travo_app/src/utils/utils.dart';

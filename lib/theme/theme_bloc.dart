@@ -24,6 +24,6 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
         ? ThemeHelper().changeTheme("dark")
         : ThemeHelper().changeTheme("light");
     UserPrefs.I.setTheme(curTheme == 'light' ? 'dark' : 'light');
-    emit(const ThemeState.themeChangedSuccess());
+    emit(ThemeState.themeChangedSuccess(ThemeHelper().themeData()));
   }
 }

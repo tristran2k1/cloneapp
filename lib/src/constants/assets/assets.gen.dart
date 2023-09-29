@@ -15,6 +15,69 @@ class $AssetsImagesGen {
   /// File path: assets/images/appbar_background.svg
   String get appbarBackground => 'assets/images/appbar_background.svg';
 
+  /// File path: assets/images/arrow-left.svg
+  String get arrowLeft => 'assets/images/arrow-left.svg';
+
+  /// File path: assets/images/banking_card_icon.svg
+  String get bankingCardIcon => 'assets/images/banking_card_icon.svg';
+
+  /// File path: assets/images/banking_transfer_icon.svg
+  String get bankingTransferIcon => 'assets/images/banking_transfer_icon.svg';
+
+  /// File path: assets/images/bed_green.svg
+  String get bedGreen => 'assets/images/bed_green.svg';
+
+  /// File path: assets/images/bed_icon.svg
+  String get bedIcon => 'assets/images/bed_icon.svg';
+
+  /// File path: assets/images/bed_red.svg
+  String get bedRed => 'assets/images/bed_red.svg';
+
+  /// File path: assets/images/calendar_red.svg
+  String get calendarRed => 'assets/images/calendar_red.svg';
+
+  /// File path: assets/images/car-rental.svg
+  String get carRental => 'assets/images/car-rental.svg';
+
+  /// File path: assets/images/checkin_icon.svg
+  String get checkinIcon => 'assets/images/checkin_icon.svg';
+
+  /// File path: assets/images/checkout_icon.svg
+  String get checkoutIcon => 'assets/images/checkout_icon.svg';
+
+  /// File path: assets/images/contact_icon.svg
+  String get contactIcon => 'assets/images/contact_icon.svg';
+
+  /// File path: assets/images/currency_exchange_icon.svg
+  String get currencyExchangeIcon => 'assets/images/currency_exchange_icon.svg';
+
+  /// File path: assets/images/exchange.svg
+  String get exchange => 'assets/images/exchange.svg';
+
+  /// File path: assets/images/flight_hotel_icon.svg
+  String get flightHotelIcon => 'assets/images/flight_hotel_icon.svg';
+
+  /// File path: assets/images/flight_icon.svg
+  String get flightIcon => 'assets/images/flight_icon.svg';
+
+  /// File path: assets/images/fork.svg
+  String get fork => 'assets/images/fork.svg';
+
+  /// File path: assets/images/free_breakfast_icon.svg
+  String get freeBreakfastIcon => 'assets/images/free_breakfast_icon.svg';
+
+  /// File path: assets/images/front_desk_icon.svg
+  String get frontDeskIcon => 'assets/images/front_desk_icon.svg';
+
+  /// File path: assets/images/guest_orange.svg
+  String get guestOrange => 'assets/images/guest_orange.svg';
+
+  /// File path: assets/images/hamburger_icon.svg
+  String get hamburgerIcon => 'assets/images/hamburger_icon.svg';
+
+  /// File path: assets/images/hotel_icon.svg
+  String get hotelIcon => 'assets/images/hotel_icon.svg';
+
   /// File path: assets/images/image_not_found.png
   AssetGenImage get imageNotFound =>
       const AssetGenImage('assets/images/image_not_found.png');
@@ -25,9 +88,114 @@ class $AssetsImagesGen {
   /// File path: assets/images/img_google.svg
   String get imgGoogle => 'assets/images/img_google.svg';
 
+  /// File path: assets/images/location_icon.svg
+  String get locationIcon => 'assets/images/location_icon.svg';
+
+  /// File path: assets/images/mastercard_icon.svg
+  String get mastercardIcon => 'assets/images/mastercard_icon.svg';
+
+  /// File path: assets/images/mini_market_icon.svg
+  String get miniMarketIcon => 'assets/images/mini_market_icon.svg';
+
+  /// File path: assets/images/more_icon.svg
+  String get moreIcon => 'assets/images/more_icon.svg';
+
+  /// File path: assets/images/non_refundable_icon.svg
+  String get nonRefundableIcon => 'assets/images/non_refundable_icon.svg';
+
+  /// File path: assets/images/non_smoking_icon.svg
+  String get nonSmokingIcon => 'assets/images/non_smoking_icon.svg';
+
+  /// File path: assets/images/parking.svg
+  String get parking => 'assets/images/parking.svg';
+
+  /// File path: assets/images/plus_icon.svg
+  String get plusIcon => 'assets/images/plus_icon.svg';
+
+  /// File path: assets/images/pool.svg
+  String get pool => 'assets/images/pool.svg';
+
+  /// File path: assets/images/promo_icon.svg
+  String get promoIcon => 'assets/images/promo_icon.svg';
+
+  /// File path: assets/images/property_red.svg
+  String get propertyRed => 'assets/images/property_red.svg';
+
+  /// File path: assets/images/reception.svg
+  String get reception => 'assets/images/reception.svg';
+
+  /// File path: assets/images/restaurantIcon.svg
+  String get restaurantIcon => 'assets/images/restaurantIcon.svg';
+
+  /// File path: assets/images/search_icon.svg
+  String get searchIcon => 'assets/images/search_icon.svg';
+
+  /// File path: assets/images/sortby_decrease_green.svg
+  String get sortbyDecreaseGreen => 'assets/images/sortby_decrease_green.svg';
+
+  /// File path: assets/images/television.svg
+  String get television => 'assets/images/television.svg';
+
+  /// File path: assets/images/visa_icon.svg
+  String get visaIcon => 'assets/images/visa_icon.svg';
+
+  /// File path: assets/images/wifi.svg
+  String get wifi => 'assets/images/wifi.svg';
+
+  /// File path: assets/images/wifi_icon.svg
+  String get wifiIcon => 'assets/images/wifi_icon.svg';
+
+  /// File path: assets/images/wifi_orange.svg
+  String get wifiOrange => 'assets/images/wifi_orange.svg';
+
   /// List of all assets
-  List<dynamic> get values =>
-      [appbarBackground, imageNotFound, imgFacebook, imgGoogle];
+  List<dynamic> get values => [
+        appbarBackground,
+        arrowLeft,
+        bankingCardIcon,
+        bankingTransferIcon,
+        bedGreen,
+        bedIcon,
+        bedRed,
+        calendarRed,
+        carRental,
+        checkinIcon,
+        checkoutIcon,
+        contactIcon,
+        currencyExchangeIcon,
+        exchange,
+        flightHotelIcon,
+        flightIcon,
+        fork,
+        freeBreakfastIcon,
+        frontDeskIcon,
+        guestOrange,
+        hamburgerIcon,
+        hotelIcon,
+        imageNotFound,
+        imgFacebook,
+        imgGoogle,
+        locationIcon,
+        mastercardIcon,
+        miniMarketIcon,
+        moreIcon,
+        nonRefundableIcon,
+        nonSmokingIcon,
+        parking,
+        plusIcon,
+        pool,
+        promoIcon,
+        propertyRed,
+        reception,
+        restaurantIcon,
+        searchIcon,
+        sortbyDecreaseGreen,
+        television,
+        visaIcon,
+        wifi,
+        wifiIcon,
+        wifiOrange
+      ];
 }
 
 class $AssetsL10nGen {

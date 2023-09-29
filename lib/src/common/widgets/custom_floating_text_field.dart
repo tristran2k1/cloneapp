@@ -4,7 +4,6 @@ import 'package:travo_app/src/constants/constants.dart';
 class CustomFloatingTextField extends StatelessWidget {
   const CustomFloatingTextField({
     super.key,
-    this.width,
     this.margin,
     this.controller,
     this.focusNode,
@@ -26,10 +25,11 @@ class CustomFloatingTextField extends StatelessWidget {
     this.validator,
     this.alignment,
     this.prefixIcon,
+    this.boxDecoration,
+    this.boxPadding,
   });
 
   final Alignment? alignment;
-  final double? width;
   final EdgeInsetsGeometry? margin;
   final TextEditingController? controller;
   final FocusNode? focusNode;
@@ -50,7 +50,8 @@ class CustomFloatingTextField extends StatelessWidget {
   final BoxConstraints? suffixConstraints;
   final EdgeInsets? contentPadding;
   final FormFieldValidator<String>? validator;
-
+  final Decoration? boxDecoration;
+  final EdgeInsets? boxPadding;
   @override
   Widget build(BuildContext context) {
     return alignment != null
@@ -62,13 +63,15 @@ class CustomFloatingTextField extends StatelessWidget {
   }
 
   Widget get floatingTextFieldWidget => Container(
-        padding: const EdgeInsets.symmetric(
-          vertical: Sizes.p12,
-          horizontal: Sizes.p15,
-        ),
-        decoration: AppDecoration.fillWhiteA.copyWith(
-          borderRadius: BorderRadiusStyle.roundedBorder8,
-        ),
+        padding: boxPadding ??
+            const EdgeInsets.symmetric(
+              vertical: Sizes.p12,
+              horizontal: Sizes.p15,
+            ),
+        decoration: boxDecoration ??
+            AppDecoration.fillWhiteA.copyWith(
+              borderRadius: BorderRadiusStyle.roundedBorder8,
+            ),
         child: TextFormField(
           controller: controller,
           focusNode: focusNode ?? FocusNode(),
@@ -97,22 +100,4 @@ class CustomFloatingTextField extends StatelessWidget {
         fillColor: appTheme.whiteA700,
         border: InputBorder.none,
       );
-}
-
-extension ExtString on String {
-  bool get isValidEmail {
-    final emailRegExp = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-    return emailRegExp.hasMatch(this);
-  }
-
-  // bool get isValidPassword {
-  //   final passwordRegExp = RegExp(
-  //       r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\><*~]).{8,}/pre>');
-  //   return passwordRegExp.hasMatch(this);
-  // }
-
-  bool get isValidPhone {
-    final phoneRegExp = RegExp(r"^\+?0[0-9]{10}$");
-    return phoneRegExp.hasMatch(this);
-  }
 }
