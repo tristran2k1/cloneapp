@@ -26,7 +26,7 @@ class _HotelsScreenState extends State<HotelsScreen> {
   double _lowerValue = 10;
   double _upperValue = 500;
   double _panelHeightOpen = 0;
-  SortByOption? _type = null;
+  SortByOption? _type;
 
   @override
   void initState() {

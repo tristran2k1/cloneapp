@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:travo_app/src/local_data/share_preference.dart';
 import 'package:travo_app/src/models/booking_room/booking_room.dart';
 import 'package:travo_app/src/models/models.dart';
 

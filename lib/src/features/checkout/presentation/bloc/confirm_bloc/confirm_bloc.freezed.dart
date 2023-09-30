@@ -215,6 +215,8 @@ abstract class _$$ConfirmBookingEventCopyWith<$Res> {
       __$$ConfirmBookingEventCopyWithImpl<$Res>;
   @useResult
   $Res call({BookingRoomModel bookingInfo});
+
+  $BookingRoomModelCopyWith<$Res> get bookingInfo;
 }
 
 /// @nodoc
@@ -228,14 +230,22 @@ class __$$ConfirmBookingEventCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? bookingInfo = freezed,
+    Object? bookingInfo = null,
   }) {
     return _then(_$ConfirmBookingEvent(
-      bookingInfo: freezed == bookingInfo
+      bookingInfo: null == bookingInfo
           ? _value.bookingInfo
           : bookingInfo // ignore: cast_nullable_to_non_nullable
               as BookingRoomModel,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $BookingRoomModelCopyWith<$Res> get bookingInfo {
+    return $BookingRoomModelCopyWith<$Res>(_value.bookingInfo, (value) {
+      return _then(_value.copyWith(bookingInfo: value));
+    });
   }
 }
 
@@ -257,13 +267,12 @@ class _$ConfirmBookingEvent implements ConfirmBookingEvent {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ConfirmBookingEvent &&
-            const DeepCollectionEquality()
-                .equals(other.bookingInfo, bookingInfo));
+            (identical(other.bookingInfo, bookingInfo) ||
+                other.bookingInfo == bookingInfo));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(bookingInfo));
+  int get hashCode => Object.hash(runtimeType, bookingInfo);
 
   @JsonKey(ignore: true)
   @override

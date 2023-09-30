@@ -20,7 +20,7 @@ class _SortbyScreenState extends State<SortbyScreen> {
     CheckItem(name: 'Nearest Distance'),
   ];
   CheckItem selectedOption = CheckItem(name: 'Highest popularity');
-  SortByOption? _type = null;
+  SortByOption? _type;
 
   @override
   Widget build(BuildContext context) {

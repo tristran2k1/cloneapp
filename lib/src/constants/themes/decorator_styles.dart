@@ -31,6 +31,9 @@ class AppDecoration {
   static BoxDecoration get fillindigo40001 => BoxDecoration(
         color: appTheme.indigo40001,
       );
+  static BoxDecoration get fillindigo50 => BoxDecoration(
+        color: appTheme.indigo50,
+      );
 
   // Gradient decorations
   static BoxDecoration get gradientPrimaryToIndigo => BoxDecoration(

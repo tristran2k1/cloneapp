@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:travo_app/src/constants/constants.dart';
 
 class DashDivider extends StatelessWidget {
-  const DashDivider({super.key, this.height = 1, this.color});
+  const DashDivider({super.key, this.height = 1, this.color, this.axis});
   final double height;
   final Color? color;
+  final Axis? axis;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class DashDivider extends StatelessWidget {
         final dashCount = (boxWidth / (2 * dashWidth)).floor();
         return Flex(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          direction: Axis.horizontal,
+          direction: axis ?? Axis.horizontal,
           children: List.generate(dashCount, (_) {
             return SizedBox(
               width: dashWidth,

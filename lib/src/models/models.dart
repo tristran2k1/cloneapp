@@ -6,3 +6,4 @@ export './room/room.dart';
 export './service_model/service.dart';
 export './payment/credit_payment/credit_payment.dart';
 export './country/country.dart';
+export './booking_flight/trip_info.dart';

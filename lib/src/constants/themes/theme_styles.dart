@@ -296,6 +296,7 @@ class PrimaryColors {
   Color get indigo40001 => const Color(0XFF6155CC);
   Color get indigo50 => const Color(0XFFE0DDF5);
   Color get indigo600 => const Color(0XFF3C5A9A);
+  Color get royalty => const Color(0XFF6022AB);
 
   // Red
   Color get red300 => const Color(0XFFF77777);

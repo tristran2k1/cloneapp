@@ -30,6 +30,7 @@ class AppbarTitle extends StatelessWidget {
             color: appTheme.whiteA700,
           ),
           maxLines: 2,
+          textAlign: TextAlign.center,
         ),
       ),
     );

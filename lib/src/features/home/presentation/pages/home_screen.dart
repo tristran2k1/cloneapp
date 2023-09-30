@@ -86,7 +86,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         BookingServices(
                           onTapHotels: () =>
                               HomeCoordinator().showHotelsScreen(),
-                          onTapFlights: () {},
+                          onTapFlights: () =>
+                              HomeCoordinator().showFlightsScreen(),
                           onTapAll: () {},
                         ),
                         Gap.h20,

@@ -12,6 +12,10 @@ import 'package:flutter/widgets.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/air_asia.png
+  AssetGenImage get airAsia =>
+      const AssetGenImage('assets/images/air_asia.png');
+
   /// File path: assets/images/appbar_background.svg
   String get appbarBackground => 'assets/images/appbar_background.svg';
 
@@ -24,6 +28,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/banking_transfer_icon.svg
   String get bankingTransferIcon => 'assets/images/banking_transfer_icon.svg';
 
+  /// File path: assets/images/batik_air.png
+  AssetGenImage get batikAir =>
+      const AssetGenImage('assets/images/batik_air.png');
+
   /// File path: assets/images/bed_green.svg
   String get bedGreen => 'assets/images/bed_green.svg';
 
@@ -32,6 +40,9 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/bed_red.svg
   String get bedRed => 'assets/images/bed_red.svg';
+
+  /// File path: assets/images/calendar_orange.svg
+  String get calendarOrange => 'assets/images/calendar_orange.svg';
 
   /// File path: assets/images/calendar_red.svg
   String get calendarRed => 'assets/images/calendar_red.svg';
@@ -45,6 +56,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/checkout_icon.svg
   String get checkoutIcon => 'assets/images/checkout_icon.svg';
 
+  /// File path: assets/images/citilink.png
+  AssetGenImage get citilink =>
+      const AssetGenImage('assets/images/citilink.png');
+
   /// File path: assets/images/contact_icon.svg
   String get contactIcon => 'assets/images/contact_icon.svg';
 
@@ -53,6 +68,10 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/exchange.svg
   String get exchange => 'assets/images/exchange.svg';
+
+  /// File path: assets/images/flight_darkblue_with_dot.svg
+  String get flightDarkblueWithDot =>
+      'assets/images/flight_darkblue_with_dot.svg';
 
   /// File path: assets/images/flight_hotel_icon.svg
   String get flightHotelIcon => 'assets/images/flight_hotel_icon.svg';
@@ -68,6 +87,10 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/front_desk_icon.svg
   String get frontDeskIcon => 'assets/images/front_desk_icon.svg';
+
+  /// File path: assets/images/garuda_indo.png
+  AssetGenImage get garudaIndo =>
+      const AssetGenImage('assets/images/garuda_indo.png');
 
   /// File path: assets/images/guest_orange.svg
   String get guestOrange => 'assets/images/guest_orange.svg';
@@ -88,8 +111,16 @@ class $AssetsImagesGen {
   /// File path: assets/images/img_google.svg
   String get imgGoogle => 'assets/images/img_google.svg';
 
+  /// File path: assets/images/lion_air.png
+  AssetGenImage get lionAir =>
+      const AssetGenImage('assets/images/lion_air.png');
+
   /// File path: assets/images/location_icon.svg
   String get locationIcon => 'assets/images/location_icon.svg';
+
+  /// File path: assets/images/location_orange_with_dot.svg
+  String get locationOrangeWithDot =>
+      'assets/images/location_orange_with_dot.svg';
 
   /// File path: assets/images/mastercard_icon.svg
   String get mastercardIcon => 'assets/images/mastercard_icon.svg';
@@ -130,11 +161,23 @@ class $AssetsImagesGen {
   /// File path: assets/images/search_icon.svg
   String get searchIcon => 'assets/images/search_icon.svg';
 
+  /// File path: assets/images/seat_green.svg
+  String get seatGreen => 'assets/images/seat_green.svg';
+
+  /// File path: assets/images/seat_red.svg
+  String get seatRed => 'assets/images/seat_red.svg';
+
   /// File path: assets/images/sortby_decrease_green.svg
   String get sortbyDecreaseGreen => 'assets/images/sortby_decrease_green.svg';
 
   /// File path: assets/images/television.svg
   String get television => 'assets/images/television.svg';
+
+  /// File path: assets/images/user_orange.svg
+  String get userOrange => 'assets/images/user_orange.svg';
+
+  /// File path: assets/images/user_red.svg
+  String get userRed => 'assets/images/user_red.svg';
 
   /// File path: assets/images/visa_icon.svg
   String get visaIcon => 'assets/images/visa_icon.svg';
@@ -150,32 +193,40 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<dynamic> get values => [
+        airAsia,
         appbarBackground,
         arrowLeft,
         bankingCardIcon,
         bankingTransferIcon,
+        batikAir,
         bedGreen,
         bedIcon,
         bedRed,
+        calendarOrange,
         calendarRed,
         carRental,
         checkinIcon,
         checkoutIcon,
+        citilink,
         contactIcon,
         currencyExchangeIcon,
         exchange,
+        flightDarkblueWithDot,
         flightHotelIcon,
         flightIcon,
         fork,
         freeBreakfastIcon,
         frontDeskIcon,
+        garudaIndo,
         guestOrange,
         hamburgerIcon,
         hotelIcon,
         imageNotFound,
         imgFacebook,
         imgGoogle,
+        lionAir,
         locationIcon,
+        locationOrangeWithDot,
         mastercardIcon,
         miniMarketIcon,
         moreIcon,
@@ -189,8 +240,12 @@ class $AssetsImagesGen {
         reception,
         restaurantIcon,
         searchIcon,
+        seatGreen,
+        seatRed,
         sortbyDecreaseGreen,
         television,
+        userOrange,
+        userRed,
         visaIcon,
         wifi,
         wifiIcon,

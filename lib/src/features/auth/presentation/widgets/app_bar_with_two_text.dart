@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get_it/get_it.dart';
-import 'package:travo_app/l10n/localization_bloc.dart';
 import 'package:travo_app/src/constants/constants.dart';
-import 'package:travo_app/theme/theme_bloc.dart';
 
 class AppBarWith2Text extends StatelessWidget {
   const AppBarWith2Text(
@@ -43,23 +39,23 @@ class AppBarWith2Text extends StatelessWidget {
               ),
             );
           }),
-          actions: [
-            // BlocBuilder<ThemeBloc, ThemeState>(
-            //   builder: (context, state) {
-            //     return IconButton(
-            //         onPressed: () =>
-            //             GetIt.I<ThemeBloc>().add(const ChangeThemePressed()),
-            //         icon: const Icon(Icons.dark_mode));
-            //   },
-            // ),
-            // IconButton(
-            //     onPressed: () {
-            //       GetIt.I<LocalizationBloc>().add(
-            //         LocalizationEvent.changeLanguageEvent(context),
-            //       );
-            //     },
-            //     icon: const Icon(Icons.language))
-          ],
+          //actions: [
+          // BlocBuilder<ThemeBloc, ThemeState>(
+          //   builder: (context, state) {
+          //     return IconButton(
+          //         onPressed: () =>
+          //             GetIt.I<ThemeBloc>().add(const ChangeThemePressed()),
+          //         icon: const Icon(Icons.dark_mode));
+          //   },
+          // ),
+          // IconButton(
+          //     onPressed: () {
+          //       GetIt.I<LocalizationBloc>().add(
+          //         LocalizationEvent.changeLanguageEvent(context),
+          //       );
+          //     },
+          //     icon: const Icon(Icons.language))
+          //],
         ),
         SliverToBoxAdapter(child: child),
       ],
