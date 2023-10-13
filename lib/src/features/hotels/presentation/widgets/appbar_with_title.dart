@@ -7,12 +7,13 @@ class AppBarWithTitle extends StatelessWidget {
   const AppBarWithTitle(
       {super.key,
       this.child,
-      required this.title,
+      this.title,
       this.titleStyle,
       this.leading,
-      this.actions});
-  final String title;
-
+      this.actions,
+      this.titleChild});
+  final String? title;
+  final Widget? titleChild;
   final Widget? child;
   final TextStyle? titleStyle;
   final Widget? leading;
@@ -36,7 +37,7 @@ class AppBarWithTitle extends StatelessWidget {
             );
           }),
           toolbarHeight: kToolbarHeight + customToolbarHeight,
-          title: AppbarTitle(text: title),
+          title: AppbarTitle(text: title, child: titleChild),
           centerTitle: true,
           actions: actions,
         ),

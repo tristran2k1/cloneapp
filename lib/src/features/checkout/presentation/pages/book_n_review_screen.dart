@@ -107,17 +107,6 @@ class _BookAndReviewScreenState extends State<BookAndReviewScreen> {
             )
           ];
           widget.bookingItem.contacts = _contactList;
-          // if (widget.bookingItem.contacts.isEmpty) {
-          //   widget.bookingItem.contacts.add(GuestContact(
-          //       name: _contactDetail.name,
-          //       phone: _contactDetail.phone,
-          //       email: _contactDetail.email));
-          // } else {
-          //   widget.bookingItem.contacts[0] = GuestContact(
-          //       name: _contactDetail.name,
-          //       phone: _contactDetail.phone,
-          //       email: _contactDetail.email);
-          // }
           widget.bookingItem.promocode = _promoCode;
           widget.bookingItem.checkinDate =
               DateTimeCvt().getCheckDate(_startDate);

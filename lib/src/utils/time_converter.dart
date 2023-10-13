@@ -14,8 +14,16 @@ class DateTimeCvt {
     return DateFormat('E, d MMM').format(date);
   }
 
+  String getFullDateWithMediumMon(DateTime date) {
+    return DateFormat('dd MMM, yyyy').format(date);
+  }
+
+  String getHourAndMin(DateTime date) {
+    return DateFormat.jm().format(date);
+  }
+
   String getCheckDate(DateTime date) {
-    return "${date.add(const Duration(hours: 7))}";
+    return "${date.add(const Duration(hours: 7))}"; // add 7 hours due to format data saved in firebase
   }
 }
 

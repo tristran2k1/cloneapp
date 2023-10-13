@@ -9,7 +9,7 @@ class Place with _$Place {
   factory Place({
     required String id,
     @Default("") String name,
-    @Default(imgNotFoundUrl) String image,
+    @Default(imgNotFoundUrl) String image, //url
     @Default(false) bool isFavourite,
     @Default(0) double rating,
   }) = _Place;

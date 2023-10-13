@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:travo_app/flavor_config.dart';
 import 'package:travo_app/l10n/locale_keys.g.dart';
 import 'package:travo_app/src/common/common.dart';
 import 'package:travo_app/src/common/toast/toast_wrapper.dart';
@@ -20,13 +21,13 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final FocusNode _focusEmail = FocusNode();
-  final FocusNode _focusPass = FocusNode();
 
   final ValueNotifier<bool> _isRemebered = ValueNotifier<bool>(false);
   final ValueNotifier<bool> _passwordVisible = ValueNotifier<bool>(true);
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final String logintext = FlavorConfig.instance!.values.content;
+
   @override
   void initState() {
     super.initState();
@@ -36,8 +37,6 @@ class _LoginScreenState extends State<LoginScreen> {
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
-    _focusEmail.dispose();
-    _focusPass.dispose();
     super.dispose();
   }
 
@@ -53,55 +52,48 @@ class _LoginScreenState extends State<LoginScreen> {
             );
           },
           builder: (context, state) {
-            return GestureDetector(
-              onTap: () {
-                _focusEmail.unfocus();
-                _focusPass.unfocus();
-              },
-              child: Scaffold(
-                  backgroundColor: theme.colorScheme.background,
-                  body: AppBarWith2Text(
-                    header: context.tr('log_in_no_space'),
-                    subscription: LocaleKeys.welcome.tr(),
-                    child: Form(
-                      key: _formKey,
-                      child: ListView(
-                        padding:
-                            const EdgeInsets.symmetric(horizontal: Sizes.p25),
-                        shrinkWrap: true,
-                        children: [
-                          Gap.h25,
-                          Wrap(
-                            runSpacing: Sizes.p20,
-                            children: [
-                              _emailTextField,
-                              _passwordTextField,
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  _rememberPassword,
-                                  _forgotPassword,
-                                ],
-                              ),
-                              _loginBtn,
-                              HorizontalDividerWithText(
-                                  content: context.tr("or_login_with")),
-                              Row(
-                                children: [
-                                  _authByGoogle,
-                                  Gap.w15,
-                                  _authByFacebook,
-                                ],
-                              ),
-                              _signUpAccount,
-                            ],
-                          ),
-                        ],
-                      ),
+            return Scaffold(
+                backgroundColor: theme.colorScheme.background,
+                body: AppBarWith2Text(
+                  header: logintext,
+                  subscription: LocaleKeys.welcome.tr(),
+                  child: Form(
+                    key: _formKey,
+                    child: ListView(
+                      padding:
+                          const EdgeInsets.symmetric(horizontal: Sizes.p25),
+                      shrinkWrap: true,
+                      children: [
+                        Gap.h25,
+                        Wrap(
+                          runSpacing: Sizes.p20,
+                          children: [
+                            _emailTextField,
+                            _passwordTextField,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                _rememberPassword,
+                                _forgotPassword,
+                              ],
+                            ),
+                            _loginBtn,
+                            HorizontalDividerWithText(
+                                content: context.tr("or_login_with")),
+                            Row(
+                              children: [
+                                _authByGoogle,
+                                Gap.w15,
+                                _authByFacebook,
+                              ],
+                            ),
+                            _signUpAccount,
+                          ],
+                        ),
+                      ],
                     ),
-                  )),
-            );
+                  ),
+                ));
           },
         );
       },
@@ -189,7 +181,7 @@ class _LoginScreenState extends State<LoginScreen> {
       builder: (context, _, __) {
         return CustomFloatingTextField(
           controller: _passwordController,
-          focusNode: _focusPass,
+          focusNode: FocusNode(),
           labelText: context.tr("password"),
           labelStyle: CustomTextStyles.bodyMediumGray700,
           hintText: context.tr("password"),
@@ -203,7 +195,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget get _emailTextField => CustomFloatingTextField(
         controller: _emailController,
-        focusNode: _focusEmail,
+        focusNode: FocusNode(),
         labelText: context.tr("email"),
         labelStyle: CustomTextStyles.bodyMediumGray700,
         hintText: context.tr("email"),

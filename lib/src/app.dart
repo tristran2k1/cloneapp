@@ -39,18 +39,22 @@ class MyApp extends StatelessWidget {
         },
         child: BlocBuilder<ThemeBloc, ThemeState>(
           builder: (context, state) {
-            return MaterialApp.router(
-              locale: context.locale,
-              theme: state.maybeWhen(
-                orElse: () => theme,
-                themeChangedSuccess: (theme) => theme,
-              ),
-              builder: BotToastInit(),
-              routerConfig: XAppRouter.router,
-              debugShowCheckedModeBanner: false,
-              supportedLocales: context.supportedLocales,
-              localizationsDelegates: context.localizationDelegates,
-            );
+            return GestureDetector(
+                onTap: () {
+                  WidgetsBinding.instance.focusManager.primaryFocus!.unfocus();
+                },
+                child: MaterialApp.router(
+                  locale: context.locale,
+                  theme: state.maybeWhen(
+                    orElse: () => theme,
+                    themeChangedSuccess: (theme) => theme,
+                  ),
+                  builder: BotToastInit(),
+                  routerConfig: XAppRouter.router,
+                  debugShowCheckedModeBanner: false,
+                  supportedLocales: context.supportedLocales,
+                  localizationsDelegates: context.localizationDelegates,
+                ));
           },
         ),
       ),

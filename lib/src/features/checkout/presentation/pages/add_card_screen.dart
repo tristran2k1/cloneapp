@@ -31,10 +31,6 @@ class _AddCardScreenState extends State<AddCardScreen> {
   final TextEditingController _cardController = TextEditingController();
   final TextEditingController _expController = TextEditingController();
   final TextEditingController _cvvController = TextEditingController();
-  final FocusNode _focusName = FocusNode();
-  final FocusNode _focusCardNumber = FocusNode();
-  final FocusNode _focusExp = FocusNode();
-  final FocusNode _focusCvv = FocusNode();
 
   late Country _selectedCountry;
 
@@ -73,48 +69,36 @@ class _AddCardScreenState extends State<AddCardScreen> {
     _cardController.dispose();
     _expController.dispose();
     _cvvController.dispose();
-    _focusCardNumber.dispose();
-    _focusName.dispose();
-    _focusExp.dispose();
-    _focusCvv.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        _focusName.unfocus();
-        _focusCardNumber.unfocus();
-        _focusExp.unfocus();
-        _focusCvv.unfocus();
-      },
-      child: Scaffold(
-        backgroundColor: theme.colorScheme.background,
-        body: SafeArea(
-          child: AppBarWithTitle(
-            leading: CustomBackButton(ctx: context),
-            title: "Add Card",
-            child: Form(
-              key: _formKey,
-              child: ListView(
-                padding: const EdgeInsets.symmetric(horizontal: Sizes.p25),
-                shrinkWrap: true,
-                physics: const ClampingScrollPhysics(),
-                children: [
-                  Gap.h25,
-                  Wrap(
-                    runSpacing: Sizes.p20,
-                    children: [
-                      _nameTextField,
-                      _cardTextField,
-                      _expAndCvv,
-                      _setcountry,
-                      doneBtn(context),
-                    ],
-                  ),
-                ],
-              ),
+    return Scaffold(
+      backgroundColor: theme.colorScheme.background,
+      body: SafeArea(
+        child: AppBarWithTitle(
+          leading: CustomBackButton(ctx: context),
+          title: "Add Card",
+          child: Form(
+            key: _formKey,
+            child: ListView(
+              padding: const EdgeInsets.symmetric(horizontal: Sizes.p25),
+              shrinkWrap: true,
+              physics: const ClampingScrollPhysics(),
+              children: [
+                Gap.h25,
+                Wrap(
+                  runSpacing: Sizes.p20,
+                  children: [
+                    _nameTextField,
+                    _cardTextField,
+                    _expAndCvv,
+                    _setcountry,
+                    doneBtn(context),
+                  ],
+                ),
+              ],
             ),
           ),
         ),
@@ -127,7 +111,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
           Expanded(
             child: CustomFloatingTextField(
               controller: _expController,
-              focusNode: _focusExp,
+              focusNode: FocusNode(),
               labelText: "Exp. Date",
               labelStyle: CustomTextStyles.bodyMediumGray700,
               hintText: "MM/YY",
@@ -147,7 +131,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
           Expanded(
             child: CustomFloatingTextField(
               controller: _cvvController,
-              focusNode: _focusCvv,
+              focusNode: FocusNode(),
               labelText: "CVV",
               labelStyle: CustomTextStyles.bodyMediumGray700,
               hintText: "***",
@@ -213,7 +197,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
 
   Widget get _cardTextField => CustomFloatingTextField(
         controller: _cardController,
-        focusNode: _focusCardNumber,
+        focusNode: FocusNode(),
         labelText: "Card Number",
         labelStyle: CustomTextStyles.bodyMediumGray700,
         hintText: "Card Number",
@@ -233,7 +217,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
 
   Widget get _nameTextField => CustomFloatingTextField(
         controller: _nameController,
-        focusNode: _focusName,
+        focusNode: FocusNode(),
         labelText: context.tr("name"),
         labelStyle: CustomTextStyles.bodyMediumGray700,
         hintText: context.tr("hint_name"),

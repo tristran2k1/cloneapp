@@ -19,8 +19,8 @@ mixin _$Hotel {
   String get id => throw _privateConstructorUsedError;
   set id(String value) => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
-  set image(String value) => throw _privateConstructorUsedError;
-  String get information => throw _privateConstructorUsedError;
+  set image(String value) => throw _privateConstructorUsedError; // url
+  String get information => throw _privateConstructorUsedError; // url
   set information(String value) => throw _privateConstructorUsedError;
   String get location => throw _privateConstructorUsedError;
   set location(String value) => throw _privateConstructorUsedError;
@@ -231,6 +231,7 @@ class _$_Hotel implements _Hotel {
   @override
   @JsonKey()
   String image;
+// url
   @override
   @JsonKey()
   String information;
@@ -287,8 +288,8 @@ abstract class _Hotel implements Hotel {
   @override
   String get image;
   set image(String value);
-  @override
-  String get information;
+  @override // url
+  String get information; // url
   set information(String value);
   @override
   String get location;

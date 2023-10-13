@@ -7,8 +7,6 @@ import 'swap_btn.dart';
 class FromToField extends StatelessWidget {
   const FromToField({
     super.key,
-    required this.focusFrom,
-    required this.focusTo,
     required this.fromController,
     required this.toController,
     this.onTap,
@@ -16,8 +14,6 @@ class FromToField extends StatelessWidget {
 
   final TextEditingController fromController;
   final TextEditingController toController;
-  final FocusNode focusFrom;
-  final FocusNode focusTo;
   final VoidCallback? onTap;
 
   @override
@@ -28,12 +24,13 @@ class FromToField extends StatelessWidget {
           children: [
             CustomFloatingTextField(
               controller: fromController,
-              focusNode: focusFrom,
+              focusNode: FocusNode(),
               labelStyle: CustomTextStyles.bodyMediumGray700,
               hintText: "Your departure",
               labelText: "From",
               prefixIcon: CustomImageView(
                 svgPath: Assets.images.flightDarkblueWithDot,
+                margin: const EdgeInsets.only(left: 5, right: 25),
               ),
               prefixConstraints: const BoxConstraints(),
               textStyle: theme.textTheme.titleSmall!.copyWith(height: 2),
@@ -41,12 +38,13 @@ class FromToField extends StatelessWidget {
             Gap.h10,
             CustomFloatingTextField(
               controller: toController,
-              focusNode: focusTo,
+              focusNode: FocusNode(),
               labelStyle: CustomTextStyles.bodyMediumGray700,
               hintText: "Your destination",
               labelText: "To",
               prefixIcon: CustomImageView(
                 svgPath: Assets.images.locationOrangeWithDot,
+                margin: const EdgeInsets.only(left: 10, right: 25),
               ),
               prefixConstraints: const BoxConstraints(),
               textStyle: theme.textTheme.titleSmall!.copyWith(height: 2),

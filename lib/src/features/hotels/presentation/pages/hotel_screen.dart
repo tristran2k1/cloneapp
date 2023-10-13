@@ -23,10 +23,10 @@ class _HotelsScreenState extends State<HotelsScreen> {
   final PanelController _panelController = PanelController();
   final ScrollController _scrollController = ScrollController();
 
-  double _lowerValue = 10;
-  double _upperValue = 500;
+  double? _lowerValue;
+  double? _upperValue;
   double _panelHeightOpen = 0;
-  SortByOption? _type;
+  HotelSortByOption? _type;
 
   @override
   void initState() {
@@ -201,20 +201,26 @@ class _HotelsScreenState extends State<HotelsScreen> {
   Widget _applyBtn(BuildContext context) {
     return BlocBuilder<HotelBloc, HotelState>(
       builder: (context, state) {
-        return CustomElevatedButton(
-            text: "Apply",
-            buttonStyle: CustomButtonStyles.none,
-            decoration: AppDecoration.gradientPrimaryToIndigo.copyWith(
-              borderRadius: BorderRadiusStyle.roundedBorder28,
-            ),
-            onTap: () {
-              BlocProvider<HotelBloc>.value(
-                value: context.read<HotelBloc>()
-                  ..add(HotelEvent.filterByPrice(_lowerValue.toInt(),
-                      _upperValue.toInt(), _type ?? SortByOption.none)),
-              );
-              _scrollController.position.minScrollExtent;
-              _panelController.close();
+        return state.maybeWhen(
+            orElse: () => const LoadingWidget(),
+            loadingHotelSuccess: (_, minPrice, maxPrice) {
+              return CustomElevatedButton(
+                  text: "Apply",
+                  buttonStyle: CustomButtonStyles.none,
+                  decoration: AppDecoration.gradientPrimaryToIndigo.copyWith(
+                    borderRadius: BorderRadiusStyle.roundedBorder28,
+                  ),
+                  onTap: () {
+                    BlocProvider<HotelBloc>.value(
+                      value: context.read<HotelBloc>()
+                        ..add(HotelEvent.filterByPrice(
+                            _lowerValue?.toInt() ?? minPrice,
+                            _upperValue?.toInt() ?? maxPrice,
+                            _type ?? HotelSortByOption.none)),
+                    );
+                    _scrollController.position.minScrollExtent;
+                    _panelController.close();
+                  });
             });
       },
     );
@@ -237,9 +243,9 @@ class _HotelsScreenState extends State<HotelsScreen> {
     );
   }
 
-  FlutterSlider _budgetSlider(int min, int max) {
+  Widget _budgetSlider(int min, int max) {
     return FlutterSlider(
-      values: [_lowerValue, _upperValue],
+      values: [_lowerValue ?? min.toDouble(), _upperValue ?? max.toDouble()],
       rangeSlider: true,
       max: max.toDouble(),
       min: min.toDouble(),
@@ -270,7 +276,6 @@ class _HotelsScreenState extends State<HotelsScreen> {
       onDragging: (handlerIndex, lowerValue, upperValue) {
         _lowerValue = lowerValue;
         _upperValue = upperValue;
-        setState(() {});
       },
     );
   }

@@ -8,7 +8,7 @@ part 'hotel.freezed.dart';
 class Hotel with _$Hotel {
   factory Hotel({
     required String id,
-    @Default(imgNotFoundUrl) String image,
+    @Default(imgNotFoundUrl) String image, // url
     @Default("") String information,
     @Default("") String location,
     @Default("") locationDescription,

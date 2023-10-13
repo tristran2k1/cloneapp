@@ -1,24 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:travo_app/src/common/common.dart';
+import 'package:travo_app/src/common/toast/toast_wrapper.dart';
 import 'package:travo_app/src/constants/constants.dart';
 import 'package:travo_app/src/features/features.dart';
 import 'package:travo_app/src/features/hotels/hotels.dart';
 import 'package:travo_app/src/models/models.dart';
+import 'package:travo_app/src/utils/utils.dart';
 
 import '../widgets/from_to_field.dart';
 
 class MultiCityBooking extends StatefulWidget {
-  const MultiCityBooking(
-      {super.key,
-      required this.fromPlaceFocus1,
-      required this.toPlaceFocus1,
-      required this.fromPlaceFocus2,
-      required this.toPlaceFocus2});
+  const MultiCityBooking({super.key});
 
-  final FocusNode fromPlaceFocus1;
-  final FocusNode toPlaceFocus1;
-  final FocusNode fromPlaceFocus2;
-  final FocusNode toPlaceFocus2;
   @override
   State<MultiCityBooking> createState() => _MultiCityBookingState();
 }
@@ -56,102 +49,158 @@ class _MultiCityBookingState extends State<MultiCityBooking> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        widget.fromPlaceFocus1.unfocus();
-        widget.toPlaceFocus1.unfocus();
-        widget.fromPlaceFocus2.unfocus();
-        widget.toPlaceFocus2.unfocus();
+    return SingleChildScrollView(
+        child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text("Flight 1", style: CustomTextStyles.titleMediumBlack900),
+          Gap.h20,
+          _inputTrip1(),
+          Gap.h10,
+          _pickDateTrip1(context),
+          Gap.h10,
+          BookingFields(
+            icon: Assets.images.userRed,
+            title: "Passengers",
+            value: "${_passengers1.toString()} Passenger",
+            onPressed: () {},
+          ),
+          Gap.h10,
+          BookingFields(
+            icon: Assets.images.seatGreen,
+            title: "Class",
+            value: _classSeat1,
+            onPressed: () {},
+          ),
+          Gap.h20,
+
+          // Flight 2
+
+          Text("Flight 2", style: CustomTextStyles.titleMediumBlack900),
+          Gap.h20,
+          _inputTrip2(),
+          Gap.h10,
+          _pickDateTrip2(context),
+          Gap.h10,
+          BookingFields(
+            icon: Assets.images.userRed,
+            title: "Passengers",
+            value: "${_passengers2.toString()} Passenger",
+            onPressed: () {},
+          ),
+          Gap.h10,
+          BookingFields(
+            icon: Assets.images.seatGreen,
+            title: "Class",
+            value: _classSeat2,
+            onPressed: () {},
+          ),
+          Gap.h20,
+
+          _searchBtn(),
+          Gap.h64,
+        ],
+      ),
+    ));
+  }
+
+  BookingFields _pickDateTrip2(BuildContext context) {
+    return BookingFields(
+      icon: Assets.images.calendarOrange,
+      title: "Departure",
+      value: _getBookingDateValue(_departureTime2),
+      onPressed: () async {
+        final DateTime? picked = await showDatePicker(
+          context: context,
+          currentDate: DateTime.now(),
+          initialDate: DateTime.now().add(const Duration(days: 1)),
+          firstDate: DateTime.now().add(const Duration(days: 1)),
+          lastDate: DateTime(2100),
+          initialEntryMode: DatePickerEntryMode.calendarOnly,
+          builder: (context, child) {
+            return Theme(
+              data: Theme.of(context).copyWith(
+                colorScheme: ColorScheme.light(
+                  primary: theme.colorScheme.primary,
+                  onPrimary: appTheme.blueGray900,
+                  onSurface: theme.colorScheme.primary,
+                ),
+              ),
+              child: child!,
+            );
+          },
+        );
+        if (picked != null) {
+          setState(() {
+            _departureTime2 = picked;
+          });
+        }
       },
-      child: SingleChildScrollView(
-          child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text("Flight 1", style: CustomTextStyles.titleMediumBlack900),
-            Gap.h20,
-            FromToField(
-              focusFrom: widget.fromPlaceFocus1,
-              focusTo: widget.toPlaceFocus1,
-              fromController: _fromPlaceController1,
-              toController: _toPlaceController1,
-              onTap: () {
-                final tmp = _toPlaceController1.text;
-                setState(() {
-                  _toPlaceController1.text = _fromPlaceController1.text;
-                  _fromPlaceController1.text = tmp;
-                });
-              },
-            ),
-            Gap.h10,
-            BookingFields(
-              icon: Assets.images.calendarOrange,
-              title: "Departure",
-              value: _getBookingDateValue(_departureTime1),
-              onPressed: () {},
-            ),
-            Gap.h10,
-            BookingFields(
-              icon: Assets.images.userRed,
-              title: "Passengers",
-              value: "${_passengers1.toString()} Passenger",
-              onPressed: () {},
-            ),
-            Gap.h10,
-            BookingFields(
-              icon: Assets.images.seatGreen,
-              title: "Class",
-              value: _classSeat1,
-              onPressed: () {},
-            ),
-            Gap.h20,
+    );
+  }
 
-            // Flight 2
+  FromToField _inputTrip2() {
+    return FromToField(
+      fromController: _fromPlaceController2,
+      toController: _toPlaceController2,
+      onTap: () {
+        final tmp = _toPlaceController2.text;
+        setState(() {
+          _toPlaceController2.text = _fromPlaceController2.text;
+          _fromPlaceController2.text = tmp;
+        });
+      },
+    );
+  }
 
-            Text("Flight 2", style: CustomTextStyles.titleMediumBlack900),
-            Gap.h20,
-            FromToField(
-              focusFrom: widget.fromPlaceFocus2,
-              focusTo: widget.toPlaceFocus2,
-              fromController: _fromPlaceController2,
-              toController: _toPlaceController2,
-              onTap: () {
-                final tmp = _toPlaceController2.text;
-                setState(() {
-                  _toPlaceController2.text = _fromPlaceController2.text;
-                  _fromPlaceController2.text = tmp;
-                });
-              },
-            ),
-            Gap.h10,
-            BookingFields(
-              icon: Assets.images.calendarOrange,
-              title: "Departure",
-              value: _getBookingDateValue(_departureTime2),
-              onPressed: () {},
-            ),
-            Gap.h10,
-            BookingFields(
-              icon: Assets.images.userRed,
-              title: "Passengers",
-              value: "${_passengers2.toString()} Passenger",
-              onPressed: () {},
-            ),
-            Gap.h10,
-            BookingFields(
-              icon: Assets.images.seatGreen,
-              title: "Class",
-              value: _classSeat2,
-              onPressed: () {},
-            ),
-            Gap.h20,
+  BookingFields _pickDateTrip1(BuildContext context) {
+    return BookingFields(
+      icon: Assets.images.calendarOrange,
+      title: "Departure",
+      value: _getBookingDateValue(_departureTime1),
+      onPressed: () async {
+        final DateTime? picked = await showDatePicker(
+          context: context,
+          currentDate: DateTime.now(),
+          initialDate: DateTime.now().add(const Duration(days: 1)),
+          firstDate: DateTime.now().add(const Duration(days: 1)),
+          lastDate: DateTime(2100),
+          initialEntryMode: DatePickerEntryMode.calendarOnly,
+          builder: (context, child) {
+            return Theme(
+              data: Theme.of(context).copyWith(
+                colorScheme: ColorScheme.light(
+                  primary: theme.colorScheme.primary,
+                  onPrimary: appTheme.blueGray900,
+                  onSurface: theme.colorScheme.primary,
+                ),
+              ),
+              child: child!,
+            );
+          },
+        );
+        if (picked != null) {
+          setState(() {
+            _departureTime1 = picked;
+          });
+        }
+      },
+    );
+  }
 
-            _searchBtn(),
-            Gap.h64,
-          ],
-        ),
-      )),
+  FromToField _inputTrip1() {
+    return FromToField(
+      fromController: _fromPlaceController1,
+      toController: _toPlaceController1,
+      onTap: () {
+        final tmp = _toPlaceController1.text;
+        setState(() {
+          _toPlaceController1.text = _fromPlaceController1.text;
+          _fromPlaceController1.text = tmp;
+        });
+      },
     );
   }
 
@@ -162,22 +211,28 @@ class _MultiCityBookingState extends State<MultiCityBooking> {
       decoration: AppDecoration.gradientPrimaryToIndigo.copyWith(
         borderRadius: BorderRadiusStyle.roundedBorder28,
       ),
-      onTap: () => FlightCoordinator().selectFlight(
-        trip1: TripInfo(
-          from: _fromPlaceController1.text,
-          to: _toPlaceController1.text,
-          date: _departureTime1,
-          passengers: _passengers1,
-          classSeat: _classSeat1,
-        ),
-        trip2: TripInfo(
-          from: _fromPlaceController2.text,
-          to: _toPlaceController2.text,
-          date: _departureTime2,
-          passengers: _passengers2,
-          classSeat: _classSeat2,
-        ),
-      ),
+      onTap: () {
+        if (_fromPlaceController1.text.isEmpty ||
+            _toPlaceController1.text.isEmpty ||
+            _fromPlaceController2.text.isEmpty ||
+            _toPlaceController2.text.isEmpty) {
+          return XToast.error("Please fill your departure and destination");
+        }
+
+        if (_departureTime1 == null || _departureTime2 == null) {
+          return XToast.error("Please select your departure dates");
+        }
+
+        return FlightCoordinator().selectFlight(
+          tripInfo: TripInfo(
+            from: _fromPlaceController1.text,
+            to: _toPlaceController1.text,
+            date: _departureTime1,
+            passengers: _passengers1,
+            classSeat: _classSeat1,
+          ),
+        );
+      },
     );
   }
 
@@ -185,6 +240,6 @@ class _MultiCityBookingState extends State<MultiCityBooking> {
     if (date == null) {
       return 'Select Date';
     }
-    return '${date.day}-${date.month}-${date.year}';
+    return DateTimeCvt().getDayMonYr(date);
   }
 }

@@ -2,9 +2,17 @@ import 'package:travo_app/src/constants/constants.dart';
 
 class CustomTextStyles {
   // Label text style
-  static get labelLarge => theme.textTheme.labelLarge!;
-  static get labelMedium => theme.textTheme.labelMedium!;
-  static get labelSmall => theme.textTheme.labelSmall!;
+  static get labelLarge => theme.textTheme.labelLarge;
+  static get labelLargeblueGray90001 =>
+      theme.textTheme.labelLarge!.copyWith(color: appTheme.blueGray90001);
+  static get labelMediumBlack900 => theme.textTheme.labelMedium!.copyWith(
+        color: appTheme.black900,
+      );
+  static get labelMedium => theme.textTheme.labelMedium;
+  static get labelSmall => theme.textTheme.labelSmall;
+  static get labelSmallBlueGray90001 => theme.textTheme.labelSmall!.copyWith(
+        color: appTheme.blueGray90001,
+      );
   // Body text style
   static get bodyMediumGray500 => theme.textTheme.bodyMedium!.copyWith(
         color: appTheme.gray500,
@@ -32,9 +40,6 @@ class CustomTextStyles {
   static get bodySmallBluegray900_1 => theme.textTheme.bodySmall!.copyWith(
         color: appTheme.blueGray90001,
       );
-  static get bodySmallBluegray900_2 => theme.textTheme.bodySmall!.copyWith(
-        color: appTheme.blueGray90001,
-      );
   static get bodySmallGray700 => theme.textTheme.bodySmall!.copyWith(
         color: appTheme.gray700,
       );
@@ -52,8 +57,19 @@ class CustomTextStyles {
   static get headlineLargeWhiteA700 => theme.textTheme.headlineLarge!.copyWith(
         color: appTheme.whiteA700,
       );
+  static get headlineLargeIndigo40001 =>
+      theme.textTheme.headlineLarge!.copyWith(
+        color: appTheme.indigo40001,
+      );
   static get headlineSmallWhiteA700 => theme.textTheme.headlineSmall!.copyWith(
         color: appTheme.whiteA700,
+      );
+  static get headlineSmallIndigo40001 =>
+      theme.textTheme.headlineSmall!.copyWith(
+        color: appTheme.indigo40001,
+      );
+  static get titleMediumIndigo40001 => theme.textTheme.titleMedium!.copyWith(
+        color: appTheme.indigo40001,
       );
   static get titleMediumA700 => theme.textTheme.titleMedium!.copyWith(
         color: appTheme.whiteA700,
@@ -68,6 +84,9 @@ class CustomTextStyles {
         color: appTheme.blueGray90001,
         fontSize: 18,
       );
+  static get titleSmallBlack900 => theme.textTheme.titleSmall!.copyWith(
+        color: appTheme.black900,
+      );
   static get titleSmallIndigo40001 => theme.textTheme.titleSmall!.copyWith(
         color: appTheme.indigo40001,
       );
@@ -76,5 +95,9 @@ class CustomTextStyles {
       );
   static get titleSmallWhiteA700 => theme.textTheme.titleSmall!.copyWith(
         color: appTheme.whiteA700,
+      );
+
+  static get titleLargeBlack900 => theme.textTheme.titleLarge!.copyWith(
+        color: appTheme.black900,
       );
 }

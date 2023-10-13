@@ -1,38 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:travo_app/src/constants/constants.dart';
 
-// ignore: must_be_immutable
 class AppbarTitle extends StatelessWidget {
-  AppbarTitle({
+  const AppbarTitle({
     super.key,
-    required this.text,
+    this.text,
     this.margin,
-    this.onTap,
+    this.child,
   });
 
-  String text;
-
-  EdgeInsetsGeometry? margin;
-
-  Function? onTap;
+  final String? text;
+  final EdgeInsetsGeometry? margin;
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        onTap?.call();
-      },
-      child: Padding(
-        padding: margin ?? EdgeInsets.zero,
-        child: Text(
-          text,
-          style: theme.textTheme.headlineLarge!.copyWith(
-            color: appTheme.whiteA700,
-          ),
-          maxLines: 2,
-          textAlign: TextAlign.center,
-        ),
-      ),
+    return Padding(
+      padding: margin ?? EdgeInsets.zero,
+      child: text != null
+          ? Text(
+              text!,
+              style: theme.textTheme.headlineLarge!.copyWith(
+                color: appTheme.whiteA700,
+              ),
+              maxLines: 2,
+              textAlign: TextAlign.center,
+            )
+          : child,
     );
   }
 }

@@ -20,7 +20,7 @@ class _SortbyScreenState extends State<SortbyScreen> {
     CheckItem(name: 'Nearest Distance'),
   ];
   CheckItem selectedOption = CheckItem(name: 'Highest popularity');
-  SortByOption? _type;
+  HotelSortByOption? _type;
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +76,7 @@ class _SortbyScreenState extends State<SortbyScreen> {
       onChanged: (CheckItem? value) {
         setState(() {
           selectedOption = value ?? selectedOption;
-          _type = SortByOption.values[index];
+          _type = HotelSortByOption.values[index];
         });
       },
       title: Text(item.name, style: CustomTextStyles.bodyMediumBluegray900),

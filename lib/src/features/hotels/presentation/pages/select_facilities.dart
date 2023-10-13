@@ -29,7 +29,7 @@ class _FacilitiesScreenState extends State<FacilitiesScreen> {
       body: SafeArea(
         child: AppBarWithTitle(
           leading: CustomBackButton(ctx: context),
-          title: "Search your\ndestination",
+          title: "Facilities",
           child: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25.0),

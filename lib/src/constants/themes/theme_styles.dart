@@ -120,6 +120,12 @@ class TextThemes {
           fontFamily: FontFamily.rubikBold,
           fontWeight: FontWeight.w700,
         ),
+        displayMedium: TextStyle(
+          color: appTheme.whiteA700,
+          fontSize: 18,
+          fontFamily: FontFamily.rubikBold,
+          fontWeight: FontWeight.w500,
+        ),
         headlineLarge: TextStyle(
           color: appTheme.whiteA700,
           fontSize: 30,

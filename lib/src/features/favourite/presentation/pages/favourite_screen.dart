@@ -19,7 +19,6 @@ class FavouriteScreen extends StatefulWidget {
 
 class _FavouriteScreenState extends State<FavouriteScreen> {
   final TextEditingController _searchController = TextEditingController();
-  final FocusNode _focusSearch = FocusNode();
   late ScrollController scrollController;
   final double expandedHight = 150.0;
   @override
@@ -32,7 +31,6 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
   @override
   void dispose() {
     _searchController.dispose();
-    _focusSearch.dispose();
     super.dispose();
   }
 
@@ -40,58 +38,53 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => FavouriteBloc()..add(const LoadingFavouriteEvent()),
-      child: GestureDetector(
-          onTap: () {
-            _focusSearch.unfocus();
-          },
-          child: Scaffold(
-            backgroundColor: theme.colorScheme.background,
-            body: ListView(
-              children: [
-                BlocBuilder<AuthBloc, AuthState>(
-                  builder: (context, state) {
-                    UserAccount user = UserPrefs.I.getUser();
-                    return HeaderWithSearchBox(
-                      name: user.name,
-                      avatar: user.avatar,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                        child: CustomFloatingTextField(
-                          controller: _searchController,
-                          focusNode: _focusSearch,
-                          labelStyle: CustomTextStyles.bodyMediumGray700,
-                          hintText: context.tr("search_destination"),
-                          labelText: context.tr("search_destination"),
-                          prefixIcon: CustomImageView(
-                            svgPath: Assets.images.searchIcon,
-                          ),
-                          prefixConstraints: const BoxConstraints(),
-                        ),
+      child: Scaffold(
+        backgroundColor: theme.colorScheme.background,
+        body: ListView(
+          children: [
+            BlocBuilder<AuthBloc, AuthState>(
+              builder: (context, state) {
+                UserAccount user = UserPrefs.I.getUser();
+                return HeaderWithSearchBox(
+                  name: user.name,
+                  avatar: user.avatar,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                    child: CustomFloatingTextField(
+                      controller: _searchController,
+                      focusNode: FocusNode(),
+                      labelStyle: CustomTextStyles.bodyMediumGray700,
+                      hintText: context.tr("search_destination"),
+                      labelText: context.tr("search_destination"),
+                      prefixIcon: CustomImageView(
+                        svgPath: Assets.images.searchIcon,
                       ),
-                    );
-                  },
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Gap.h20,
-                      BlocBuilder<FavouriteBloc, FavouriteState>(
-                        builder: (context, state) {
-                          return state.maybeWhen(
-                            orElse: () => const LoadingWidget(),
-                            loadingSuccess: (places) =>
-                                makeRelatedPhotos(places),
-                          );
-                        },
-                      ),
-                    ],
+                      prefixConstraints: const BoxConstraints(),
+                    ),
                   ),
-                ),
-              ],
+                );
+              },
             ),
-          )),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Gap.h20,
+                  BlocBuilder<FavouriteBloc, FavouriteState>(
+                    builder: (context, state) {
+                      return state.maybeWhen(
+                        orElse: () => const LoadingWidget(),
+                        loadingSuccess: (places) => makeRelatedPhotos(places),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 

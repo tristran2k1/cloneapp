@@ -151,7 +151,7 @@ class HotelCoordinator extends BaseCoordinator {
     pushNamed(HotelRoute.propertyType.name);
   }
 
-  Future<SortByOption?> showSortbyScreen() async {
+  Future<HotelSortByOption?> showSortbyScreen() async {
     return await context.pushNamed(HotelRoute.sortby.name);
   }
 }

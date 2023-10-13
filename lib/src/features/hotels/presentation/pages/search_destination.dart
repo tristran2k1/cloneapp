@@ -29,34 +29,29 @@ class _SearchDestinationScreenState extends State<SearchDestinationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        _focusSearch.unfocus();
-      },
-      child: Scaffold(
-        backgroundColor: theme.colorScheme.background,
-        body: SafeArea(
-          child: AppBarWithTitle(
-            leading: CustomBackButton(ctx: context),
-            title: "Search your\ndestination",
-            child: Form(
-              key: _formKey,
-              child: ListView(
-                padding: const EdgeInsets.symmetric(horizontal: Sizes.p25),
-                shrinkWrap: true,
-                physics: const ClampingScrollPhysics(),
-                children: [
-                  Gap.h25,
-                  Wrap(
-                    runSpacing: Sizes.p4,
-                    children: [
-                      _searchTextField,
-                      _searchNearbyDestination,
-                      _searchBtn(context),
-                    ],
-                  ),
-                ],
-              ),
+    return Scaffold(
+      backgroundColor: theme.colorScheme.background,
+      body: SafeArea(
+        child: AppBarWithTitle(
+          leading: CustomBackButton(ctx: context),
+          title: "Search your\ndestination",
+          child: Form(
+            key: _formKey,
+            child: ListView(
+              padding: const EdgeInsets.symmetric(horizontal: Sizes.p25),
+              shrinkWrap: true,
+              physics: const ClampingScrollPhysics(),
+              children: [
+                Gap.h25,
+                Wrap(
+                  runSpacing: Sizes.p4,
+                  children: [
+                    _searchTextField,
+                    _searchNearbyDestination,
+                    _searchBtn(context),
+                  ],
+                ),
+              ],
             ),
           ),
         ),
@@ -82,16 +77,9 @@ class _SearchDestinationScreenState extends State<SearchDestinationScreen> {
         onPressed: () {},
         child: Row(
           children: [
-            const Icon(
-              Icons.my_location,
-              size: 16,
-              color: Colors.black,
-            ),
+            const Icon(Icons.my_location, size: 16, color: Colors.black),
             Gap.w15,
-            Text(
-              "Search nearby destination",
-              style: theme.textTheme.bodyMedium,
-            )
+            Text("Search nearby destination", style: theme.textTheme.bodyMedium)
           ],
         ),
       );
@@ -102,9 +90,7 @@ class _SearchDestinationScreenState extends State<SearchDestinationScreen> {
         labelStyle: CustomTextStyles.bodyMediumGray700,
         hintText: context.tr("search_destination"),
         labelText: context.tr("search_destination"),
-        prefixIcon: CustomImageView(
-          svgPath: Assets.images.searchIcon,
-        ),
+        prefixIcon: CustomImageView(svgPath: Assets.images.searchIcon),
         prefixConstraints: const BoxConstraints(),
       );
 }

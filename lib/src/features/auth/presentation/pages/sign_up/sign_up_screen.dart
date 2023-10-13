@@ -25,10 +25,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final FocusNode _focusName = FocusNode();
-  final FocusNode _focusPhone = FocusNode();
-  final FocusNode _focusEmail = FocusNode();
-  final FocusNode _focusPass = FocusNode();
 
   final ValueNotifier<Country> _selectedCountry =
       ValueNotifier<Country>(CountryUtils().getCountryByPhoneCode('84'));
@@ -47,10 +43,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _phoneController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
-    _focusEmail.dispose();
-    _focusPass.dispose();
-    _focusName.dispose();
-    _focusPhone.dispose();
+
     super.dispose();
   }
 
@@ -69,53 +62,45 @@ class _SignUpScreenState extends State<SignUpScreen> {
             );
           },
           builder: (context, state) {
-            return GestureDetector(
-              onTap: () {
-                _focusName.unfocus();
-                _focusEmail.unfocus();
-                _focusPass.unfocus();
-                _focusPhone.unfocus();
-              },
-              child: Scaffold(
-                backgroundColor: theme.colorScheme.background,
-                body: SafeArea(
-                  child: AppBarWith2Text(
-                    header: context.tr('sign_up'),
-                    subscription: context.tr("let_create_your_account"),
-                    leading: CustomBackButton(ctx: context),
-                    child: Form(
-                      key: _formKey,
-                      child: ListView(
-                        padding:
-                            const EdgeInsets.symmetric(horizontal: Sizes.p25),
-                        shrinkWrap: true,
-                        physics: const ClampingScrollPhysics(),
-                        children: [
-                          Gap.h25,
-                          Wrap(
-                            runSpacing: Sizes.p20,
-                            children: [
-                              _nameTextField,
-                              _setcountry,
-                              _phoneTextField,
-                              _emailTextField,
-                              _passwordTextField,
-                              _policyText,
-                              _signUpBtn,
-                              HorizontalDividerWithText(
-                                  content: context.tr("or_sign_up_with")),
-                              Row(
-                                children: [
-                                  _authByGoogle,
-                                  Gap.w15,
-                                  _authByFacebook,
-                                ],
-                              ),
-                              Container(height: Sizes.p48),
-                            ],
-                          ),
-                        ],
-                      ),
+            return Scaffold(
+              backgroundColor: theme.colorScheme.background,
+              body: SafeArea(
+                child: AppBarWith2Text(
+                  header: context.tr('sign_up'),
+                  subscription: context.tr("let_create_your_account"),
+                  leading: CustomBackButton(ctx: context),
+                  child: Form(
+                    key: _formKey,
+                    child: ListView(
+                      padding:
+                          const EdgeInsets.symmetric(horizontal: Sizes.p25),
+                      shrinkWrap: true,
+                      physics: const ClampingScrollPhysics(),
+                      children: [
+                        Gap.h25,
+                        Wrap(
+                          runSpacing: Sizes.p20,
+                          children: [
+                            _nameTextField,
+                            _setcountry,
+                            _phoneTextField,
+                            _emailTextField,
+                            _passwordTextField,
+                            _policyText,
+                            _signUpBtn,
+                            HorizontalDividerWithText(
+                                content: context.tr("or_sign_up_with")),
+                            Row(
+                              children: [
+                                _authByGoogle,
+                                Gap.w15,
+                                _authByFacebook,
+                              ],
+                            ),
+                            Container(height: Sizes.p48),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -146,7 +131,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             labelStyle: CustomTextStyles.bodyMediumGray700,
             hintText: context.tr("phone_number"),
             textInputType: TextInputType.phone,
-            focusNode: _focusPhone,
+            focusNode: FocusNode(),
             validator: (value) {
               if (value == null) {
                 return context.tr("please_enter_your_phone_number");
@@ -217,7 +202,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       text: TextSpan(children: [
         TextSpan(
           text: "${context.tr("by_tapping_sign_up")} ",
-          style: CustomTextStyles.bodySmallBluegray900_2,
+          style: CustomTextStyles.bodySmallBluegray900_1,
         ),
         TextSpan(
             text: context.tr("terms_and_conditions"),
@@ -225,14 +210,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
             recognizer: TapGestureRecognizer()..onTap = () {}),
         TextSpan(
             text: " ${context.tr("and")} ",
-            style: CustomTextStyles.bodySmallBluegray900_2),
+            style: CustomTextStyles.bodySmallBluegray900_1),
         TextSpan(
             text: context.tr("privacy_policy"),
             style: CustomTextStyles.bodySmallIndigo40001,
             recognizer: TapGestureRecognizer()..onTap = () {}),
         TextSpan(
             text: " ${context.tr("of_this_app")}",
-            style: CustomTextStyles.bodySmallBluegray900_2)
+            style: CustomTextStyles.bodySmallBluegray900_1)
       ]),
       textAlign: TextAlign.center);
 
@@ -240,7 +225,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       valueListenable: _passwordVisible,
       builder: (context, _, __) => CustomFloatingTextField(
             controller: _passwordController,
-            focusNode: _focusPass,
+            focusNode: FocusNode(),
             labelText: context.tr("password"),
             labelStyle: CustomTextStyles.bodyMediumGray700,
             hintText: context.tr("password"),
@@ -259,7 +244,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   Widget get _emailTextField => CustomFloatingTextField(
         controller: _emailController,
-        focusNode: _focusEmail,
+        focusNode: FocusNode(),
         labelText: context.tr("email"),
         labelStyle: CustomTextStyles.bodyMediumGray700,
         hintText: context.tr("email"),
@@ -277,7 +262,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   Widget get _nameTextField => CustomFloatingTextField(
         controller: _nameController,
-        focusNode: _focusName,
+        focusNode: FocusNode(),
         labelText: context.tr("name"),
         labelStyle: CustomTextStyles.bodyMediumGray700,
         hintText: context.tr("hint_name"),

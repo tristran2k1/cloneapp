@@ -11,11 +11,22 @@ class CheckItem with _$CheckItem {
   }) = _CheckItem;
 }
 
-enum SortByOption {
+enum HotelSortByOption {
   highestPopularity,
   lowestPrice,
   highestPrice,
   highestRating,
   nearestDistance,
+  none
+}
+
+enum FlightSortByOption {
+  earliestDeparture,
+  latestDeparture,
+  earliestArrival,
+  latestArrival,
+  nearestDistance,
+  shortestDuration,
+  lowsestPrice,
   none
 }

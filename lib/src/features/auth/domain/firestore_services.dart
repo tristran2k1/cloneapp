@@ -18,7 +18,7 @@ class FirestoreService {
     });
   }
 
-  FutureOr<UserAccount?> currentUser(UserAccount user) async {
+  Future<UserAccount?> currentUser(UserAccount user) async {
     return await _firestore
         .collection('user')
         .doc(user.id)
@@ -29,4 +29,5 @@ class FirestoreService {
       return UserAccount(id: '');
     });
   }
+
 }

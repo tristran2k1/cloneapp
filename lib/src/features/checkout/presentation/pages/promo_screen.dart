@@ -13,7 +13,6 @@ class PromoScreen extends StatefulWidget {
 
 class _PromoScreenState extends State<PromoScreen> {
   final TextEditingController _promoController = TextEditingController();
-  final FocusNode _promoFocus = FocusNode();
 
   @override
   void initState() {
@@ -24,37 +23,31 @@ class _PromoScreenState extends State<PromoScreen> {
   @override
   void dispose() {
     _promoController.dispose();
-    _promoFocus.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        _promoFocus.unfocus();
-      },
-      child: Scaffold(
-        backgroundColor: theme.colorScheme.background,
-        body: SafeArea(
-          child: AppBarWithTitle(
-            leading: CustomBackButton(ctx: context),
-            title: "Contact Details",
-            child: ListView(
-              padding: const EdgeInsets.symmetric(horizontal: Sizes.p25),
-              shrinkWrap: true,
-              physics: const ClampingScrollPhysics(),
-              children: [
-                Gap.h25,
-                Wrap(
-                  runSpacing: Sizes.p20,
-                  children: [
-                    _addPromoField,
-                    _doneBtn(context),
-                  ],
-                ),
-              ],
-            ),
+    return Scaffold(
+      backgroundColor: theme.colorScheme.background,
+      body: SafeArea(
+        child: AppBarWithTitle(
+          leading: CustomBackButton(ctx: context),
+          title: "Contact Details",
+          child: ListView(
+            padding: const EdgeInsets.symmetric(horizontal: Sizes.p25),
+            shrinkWrap: true,
+            physics: const ClampingScrollPhysics(),
+            children: [
+              Gap.h25,
+              Wrap(
+                runSpacing: Sizes.p20,
+                children: [
+                  _addPromoField,
+                  _doneBtn(context),
+                ],
+              ),
+            ],
           ),
         ),
       ),
@@ -75,7 +68,7 @@ class _PromoScreenState extends State<PromoScreen> {
 
   Widget get _addPromoField => CustomFloatingTextField(
         controller: _promoController,
-        focusNode: _promoFocus,
+        focusNode: FocusNode(),
         labelText: "Coupon Code",
         labelStyle: CustomTextStyles.bodyMediumGray700,
         hintText: "Coupon Code",

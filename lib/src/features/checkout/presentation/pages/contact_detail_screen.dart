@@ -23,9 +23,6 @@ class _ContactDetailScreenState extends State<ContactDetailScreen> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
-  final FocusNode _focusName = FocusNode();
-  final FocusNode _focusPhone = FocusNode();
-  final FocusNode _focusEmail = FocusNode();
 
   late Country _selectedCountry;
 
@@ -61,56 +58,46 @@ class _ContactDetailScreenState extends State<ContactDetailScreen> {
     _nameController.dispose();
     _phoneController.dispose();
     _emailController.dispose();
-    _focusEmail.dispose();
-    _focusName.dispose();
-    _focusPhone.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        _focusName.unfocus();
-        _focusEmail.unfocus();
-        _focusPhone.unfocus();
-      },
-      child: Scaffold(
-        backgroundColor: theme.colorScheme.background,
-        body: SafeArea(
-          child: AppBarWithTitle(
-            leading: CustomBackButton(ctx: context),
-            title: "Contact Details",
-            child: Form(
-              key: _formKey,
-              child: ListView(
-                padding: const EdgeInsets.symmetric(horizontal: Sizes.p25),
-                shrinkWrap: true,
-                physics: const ClampingScrollPhysics(),
-                children: [
-                  Gap.h25,
-                  Wrap(
-                    runSpacing: Sizes.p20,
-                    children: [
-                      _nameTextField,
-                      _setcountry,
-                      _phoneTextField,
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _emailTextField,
-                          Gap.h10,
-                          Text("E-ticket will be sent to your E-mail",
-                              style: theme.textTheme.labelSmall!
-                                  .copyWith(color: appTheme.gray700)),
-                          Gap.h25,
-                          doneBtn(context),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+    return Scaffold(
+      backgroundColor: theme.colorScheme.background,
+      body: SafeArea(
+        child: AppBarWithTitle(
+          leading: CustomBackButton(ctx: context),
+          title: "Contact Details",
+          child: Form(
+            key: _formKey,
+            child: ListView(
+              padding: const EdgeInsets.symmetric(horizontal: Sizes.p25),
+              shrinkWrap: true,
+              physics: const ClampingScrollPhysics(),
+              children: [
+                Gap.h25,
+                Wrap(
+                  runSpacing: Sizes.p20,
+                  children: [
+                    _nameTextField,
+                    _setcountry,
+                    _phoneTextField,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _emailTextField,
+                        Gap.h10,
+                        Text("E-ticket will be sent to your E-mail",
+                            style: theme.textTheme.labelSmall!
+                                .copyWith(color: appTheme.gray700)),
+                        Gap.h25,
+                        doneBtn(context),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         ),
@@ -158,7 +145,7 @@ class _ContactDetailScreenState extends State<ContactDetailScreen> {
         labelStyle: CustomTextStyles.bodyMediumGray700,
         hintText: context.tr("phone_number"),
         textInputType: TextInputType.phone,
-        focusNode: _focusPhone,
+        focusNode: FocusNode(),
         validator: (value) {
           if (value == null) {
             return context.tr("please_enter_your_phone_number");
@@ -189,7 +176,7 @@ class _ContactDetailScreenState extends State<ContactDetailScreen> {
 
   Widget get _emailTextField => CustomFloatingTextField(
         controller: _emailController,
-        focusNode: _focusEmail,
+        focusNode: FocusNode(),
         labelText: context.tr("email"),
         labelStyle: CustomTextStyles.bodyMediumGray700,
         hintText: context.tr("email"),
@@ -207,7 +194,7 @@ class _ContactDetailScreenState extends State<ContactDetailScreen> {
 
   Widget get _nameTextField => CustomFloatingTextField(
         controller: _nameController,
-        focusNode: _focusName,
+        focusNode: FocusNode(),
         labelText: context.tr("name"),
         labelStyle: CustomTextStyles.bodyMediumGray700,
         hintText: context.tr("hint_name"),

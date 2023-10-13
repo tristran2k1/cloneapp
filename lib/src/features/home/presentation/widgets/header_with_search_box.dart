@@ -54,7 +54,7 @@ class HeaderWithSearchBox extends StatelessWidget {
                           size: 24, color: appTheme.whiteA700),
                       Gap.w15,
                       CustomImageView(
-                        url: avatar,
+                        base64Image: avatar,
                         height: 45,
                         width: 45,
                         radius: BorderRadiusStyle.roundedBorder12,

@@ -16,6 +16,12 @@ class $AssetsImagesGen {
   AssetGenImage get airAsia =>
       const AssetGenImage('assets/images/air_asia.png');
 
+  /// File path: assets/images/airplane_base.svg
+  String get airplaneBase => 'assets/images/airplane_base.svg';
+
+  /// File path: assets/images/airplane_cockpit.svg
+  String get airplaneCockpit => 'assets/images/airplane_cockpit.svg';
+
   /// File path: assets/images/appbar_background.svg
   String get appbarBackground => 'assets/images/appbar_background.svg';
 
@@ -27,6 +33,9 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/banking_transfer_icon.svg
   String get bankingTransferIcon => 'assets/images/banking_transfer_icon.svg';
+
+  /// File path: assets/images/barcode.png
+  AssetGenImage get barcode => const AssetGenImage('assets/images/barcode.png');
 
   /// File path: assets/images/batik_air.png
   AssetGenImage get batikAir =>
@@ -66,8 +75,14 @@ class $AssetsImagesGen {
   /// File path: assets/images/currency_exchange_icon.svg
   String get currencyExchangeIcon => 'assets/images/currency_exchange_icon.svg';
 
+  /// File path: assets/images/energy.svg
+  String get energy => 'assets/images/energy.svg';
+
   /// File path: assets/images/exchange.svg
   String get exchange => 'assets/images/exchange.svg';
+
+  /// File path: assets/images/facility_red.svg
+  String get facilityRed => 'assets/images/facility_red.svg';
 
   /// File path: assets/images/flight_darkblue_with_dot.svg
   String get flightDarkblueWithDot =>
@@ -121,6 +136,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/location_orange_with_dot.svg
   String get locationOrangeWithDot =>
       'assets/images/location_orange_with_dot.svg';
+
+  /// File path: assets/images/luggage.svg
+  String get luggage => 'assets/images/luggage.svg';
 
   /// File path: assets/images/mastercard_icon.svg
   String get mastercardIcon => 'assets/images/mastercard_icon.svg';
@@ -194,10 +212,13 @@ class $AssetsImagesGen {
   /// List of all assets
   List<dynamic> get values => [
         airAsia,
+        airplaneBase,
+        airplaneCockpit,
         appbarBackground,
         arrowLeft,
         bankingCardIcon,
         bankingTransferIcon,
+        barcode,
         batikAir,
         bedGreen,
         bedIcon,
@@ -210,7 +231,9 @@ class $AssetsImagesGen {
         citilink,
         contactIcon,
         currencyExchangeIcon,
+        energy,
         exchange,
+        facilityRed,
         flightDarkblueWithDot,
         flightHotelIcon,
         flightIcon,
@@ -227,6 +250,7 @@ class $AssetsImagesGen {
         lionAir,
         locationIcon,
         locationOrangeWithDot,
+        luggage,
         mastercardIcon,
         miniMarketIcon,
         moreIcon,

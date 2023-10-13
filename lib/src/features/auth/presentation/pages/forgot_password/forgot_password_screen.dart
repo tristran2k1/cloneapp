@@ -17,7 +17,6 @@ class ForgotPasswordScreen extends StatefulWidget {
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final TextEditingController _emailController = TextEditingController();
-  final FocusNode _focusEmail = FocusNode();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -28,7 +27,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   @override
   void dispose() {
     _emailController.dispose();
-    _focusEmail.dispose();
     super.dispose();
   }
 
@@ -44,37 +42,32 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     XToast.success(context.tr("common_success")));
           },
           builder: (context, state) {
-            return GestureDetector(
-              onTap: () {
-                _focusEmail.unfocus();
-              },
-              child: Scaffold(
-                  backgroundColor: theme.colorScheme.background,
-                  resizeToAvoidBottomInset: false,
-                  body: AppBarWith2Text(
-                    leading: CustomBackButton(ctx: context),
-                    header: context.tr("forgot_password"),
-                    subscription: context.tr("forgot_password_subtitle"),
-                    child: Form(
-                      key: _formKey,
-                      child: ListView(
-                        padding:
-                            const EdgeInsets.symmetric(horizontal: Sizes.p25),
-                        shrinkWrap: true,
-                        children: [
-                          Gap.h25,
-                          Wrap(
-                            runSpacing: Sizes.p20,
-                            children: [
-                              _emailTextField,
-                              _sendBtn,
-                            ],
-                          ),
-                        ],
-                      ),
+            return Scaffold(
+                backgroundColor: theme.colorScheme.background,
+                resizeToAvoidBottomInset: false,
+                body: AppBarWith2Text(
+                  leading: CustomBackButton(ctx: context),
+                  header: context.tr("forgot_password"),
+                  subscription: context.tr("forgot_password_subtitle"),
+                  child: Form(
+                    key: _formKey,
+                    child: ListView(
+                      padding:
+                          const EdgeInsets.symmetric(horizontal: Sizes.p25),
+                      shrinkWrap: true,
+                      children: [
+                        Gap.h25,
+                        Wrap(
+                          runSpacing: Sizes.p20,
+                          children: [
+                            _emailTextField,
+                            _sendBtn,
+                          ],
+                        ),
+                      ],
                     ),
-                  )),
-            );
+                  ),
+                ));
           },
         );
       },
@@ -97,7 +90,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
   Widget get _emailTextField => CustomFloatingTextField(
       controller: _emailController,
-      focusNode: _focusEmail,
+      focusNode: FocusNode(),
       labelText: context.tr("email"),
       labelStyle: CustomTextStyles.bodyMediumGray700,
       hintText: context.tr("email"),

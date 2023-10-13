@@ -7,3 +7,6 @@ export './service_model/service.dart';
 export './payment/credit_payment/credit_payment.dart';
 export './country/country.dart';
 export './booking_flight/trip_info.dart';
+export './flight_ticket/flight_ticket.dart';
+export './seat_data/seat_data.dart';
+export './booking_flight/booking_flight.dart';

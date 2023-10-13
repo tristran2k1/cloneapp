@@ -22,6 +22,7 @@ class HomeCoordinator extends BaseCoordinator {
       path: 'flights',
       pageBuilder: (context, state) =>
           DefaultTransition(child: const BookingFlightsScreen()),
+      routes: FlightCoordinator.router,
     ),
   ];
   void showHotelsScreen() {

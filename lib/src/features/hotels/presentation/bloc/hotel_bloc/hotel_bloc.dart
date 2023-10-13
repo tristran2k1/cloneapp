@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:travo_app/src/models/checkitem/checkitem.dart';
 import 'package:travo_app/src/models/hotel/hotel.dart';
+import 'package:travo_app/src/utils/utils.dart';
 
 import '../../../domain/remote/firestore_services.dart';
 
@@ -28,8 +29,8 @@ class HotelBloc extends Bloc<HotelEvent, HotelState> {
     if (_hotelList.hotels.isEmpty) {
       emit(const HotelState.errorHotelState('No hotels found'));
     } else {
-      minPrice = getMinPrice(_hotelList);
-      maxPrice = getMaxPrice(_hotelList);
+      minPrice = getMinPrice(_hotelList.hotels.map((e) => e.price).toList());
+      maxPrice = getMaxPrice(_hotelList.hotels.map((e) => e.price).toList());
       emit(HotelState.loadingHotelSuccess(_hotelList, minPrice, maxPrice));
     }
   }
@@ -41,22 +42,22 @@ class HotelBloc extends Bloc<HotelEvent, HotelState> {
             hotel.price >= event.minPrice && hotel.price <= event.maxPrice)
         .toList();
     switch (event.type) {
-      case SortByOption.highestPopularity:
+      case HotelSortByOption.highestPopularity:
         filteredHotels.sort((a, b) => b.totalReviews.compareTo(a.totalReviews));
         emit(HotelState.loadingHotelSuccess(
             HotelList(hotels: filteredHotels), minPrice, maxPrice));
         break;
-      case SortByOption.lowestPrice:
+      case HotelSortByOption.lowestPrice:
         filteredHotels.sort((a, b) => a.price.compareTo(b.price));
         emit(HotelState.loadingHotelSuccess(
             HotelList(hotels: filteredHotels), minPrice, maxPrice));
         break;
-      case SortByOption.highestPrice:
+      case HotelSortByOption.highestPrice:
         filteredHotels.sort((a, b) => b.price.compareTo(a.price));
         emit(HotelState.loadingHotelSuccess(
             HotelList(hotels: filteredHotels), minPrice, maxPrice));
         break;
-      case SortByOption.highestRating:
+      case HotelSortByOption.highestRating:
         filteredHotels.sort((a, b) => b.rating.compareTo(a.rating));
         emit(HotelState.loadingHotelSuccess(
             HotelList(hotels: filteredHotels), minPrice, maxPrice));
@@ -68,24 +69,4 @@ class HotelBloc extends Bloc<HotelEvent, HotelState> {
     emit(HotelState.loadingHotelSuccess(
         HotelList(hotels: filteredHotels), minPrice, maxPrice));
   }
-}
-
-int getMinPrice(HotelList hotels) {
-  int minPrice = 0;
-  for (Hotel hotel in hotels.hotels) {
-    if (hotel.price < minPrice) {
-      minPrice = hotel.price;
-    }
-  }
-  return minPrice;
-}
-
-int getMaxPrice(HotelList hotels) {
-  int maxPrice = 0;
-  for (Hotel hotel in hotels.hotels) {
-    if (hotel.price > maxPrice) {
-      maxPrice = hotel.price;
-    }
-  }
-  return maxPrice;
 }

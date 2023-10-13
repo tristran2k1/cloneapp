@@ -19,21 +19,22 @@ mixin _$HotelEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() hotelLoadingEvent,
-    required TResult Function(int minPrice, int maxPrice, SortByOption type)
+    required TResult Function(
+            int minPrice, int maxPrice, HotelSortByOption type)
         filterByPrice,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? hotelLoadingEvent,
-    TResult? Function(int minPrice, int maxPrice, SortByOption type)?
+    TResult? Function(int minPrice, int maxPrice, HotelSortByOption type)?
         filterByPrice,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? hotelLoadingEvent,
-    TResult Function(int minPrice, int maxPrice, SortByOption type)?
+    TResult Function(int minPrice, int maxPrice, HotelSortByOption type)?
         filterByPrice,
     required TResult orElse(),
   }) =>
@@ -116,7 +117,8 @@ class _$HotelLoadingEvent implements HotelLoadingEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() hotelLoadingEvent,
-    required TResult Function(int minPrice, int maxPrice, SortByOption type)
+    required TResult Function(
+            int minPrice, int maxPrice, HotelSortByOption type)
         filterByPrice,
   }) {
     return hotelLoadingEvent();
@@ -126,7 +128,7 @@ class _$HotelLoadingEvent implements HotelLoadingEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? hotelLoadingEvent,
-    TResult? Function(int minPrice, int maxPrice, SortByOption type)?
+    TResult? Function(int minPrice, int maxPrice, HotelSortByOption type)?
         filterByPrice,
   }) {
     return hotelLoadingEvent?.call();
@@ -136,7 +138,7 @@ class _$HotelLoadingEvent implements HotelLoadingEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? hotelLoadingEvent,
-    TResult Function(int minPrice, int maxPrice, SortByOption type)?
+    TResult Function(int minPrice, int maxPrice, HotelSortByOption type)?
         filterByPrice,
     required TResult orElse(),
   }) {
@@ -188,7 +190,7 @@ abstract class _$$FilterByPriceHotelEventCopyWith<$Res> {
           $Res Function(_$FilterByPriceHotelEvent) then) =
       __$$FilterByPriceHotelEventCopyWithImpl<$Res>;
   @useResult
-  $Res call({int minPrice, int maxPrice, SortByOption type});
+  $Res call({int minPrice, int maxPrice, HotelSortByOption type});
 }
 
 /// @nodoc
@@ -218,7 +220,7 @@ class __$$FilterByPriceHotelEventCopyWithImpl<$Res>
       null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as SortByOption,
+              as HotelSortByOption,
     ));
   }
 }
@@ -233,7 +235,7 @@ class _$FilterByPriceHotelEvent implements FilterByPriceHotelEvent {
   @override
   final int maxPrice;
   @override
-  final SortByOption type;
+  final HotelSortByOption type;
 
   @override
   String toString() {
@@ -266,7 +268,8 @@ class _$FilterByPriceHotelEvent implements FilterByPriceHotelEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() hotelLoadingEvent,
-    required TResult Function(int minPrice, int maxPrice, SortByOption type)
+    required TResult Function(
+            int minPrice, int maxPrice, HotelSortByOption type)
         filterByPrice,
   }) {
     return filterByPrice(minPrice, maxPrice, type);
@@ -276,7 +279,7 @@ class _$FilterByPriceHotelEvent implements FilterByPriceHotelEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? hotelLoadingEvent,
-    TResult? Function(int minPrice, int maxPrice, SortByOption type)?
+    TResult? Function(int minPrice, int maxPrice, HotelSortByOption type)?
         filterByPrice,
   }) {
     return filterByPrice?.call(minPrice, maxPrice, type);
@@ -286,7 +289,7 @@ class _$FilterByPriceHotelEvent implements FilterByPriceHotelEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? hotelLoadingEvent,
-    TResult Function(int minPrice, int maxPrice, SortByOption type)?
+    TResult Function(int minPrice, int maxPrice, HotelSortByOption type)?
         filterByPrice,
     required TResult orElse(),
   }) {
@@ -329,13 +332,12 @@ class _$FilterByPriceHotelEvent implements FilterByPriceHotelEvent {
 }
 
 abstract class FilterByPriceHotelEvent implements HotelEvent {
-  const factory FilterByPriceHotelEvent(
-          final int minPrice, final int maxPrice, final SortByOption type) =
-      _$FilterByPriceHotelEvent;
+  const factory FilterByPriceHotelEvent(final int minPrice, final int maxPrice,
+      final HotelSortByOption type) = _$FilterByPriceHotelEvent;
 
   int get minPrice;
   int get maxPrice;
-  SortByOption get type;
+  HotelSortByOption get type;
   @JsonKey(ignore: true)
   _$$FilterByPriceHotelEventCopyWith<_$FilterByPriceHotelEvent> get copyWith =>
       throw _privateConstructorUsedError;

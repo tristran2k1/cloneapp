@@ -7,6 +7,7 @@ import 'package:travo_app/src/features/auth/domain/firebase_auth_provider.dart';
 import 'package:travo_app/src/features/auth/domain/firestore_services.dart';
 import 'package:travo_app/src/local_data/share_preference.dart';
 import 'package:travo_app/src/models/models.dart';
+import 'package:travo_app/src/utils/string_cvt.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
@@ -22,6 +23,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<LoginAccountEvent>(_handleLoginAccountEvent);
     on<SignUpEvent>(_handleSignUpEvent);
     on<ForgotPasswordEvent>(_handleForgotPasswordEvent);
+    on<SaveAvatarEvent>(_handleSaveAvatarEvent);
+    on<LogOutEvent>(_handleLogOutEvent);
   }
 
   final prefs = UserPrefs.instance;
@@ -42,6 +45,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         if (_user!.id == '') {
           emit(const AuthState.error("Cannot load user data"));
         } else {
+          _user?.avatar = await ImageCvt.networkImageToBase64(_user!.avatar) as String;
           prefs.setUser(_user!);
           emit(AuthState.authenticated(_user!));
         }
@@ -81,6 +85,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(const AuthState.error("Something went wrong"));
       }
     }
+  }
+
+  FutureOr<void> _handleSaveAvatarEvent(SaveAvatarEvent event, Emitter<AuthState> emit) {
+    emit(const AuthState.loading());
+    _user?.avatar = event.avatar;
+    UserPrefs.I.setUser(_user!);
+    emit(AuthState.authenticated(_user!));
+  }
+
+  FutureOr<void> _handleLogOutEvent(LogOutEvent event, Emitter<AuthState> emit) {
+    emit(const AuthState.loading());
+    _authService.signOut();
+    emit(const AuthState.unauthenticated());
   }
 }
 

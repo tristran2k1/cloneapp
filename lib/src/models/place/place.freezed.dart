@@ -21,8 +21,8 @@ mixin _$Place {
   String get name => throw _privateConstructorUsedError;
   set name(String value) => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
-  set image(String value) => throw _privateConstructorUsedError;
-  bool get isFavourite => throw _privateConstructorUsedError;
+  set image(String value) => throw _privateConstructorUsedError; //url
+  bool get isFavourite => throw _privateConstructorUsedError; //url
   set isFavourite(bool value) => throw _privateConstructorUsedError;
   double get rating => throw _privateConstructorUsedError;
   set rating(double value) => throw _privateConstructorUsedError;
@@ -152,6 +152,7 @@ class _$_Place implements _Place {
   @override
   @JsonKey()
   String image;
+//url
   @override
   @JsonKey()
   bool isFavourite;
@@ -188,8 +189,8 @@ abstract class _Place implements Place {
   @override
   String get image;
   set image(String value);
-  @override
-  bool get isFavourite;
+  @override //url
+  bool get isFavourite; //url
   set isFavourite(bool value);
   @override
   double get rating;

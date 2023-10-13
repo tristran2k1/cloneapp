@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable
 
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -20,6 +21,9 @@ class CustomImageView extends StatelessWidget {
   ///[file] is required parameter for fetching image file
   File? file;
 
+  ///[base64Image] is required parameter for base64 Image
+  String? base64Image;
+
   double? height;
   double? width;
   Color? color;
@@ -39,6 +43,7 @@ class CustomImageView extends StatelessWidget {
     this.imagePath,
     this.svgPath,
     this.file,
+    this.base64Image,
     this.height,
     this.width,
     this.color,
@@ -147,6 +152,13 @@ class CustomImageView extends StatelessWidget {
         width: width,
         fit: fit ?? BoxFit.cover,
         color: color,
+      );
+    } else if(base64Image != null && base64Image!.isNotEmpty) {
+      return Image.memory(
+        base64Decode(base64Image!),
+        height: height,
+        width: width,
+        fit: fit ?? BoxFit.contain,
       );
     }
     return const SizedBox();
