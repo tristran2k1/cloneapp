@@ -6,4 +6,5 @@ abstract class HotelEvent with _$HotelEvent {
   const factory HotelEvent.filterByPrice(
           int minPrice, int maxPrice, HotelSortByOption type) =
       FilterByPriceHotelEvent;
+  const factory HotelEvent.resetEvent() = ResetHotelEvent;
 }

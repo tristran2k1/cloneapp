@@ -1,26 +1,32 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:travo_app/src/features/auth/domain/auth_exceptions.dart';
-import 'package:travo_app/src/features/auth/domain/firebase_auth_provider.dart';
-import 'package:travo_app/src/features/auth/domain/firestore_services.dart';
+import 'package:travo_app/src/constants/constants.dart';
+import 'package:travo_app/src/features/auth/infrastructure/auth_exceptions.dart';
+import 'package:travo_app/src/features/auth/infrastructure/firebase_auth_provider.dart';
+import 'package:travo_app/src/features/auth/infrastructure/firestore_services.dart';
 import 'package:travo_app/src/local_data/share_preference.dart';
 import 'package:travo_app/src/models/models.dart';
 import 'package:travo_app/src/utils/string_cvt.dart';
 
+import '../../infrastructure/storage_services.dart';
+
+part 'auth_bloc.freezed.dart';
 part 'auth_event.dart';
 part 'auth_state.dart';
-part 'auth_bloc.freezed.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   UserAccount? _user;
   AuthBloc() : super(const InitialState()) {
     _authService = FirebaseAuthService();
     _firestoreService = FirestoreService();
+    _storage = StorageServices();
 
     on<InitialApp>(_handleInitialApp);
     on<LoginAccountEvent>(_handleLoginAccountEvent);
+    on<LoginSavedAccountEvent>(_handleLoginSavedAccountEvent);
     on<SignUpEvent>(_handleSignUpEvent);
     on<ForgotPasswordEvent>(_handleForgotPasswordEvent);
     on<SaveAvatarEvent>(_handleSaveAvatarEvent);
@@ -30,9 +36,22 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final prefs = UserPrefs.instance;
   late FirebaseAuthService _authService;
   late FirestoreService _firestoreService;
+  late StorageServices _storage;
 
-  FutureOr<void> _handleInitialApp(InitialApp event, Emitter<AuthState> emit) {
-    emit(const UnauthenticatedState());
+  FutureOr<void> _handleLoginSavedAccountEvent(
+      LoginSavedAccountEvent event, Emitter<AuthState> emit) async {
+    if (prefs.getUser().id != '') {
+      final uEmail = prefs.getUser().email;
+      final uPass = UserPrefs.I.getPass();
+      _user = await _authService.logIn(uEmail, uPass);
+      if (_user != null) {
+        emit(AuthState.authenticated(_user!));
+      } else {
+        emit(const AuthState.error("Cannot login user"));
+      }
+    } else {
+      emit(const UnauthenticatedState());
+    }
   }
 
   FutureOr<void> _handleLoginAccountEvent(
@@ -45,8 +64,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         if (_user!.id == '') {
           emit(const AuthState.error("Cannot load user data"));
         } else {
-          _user?.avatar = await ImageCvt.networkImageToBase64(_user!.avatar) as String;
+          _user?.avatar = await ImageCvt.networkImageToBase64(
+              _user?.avatar ?? imgNotFoundUrl) as String;
           prefs.setUser(_user!);
+          prefs.setPass(event.password);
           emit(AuthState.authenticated(_user!));
         }
       } else {
@@ -87,16 +108,27 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
-  FutureOr<void> _handleSaveAvatarEvent(SaveAvatarEvent event, Emitter<AuthState> emit) {
+  FutureOr<void> _handleSaveAvatarEvent(
+      SaveAvatarEvent event, Emitter<AuthState> emit) async {
     emit(const AuthState.loading());
-    _user?.avatar = event.avatar;
-    UserPrefs.I.setUser(_user!);
+    final avatarUrl = await _storage.changeAvatar(_user!.id, event.avatar);
+    if (avatarUrl != '') {
+      _user?.avatar = await ImageCvt.networkImageToBase64(avatarUrl) as String;
+      _firestoreService.changeAvatar(_user!.id, avatarUrl);
+      UserPrefs.I.setUser(_user!);
+    }
     emit(AuthState.authenticated(_user!));
   }
 
-  FutureOr<void> _handleLogOutEvent(LogOutEvent event, Emitter<AuthState> emit) {
+  FutureOr<void> _handleLogOutEvent(
+      LogOutEvent event, Emitter<AuthState> emit) {
     emit(const AuthState.loading());
     _authService.signOut();
+    emit(const AuthState.unauthenticated());
+    prefs.removeUser();
+  }
+
+  FutureOr<void> _handleInitialApp(InitialApp event, Emitter<AuthState> emit) {
     emit(const AuthState.unauthenticated());
   }
 }

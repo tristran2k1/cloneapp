@@ -32,7 +32,7 @@ class _FacilitiesScreenState extends State<FacilitiesScreen> {
           title: "Facilities",
           child: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              padding: EdgeInsetsConst.hor25,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

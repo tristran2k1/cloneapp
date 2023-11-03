@@ -7,7 +7,6 @@ import 'package:travo_app/src/features/checkout/presentation/bloc/checkout_bloc/
 import 'package:travo_app/src/features/features.dart';
 import 'package:travo_app/src/features/hotels/hotels.dart';
 import 'package:travo_app/src/local_data/share_preference.dart';
-import 'package:travo_app/src/models/booking_room/booking_room.dart';
 import 'package:travo_app/src/models/models.dart';
 import 'package:travo_app/src/utils/utils.dart';
 
@@ -23,24 +22,25 @@ class BookAndReviewScreen extends StatefulWidget {
 }
 
 class _BookAndReviewScreenState extends State<BookAndReviewScreen> {
-  UserAccount _contactDetail = UserAccount(id: "");
-  String? _promoCode;
-
-  late DateTime _startDate;
-  late DateTime _endDate;
+  final ValueNotifier<UserAccount> _contactDetail =
+      ValueNotifier(UserAccount(id: ""));
+  final StringValueModel _promoCode = StringValueModel();
+  final DateTimeValueModel _startDate = DateTimeValueModel();
+  final DateTimeValueModel _endDate = DateTimeValueModel();
   List<GuestContact> _contactList = [];
 
   @override
   void initState() {
-    final initdate = DateTime.now().add(const Duration(days: 1));
-    _startDate = DateTime(initdate.year, initdate.month, initdate.day);
-    _endDate = _startDate.add(const Duration(days: 1));
+    final initDate = DateTime.now().add(const Duration(days: 1));
+    _startDate.setValue(DateTime(initDate.year, initDate.month, initDate.day));
+    _endDate.setValue(_startDate.value!.add(const Duration(days: 1)));
 
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
     return BlocProvider(
       create: (context) =>
           CheckoutBloc()..add(CheckoutLoadingEvent(widget.bookingItem.roomId)),
@@ -57,13 +57,12 @@ class _BookAndReviewScreenState extends State<BookAndReviewScreen> {
                 return state.maybeWhen(
                   orElse: () => const LoadingWidget(),
                   loadingSuccess: (room) => Positioned(
-                    top: 144,
+                    top: tBarHeight,
                     child: SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height - 144 - 25,
+                      width: screenSize.width,
+                      height: screenSize.height - tBarHeight - tBarTitleHeight,
                       child: ListView(
-                        padding: const EdgeInsets.symmetric(horizontal: 25.0)
-                            .copyWith(bottom: 25),
+                        padding: EdgeInsetsConst.hor25.copyWith(bottom: 25),
                         shrinkWrap: true,
                         children: [
                           _progressCheckout(),
@@ -90,34 +89,37 @@ class _BookAndReviewScreenState extends State<BookAndReviewScreen> {
     );
   }
 
-  CustomElevatedButton _paymentBtn() {
-    return CustomElevatedButton(
-      text: "Payment",
-      buttonStyle: CustomButtonStyles.none,
-      decoration: AppDecoration.gradientPrimaryToIndigo.copyWith(
-        borderRadius: BorderRadiusStyle.roundedBorder28,
+  Widget _paymentBtn() {
+    return ValueListenableBuilder(
+      valueListenable: _contactDetail,
+      builder: (_, value, __) => CustomElevatedButton(
+        text: "Payment",
+        buttonStyle: CustomButtonStyles.none,
+        decoration: AppDecoration.gradientPrimaryToIndigo.copyWith(
+          borderRadius: BorderRadiusStyle.roundedBorder28,
+        ),
+        onTap: () {
+          if (_contactDetail.value.name.isNotEmpty) {
+            _contactList = [
+              GuestContact(
+                name: _contactDetail.value.name,
+                phone: _contactDetail.value.phone,
+                email: _contactDetail.value.email,
+              )
+            ];
+            widget.bookingItem.contacts = _contactList;
+            widget.bookingItem.promocode = _promoCode.value;
+            widget.bookingItem.checkinDate =
+                DateTimeCvt().getCheckDate(_startDate.value!);
+            widget.bookingItem.checkoutDate =
+                DateTimeCvt().getCheckDate(_endDate.value!);
+            return CheckoutCoordinator()
+                .goPayment(bookingInfo: widget.bookingItem);
+          } else {
+            XToast.error("Please enter your contact");
+          }
+        },
       ),
-      onTap: () {
-        if (_contactDetail.name.isNotEmpty) {
-          _contactList = [
-            GuestContact(
-              name: _contactDetail.name,
-              phone: _contactDetail.phone,
-              email: _contactDetail.email,
-            )
-          ];
-          widget.bookingItem.contacts = _contactList;
-          widget.bookingItem.promocode = _promoCode;
-          widget.bookingItem.checkinDate =
-              DateTimeCvt().getCheckDate(_startDate);
-          widget.bookingItem.checkoutDate =
-              DateTimeCvt().getCheckDate(_endDate);
-          return CheckoutCoordinator()
-              .goPayment(bookingInfo: widget.bookingItem);
-        } else {
-          XToast.error("Please enter your contact");
-        }
-      },
     );
   }
 
@@ -135,22 +137,24 @@ class _BookAndReviewScreenState extends State<BookAndReviewScreen> {
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) {
         final user = UserPrefs.I.getUser();
-        return BookingInfoWidget(
-          title: "Contact Details",
-          icon: Assets.images.contactIcon,
-          textButton: "Add Contact",
-          needValidation: true,
-          validateText: "Please enter your contact",
-          needAvatar: true,
-          information: _contactDetail.name.isNotEmpty
-              ? "${_contactDetail.name} ${_contactDetail.phone}"
-              : null,
-          onTap: () async {
-            final contact = await goContactDetail(user);
-            setState(() {
-              _contactDetail = contact ?? _contactDetail;
-            });
-          },
+        return ValueListenableBuilder(
+          valueListenable: _contactDetail,
+          builder: (_, value, __) => BookingInfoWidget(
+            title: "Contact Details",
+            icon: Assets.images.contactIcon,
+            textButton: "Add Contact",
+            needValidation: true,
+            validateText: "Please enter your contact",
+            needAvatar: true,
+            information: _contactDetail.value.name.isNotEmpty
+                ? "${_contactDetail.value.name} ${_contactDetail.value.phone}"
+                : null,
+            onTap: () async {
+              final contact = await goContactDetail(user, _contactDetail.value);
+
+              _contactDetail.value = contact ?? _contactDetail.value;
+            },
+          ),
         );
       },
     );
@@ -161,13 +165,13 @@ class _BookAndReviewScreenState extends State<BookAndReviewScreen> {
       title: "Promo Code",
       icon: Assets.images.promoIcon,
       textButton: "Add Promo Code",
-      information: _promoCode != '' ? _promoCode : null,
+      information: _promoCode.value != '' ? _promoCode.value : null,
       onTap: () async {
-        final promo =
-            await CheckoutCoordinator().addPromoCode(code: _promoCode ?? "");
-        setState(() {
-          _promoCode = promo ?? _promoCode;
-        });
+        final promo = await CheckoutCoordinator()
+            .addPromoCode(code: _promoCode.value ?? "");
+        if (promo != null) {
+          _promoCode.setValue(promo);
+        }
       },
     );
   }
@@ -175,27 +179,24 @@ class _BookAndReviewScreenState extends State<BookAndReviewScreen> {
   BookingDateWidget _bookingDate() {
     return BookingDateWidget(
       initialDate: DateTime.now().add(const Duration(days: 1)),
-      startDate: _startDate,
-      endDate: _endDate,
-      startDateSelected: (startvalue) {
-        setState(() {
-          _startDate = startvalue;
-          if (!_endDate.isAfter(_startDate)) {
-            _endDate = _startDate.add(const Duration(days: 1));
-          }
-        });
+      startDate: _startDate.value!,
+      endDate: _endDate.value!,
+      startDateSelected: (startValue) {
+        _startDate.setValue(startValue);
+        if (!_endDate.value!.isAfter(_startDate.value!)) {
+          _endDate.setValue(_startDate.value!.add(const Duration(days: 1)));
+        }
       },
-      endDateSelected: (endvalue) {
-        setState(() {
-          _endDate = endvalue;
-        });
+      endDateSelected: (endValue) {
+        _endDate.setValue(endValue);
       },
     );
   }
 
-  Future<UserAccount?> goContactDetail(UserAccount user) async {
+  Future<UserAccount?> goContactDetail(
+      UserAccount user, UserAccount contact) async {
     return await CheckoutCoordinator().addContactDetail(
-      user: _contactDetail.id == "" ? user : _contactDetail,
+      user: contact.id == "" ? user : contact,
     );
   }
 }

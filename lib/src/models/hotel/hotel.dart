@@ -1,23 +1,31 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:travo_app/src/constants/constants.dart';
 
-part 'hotel.freezed.dart';
+/// [image] is url of image
 
-@unfreezed
-class Hotel with _$Hotel {
-  factory Hotel({
-    required String id,
-    @Default(imgNotFoundUrl) String image, // url
-    @Default("") String information,
-    @Default("") String location,
-    @Default("") locationDescription,
-    @Default("") String name,
-    @Default(0) int price,
-    @Default(0) double rating,
-    @Default(0) int totalReviews,
-    @Default(false) bool isFavourite,
-  }) = _Hotel;
+class Hotel {
+  final String id;
+  final String image; // url
+  final String information;
+  final String location;
+  final String locationDescription;
+  final String name;
+  final int price;
+  final double rating;
+  final int totalReviews;
+  bool isFavourite;
+
+  Hotel(
+      {required this.id,
+      this.image = imgNotFoundUrl,
+      this.information = "",
+      this.location = "",
+      this.locationDescription = "",
+      this.name = "",
+      this.price = 0,
+      this.rating = 0,
+      this.totalReviews = 0,
+      this.isFavourite = false});
 
   factory Hotel.fromFirestore(DocumentSnapshot<Map<String, dynamic>> document,
       String id, bool? isFavourite) {
@@ -47,11 +55,9 @@ class Hotel with _$Hotel {
   }
 }
 
-@unfreezed
-class HotelList with _$HotelList {
-  factory HotelList({
-    @Default([]) List<Hotel> hotels,
-  }) = _HotelList;
+class HotelList {
+  final List<Hotel> hotels;
+  HotelList({this.hotels = const []});
 
   factory HotelList.fromFirestoreAsSimple(QuerySnapshot snapshot) {
     if (snapshot.docs.isNotEmpty) {

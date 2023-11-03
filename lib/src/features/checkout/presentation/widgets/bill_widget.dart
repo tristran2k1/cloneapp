@@ -3,8 +3,9 @@ import 'package:travo_app/src/common/common.dart';
 import 'package:travo_app/src/constants/constants.dart';
 
 class BillWidget extends StatelessWidget {
-  const BillWidget({super.key, required this.price});
-  final String price;
+  const BillWidget({super.key, required this.price, required this.duration});
+  final int price;
+  final int duration;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,10 +19,10 @@ class BillWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                Text("1Night",
+                Text("$duration Night(s)",
                     style: theme.textTheme.bodySmall!
                         .copyWith(color: appTheme.gray700)),
-                Text("\$$price",
+                Text("\$${price * duration} (\$$price/night)",
                     style: theme.textTheme.bodySmall!
                         .copyWith(color: appTheme.gray700))
               ]),
@@ -41,7 +42,7 @@ class BillWidget extends StatelessWidget {
                 Text("Total",
                     style: theme.textTheme.titleSmall!
                         .copyWith(color: appTheme.gray700)),
-                Text("\$$price",
+                Text("\$${price * duration}",
                     style: theme.textTheme.titleSmall!
                         .copyWith(color: appTheme.gray700))
               ]),

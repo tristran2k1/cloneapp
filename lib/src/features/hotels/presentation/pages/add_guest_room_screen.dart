@@ -34,7 +34,7 @@ class _AddGuestRoomScreenState extends State<AddGuestRoomScreen> {
         leading: CustomBackButton(ctx: context),
         title: "Add guest and room",
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25.0),
+          padding: EdgeInsetsConst.hor25,
           child: Column(children: [
             Gap.h20,
             _selectNumGuest(),

@@ -1,15 +1,11 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:travo_app/src/constants/constants.dart';
 
-part 'service.freezed.dart';
+class ServiceModel {
+  final String id;
+  final String name;
+  final String icon;
 
-@unfreezed
-class ServiceModel with _$ServiceModel {
-  factory ServiceModel({
-    required String id,
-    @Default("") String name,
-    @Default("") String icon,
-  }) = _ServiceModel;
+  ServiceModel({required this.id, this.name = "", this.icon = ""});
 
   factory ServiceModel.fromID(String? id) {
     if (id == null || id == "") {
@@ -21,11 +17,10 @@ class ServiceModel with _$ServiceModel {
   }
 }
 
-@unfreezed
-class ServiceList with _$ServiceList {
-  factory ServiceList({
-    @Default([]) List<ServiceModel> services,
-  }) = _ServiceList;
+class ServiceList {
+  final List<ServiceModel> services;
+
+  ServiceList({required this.services});
 
   factory ServiceList.fromStringList(List<dynamic>? serviceslist) {
     if (serviceslist == null || serviceslist.isEmpty) {

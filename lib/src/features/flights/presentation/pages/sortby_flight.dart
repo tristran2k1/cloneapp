@@ -35,7 +35,7 @@ class _SortbyFlightState extends State<SortbyFlight> {
           title: "Sort by",
           child: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              padding: EdgeInsetsConst.hor25,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

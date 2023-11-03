@@ -17,6 +17,7 @@ class SelectRoomScreen extends StatefulWidget {
 class _SelectRoomScreenState extends State<SelectRoomScreen> {
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
     return BlocProvider(
       create: (context) => RoomBloc()..add(RoomLoadingEvent(widget.hotelId)),
       child: BlocListener<RoomBloc, RoomState>(
@@ -38,12 +39,13 @@ class _SelectRoomScreenState extends State<SelectRoomScreen> {
                   return state.maybeWhen(
                     orElse: () => const LoadingWidget(),
                     loadingSuccess: (rooms) => Positioned(
-                      top: 144,
+                      top: tBarHeight,
                       child: SizedBox(
-                        width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height - 144 - 25,
+                        width: screenSize.width,
+                        height:
+                            screenSize.height - tBarHeight - tBarTitleHeight,
                         child: ListView(
-                          padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                          padding: EdgeInsetsConst.hor25,
                           shrinkWrap: true,
                           children: List.generate(
                               rooms.rooms.length,

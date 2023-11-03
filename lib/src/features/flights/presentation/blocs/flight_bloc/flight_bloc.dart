@@ -2,14 +2,14 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:travo_app/src/features/flights/domain/local/flight_ticket_data.dart';
+import 'package:travo_app/src/features/flights/infrastructure/local/flight_ticket_data.dart';
 import 'package:travo_app/src/models/checkitem/checkitem.dart';
 import 'package:travo_app/src/models/models.dart';
 import 'package:travo_app/src/utils/utils.dart';
 
+part 'flight_bloc.freezed.dart';
 part 'flight_event.dart';
 part 'flight_state.dart';
-part 'flight_bloc.freezed.dart';
 
 class FlightBloc extends Bloc<FlightEvent, FlightState> {
   FlightBloc() : super(const FlightState.initial()) {

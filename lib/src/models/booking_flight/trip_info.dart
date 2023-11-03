@@ -1,14 +1,15 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+class TripInfo {
+  final String from;
+  final String to;
+  final DateTime? date;
+  final int passengers;
+  final String classSeat;
 
-part 'trip_info.freezed.dart';
-
-@unfreezed
-class TripInfo with _$TripInfo {
-  factory TripInfo({
-    @Default("") String from,
-    @Default("") String to,
-    DateTime? date,
-    @Default(1) int passengers,
-    @Default("Economy") String classSeat,
-  }) = _TripInfo;
+  TripInfo({
+    this.from = "",
+    this.to = "",
+    this.date,
+    this.passengers = 1,
+    this.classSeat = "Economy",
+  });
 }

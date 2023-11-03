@@ -4,7 +4,6 @@ import 'package:travo_app/src/common/toast/toast_wrapper.dart';
 import 'package:travo_app/src/constants/constants.dart';
 import 'package:travo_app/src/features/hotels/hotels.dart';
 import 'package:travo_app/src/local_data/share_preference.dart';
-import 'package:travo_app/src/models/booking_room/booking_room.dart';
 import 'package:travo_app/src/models/models.dart';
 
 import '../../checkout.dart';
@@ -18,7 +17,8 @@ class PaymentScreen extends StatefulWidget {
 }
 
 class _PaymentScreenState extends State<PaymentScreen> {
-  CreditPayment _creditPayment = CreditPayment();
+  final ValueNotifier<CreditPayment> _creditPayment =
+      ValueNotifier<CreditPayment>(CreditPayment());
   late String creditName;
   late String country;
 
@@ -31,6 +31,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: theme.colorScheme.background,
       body: SafeArea(
@@ -40,13 +41,12 @@ class _PaymentScreenState extends State<PaymentScreen> {
             leading: CustomBackButton(ctx: context),
           ),
           Positioned(
-            top: 144,
+            top: tBarHeight,
             child: SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height - 144 - 25,
+              width: screenSize.width,
+              height: screenSize.height - tBarHeight - tBarTitleHeight,
               child: ListView(
-                padding: const EdgeInsets.symmetric(horizontal: 25.0)
-                    .copyWith(bottom: 25),
+                padding: EdgeInsetsConst.hor25.copyWith(bottom: 25),
                 shrinkWrap: true,
                 children: [
                   _progressCheckout(),
@@ -70,20 +70,22 @@ class _PaymentScreenState extends State<PaymentScreen> {
     );
   }
 
-  BookingInfoWidget _cardWidget() {
-    return BookingInfoWidget(
-      title: "Credit / Debit Card",
-      icon: Assets.images.bankingCardIcon,
-      textButton: "Add Card",
-      information: _creditPayment.name != '' ? _creditPayment.name : null,
-      needAvatar: false,
-      needValidation: false,
-      onTap: () async {
-        final creditInfo = await _addCreditCard();
-        setState(() {
-          _creditPayment = creditInfo ?? _creditPayment;
-        });
-      },
+  Widget _cardWidget() {
+    return ValueListenableBuilder(
+      valueListenable: _creditPayment,
+      builder: (_, value, __) => BookingInfoWidget(
+        title: "Credit / Debit Card",
+        icon: Assets.images.bankingCardIcon,
+        textButton: "Add Card",
+        information:
+            _creditPayment.value.name != '' ? _creditPayment.value.name : null,
+        needAvatar: false,
+        needValidation: false,
+        onTap: () async {
+          final creditInfo = await _addCreditCard();
+          _creditPayment.value = creditInfo ?? _creditPayment.value;
+        },
+      ),
     );
   }
 
@@ -95,8 +97,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
         borderRadius: BorderRadiusStyle.roundedBorder28,
       ),
       onTap: () {
-        if (_creditPayment.cardNumber != "") {
-          widget.bookingInfo.credit = _creditPayment;
+        if (_creditPayment.value.cardNumber != "") {
+          widget.bookingInfo.credit = _creditPayment.value;
           CheckoutCoordinator().goConfirm(bookingInfo: widget.bookingInfo);
         } else {
           XToast.error("Please enter card data");
@@ -109,9 +111,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
     return await CheckoutCoordinator().addCard(
       name: creditName,
       country: country,
-      cardNumber: _creditPayment.cardNumber,
-      expdate: _creditPayment.expiration,
-      cvv: _creditPayment.cvv,
+      cardNumber: _creditPayment.value.cardNumber,
+      expdate: _creditPayment.value.expiration,
+      cvv: _creditPayment.value.cvv,
     );
   }
 

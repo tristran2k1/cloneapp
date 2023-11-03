@@ -134,7 +134,7 @@ class BookingInfoWidget extends StatelessWidget {
         child: Center(
           child: CustomImageView(
             radius: BorderRadiusStyle.roundedBorder20,
-            url: avatarUrl,
+            base64Image: avatarUrl,
             margin: EdgeInsets.zero,
           ),
         ));

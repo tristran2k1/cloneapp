@@ -681,8 +681,6 @@ abstract class _$$HotelDetailLoadingSuccessCopyWith<$Res> {
       __$$HotelDetailLoadingSuccessCopyWithImpl<$Res>;
   @useResult
   $Res call({Hotel hotel});
-
-  $HotelCopyWith<$Res> get hotel;
 }
 
 /// @nodoc
@@ -704,14 +702,6 @@ class __$$HotelDetailLoadingSuccessCopyWithImpl<$Res>
           : hotel // ignore: cast_nullable_to_non_nullable
               as Hotel,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $HotelCopyWith<$Res> get hotel {
-    return $HotelCopyWith<$Res>(_value.hotel, (value) {
-      return _then(_value.copyWith(hotel: value));
-    });
   }
 }
 

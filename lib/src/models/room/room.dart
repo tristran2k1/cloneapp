@@ -1,23 +1,30 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:travo_app/src/constants/constants.dart';
 import 'package:travo_app/src/models/models.dart';
 
-part 'room.freezed.dart';
+class RoomModel {
+  final String id;
+  final String hotel;
+  final String image;
+  final int maxGuest;
+  final String name;
+  final int price;
+  final ServiceList? services;
+  final int total;
+  final String typePrice;
 
-@unfreezed
-class RoomModel with _$RoomModel {
-  factory RoomModel({
-    required String id,
-    @Default("") String hotel,
-    @Default(imgNotFoundUrl) String image,
-    @Default(0) int maxGuest,
-    @Default("") String name,
-    @Default(0) int price,
-    ServiceList? services,
-    @Default(0) int total,
-    @Default("") String typePrice,
-  }) = _RoomModel;
+  RoomModel({
+    required this.id,
+    this.hotel = "",
+    this.image = imgNotFoundUrl,
+    this.maxGuest = 0,
+    this.name = "",
+    this.price = 0,
+    this.services,
+    this.total = 0,
+    this.typePrice = "",
+  });
+
   factory RoomModel.fromFirestore(
       DocumentSnapshot<Map<String, dynamic>> document, String id) {
     final data = document.data() as Map<String, dynamic>;
@@ -45,11 +52,10 @@ class RoomModel with _$RoomModel {
   }
 }
 
-@unfreezed
-class RoomList with _$RoomList {
-  factory RoomList({
-    @Default([]) List<RoomModel> rooms,
-  }) = _Room;
+class RoomList {
+  final List<RoomModel> rooms;
+
+  RoomList({this.rooms = const []});
 
   factory RoomList.fromFirestoreAsSimple(QuerySnapshot snapshot) {
     if (snapshot.docs.isNotEmpty) {

@@ -6,6 +6,7 @@ import 'package:travo_app/src/constants/constants.dart';
 import 'package:travo_app/src/features/hotels/hotels.dart';
 import 'package:travo_app/src/models/booking_room/booking_room.dart';
 import 'package:travo_app/src/routes/coordinator.dart';
+import 'package:travo_app/src/utils/time_converter.dart';
 
 import '../../checkout.dart';
 import '../bloc/confirm_bloc/confirm_bloc.dart';
@@ -17,6 +18,7 @@ class ConfirmScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
     return BlocProvider(
       create: (_) =>
           ConfirmBloc()..add(ConfirmLoadingEvent(bookingInfo.roomId)),
@@ -38,13 +40,12 @@ class ConfirmScreen extends StatelessWidget {
                 leading: CustomBackButton(ctx: context),
               ),
               Positioned(
-                top: 144,
+                top: tBarHeight,
                 child: SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height - 144 - 25,
+                  width: screenSize.width,
+                  height: screenSize.height - tBarHeight - tBarTitleHeight,
                   child: ListView(
-                    padding: const EdgeInsets.symmetric(horizontal: 25.0)
-                        .copyWith(bottom: 25),
+                    padding: EdgeInsetsConst.hor25.copyWith(bottom: 25),
                     shrinkWrap: true,
                     children: [
                       _progressCheckout(),
@@ -94,7 +95,11 @@ class ConfirmScreen extends StatelessWidget {
         return state.maybeWhen(
           orElse: () => const LoadingWidget(),
           loadingSuccess: (room) => BillWidget(
-            price: room.price.toString(),
+            price: room.price,
+            duration: DateTimeCvt().getDurationDays(
+              bookingInfo.getCheckinDate,
+              bookingInfo.getCheckoutDate,
+            ),
           ),
         );
       },

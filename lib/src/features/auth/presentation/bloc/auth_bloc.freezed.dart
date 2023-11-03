@@ -21,11 +21,12 @@ mixin _$AuthEvent {
     required TResult Function() initialApp,
     required TResult Function(String email) forgotPasswordEvent,
     required TResult Function(String email, String password) loginAccountEvent,
+    required TResult Function() loginSavedAccountEvent,
     required TResult Function(String name, String country, String phone,
             String email, String password)
         signUpEvent,
     required TResult Function() logOutEvent,
-    required TResult Function(String avatar) saveAvatar,
+    required TResult Function(File avatar) saveAvatar,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -33,11 +34,12 @@ mixin _$AuthEvent {
     TResult? Function()? initialApp,
     TResult? Function(String email)? forgotPasswordEvent,
     TResult? Function(String email, String password)? loginAccountEvent,
+    TResult? Function()? loginSavedAccountEvent,
     TResult? Function(String name, String country, String phone, String email,
             String password)?
         signUpEvent,
     TResult? Function()? logOutEvent,
-    TResult? Function(String avatar)? saveAvatar,
+    TResult? Function(File avatar)? saveAvatar,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -45,11 +47,12 @@ mixin _$AuthEvent {
     TResult Function()? initialApp,
     TResult Function(String email)? forgotPasswordEvent,
     TResult Function(String email, String password)? loginAccountEvent,
+    TResult Function()? loginSavedAccountEvent,
     TResult Function(String name, String country, String phone, String email,
             String password)?
         signUpEvent,
     TResult Function()? logOutEvent,
-    TResult Function(String avatar)? saveAvatar,
+    TResult Function(File avatar)? saveAvatar,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -58,6 +61,8 @@ mixin _$AuthEvent {
     required TResult Function(InitialApp value) initialApp,
     required TResult Function(ForgotPasswordEvent value) forgotPasswordEvent,
     required TResult Function(LoginAccountEvent value) loginAccountEvent,
+    required TResult Function(LoginSavedAccountEvent value)
+        loginSavedAccountEvent,
     required TResult Function(SignUpEvent value) signUpEvent,
     required TResult Function(LogOutEvent value) logOutEvent,
     required TResult Function(SaveAvatarEvent value) saveAvatar,
@@ -68,6 +73,7 @@ mixin _$AuthEvent {
     TResult? Function(InitialApp value)? initialApp,
     TResult? Function(ForgotPasswordEvent value)? forgotPasswordEvent,
     TResult? Function(LoginAccountEvent value)? loginAccountEvent,
+    TResult? Function(LoginSavedAccountEvent value)? loginSavedAccountEvent,
     TResult? Function(SignUpEvent value)? signUpEvent,
     TResult? Function(LogOutEvent value)? logOutEvent,
     TResult? Function(SaveAvatarEvent value)? saveAvatar,
@@ -78,6 +84,7 @@ mixin _$AuthEvent {
     TResult Function(InitialApp value)? initialApp,
     TResult Function(ForgotPasswordEvent value)? forgotPasswordEvent,
     TResult Function(LoginAccountEvent value)? loginAccountEvent,
+    TResult Function(LoginSavedAccountEvent value)? loginSavedAccountEvent,
     TResult Function(SignUpEvent value)? signUpEvent,
     TResult Function(LogOutEvent value)? logOutEvent,
     TResult Function(SaveAvatarEvent value)? saveAvatar,
@@ -144,11 +151,12 @@ class _$InitialApp implements InitialApp {
     required TResult Function() initialApp,
     required TResult Function(String email) forgotPasswordEvent,
     required TResult Function(String email, String password) loginAccountEvent,
+    required TResult Function() loginSavedAccountEvent,
     required TResult Function(String name, String country, String phone,
             String email, String password)
         signUpEvent,
     required TResult Function() logOutEvent,
-    required TResult Function(String avatar) saveAvatar,
+    required TResult Function(File avatar) saveAvatar,
   }) {
     return initialApp();
   }
@@ -159,11 +167,12 @@ class _$InitialApp implements InitialApp {
     TResult? Function()? initialApp,
     TResult? Function(String email)? forgotPasswordEvent,
     TResult? Function(String email, String password)? loginAccountEvent,
+    TResult? Function()? loginSavedAccountEvent,
     TResult? Function(String name, String country, String phone, String email,
             String password)?
         signUpEvent,
     TResult? Function()? logOutEvent,
-    TResult? Function(String avatar)? saveAvatar,
+    TResult? Function(File avatar)? saveAvatar,
   }) {
     return initialApp?.call();
   }
@@ -174,11 +183,12 @@ class _$InitialApp implements InitialApp {
     TResult Function()? initialApp,
     TResult Function(String email)? forgotPasswordEvent,
     TResult Function(String email, String password)? loginAccountEvent,
+    TResult Function()? loginSavedAccountEvent,
     TResult Function(String name, String country, String phone, String email,
             String password)?
         signUpEvent,
     TResult Function()? logOutEvent,
-    TResult Function(String avatar)? saveAvatar,
+    TResult Function(File avatar)? saveAvatar,
     required TResult orElse(),
   }) {
     if (initialApp != null) {
@@ -193,6 +203,8 @@ class _$InitialApp implements InitialApp {
     required TResult Function(InitialApp value) initialApp,
     required TResult Function(ForgotPasswordEvent value) forgotPasswordEvent,
     required TResult Function(LoginAccountEvent value) loginAccountEvent,
+    required TResult Function(LoginSavedAccountEvent value)
+        loginSavedAccountEvent,
     required TResult Function(SignUpEvent value) signUpEvent,
     required TResult Function(LogOutEvent value) logOutEvent,
     required TResult Function(SaveAvatarEvent value) saveAvatar,
@@ -206,6 +218,7 @@ class _$InitialApp implements InitialApp {
     TResult? Function(InitialApp value)? initialApp,
     TResult? Function(ForgotPasswordEvent value)? forgotPasswordEvent,
     TResult? Function(LoginAccountEvent value)? loginAccountEvent,
+    TResult? Function(LoginSavedAccountEvent value)? loginSavedAccountEvent,
     TResult? Function(SignUpEvent value)? signUpEvent,
     TResult? Function(LogOutEvent value)? logOutEvent,
     TResult? Function(SaveAvatarEvent value)? saveAvatar,
@@ -219,6 +232,7 @@ class _$InitialApp implements InitialApp {
     TResult Function(InitialApp value)? initialApp,
     TResult Function(ForgotPasswordEvent value)? forgotPasswordEvent,
     TResult Function(LoginAccountEvent value)? loginAccountEvent,
+    TResult Function(LoginSavedAccountEvent value)? loginSavedAccountEvent,
     TResult Function(SignUpEvent value)? signUpEvent,
     TResult Function(LogOutEvent value)? logOutEvent,
     TResult Function(SaveAvatarEvent value)? saveAvatar,
@@ -303,11 +317,12 @@ class _$ForgotPasswordEvent implements ForgotPasswordEvent {
     required TResult Function() initialApp,
     required TResult Function(String email) forgotPasswordEvent,
     required TResult Function(String email, String password) loginAccountEvent,
+    required TResult Function() loginSavedAccountEvent,
     required TResult Function(String name, String country, String phone,
             String email, String password)
         signUpEvent,
     required TResult Function() logOutEvent,
-    required TResult Function(String avatar) saveAvatar,
+    required TResult Function(File avatar) saveAvatar,
   }) {
     return forgotPasswordEvent(email);
   }
@@ -318,11 +333,12 @@ class _$ForgotPasswordEvent implements ForgotPasswordEvent {
     TResult? Function()? initialApp,
     TResult? Function(String email)? forgotPasswordEvent,
     TResult? Function(String email, String password)? loginAccountEvent,
+    TResult? Function()? loginSavedAccountEvent,
     TResult? Function(String name, String country, String phone, String email,
             String password)?
         signUpEvent,
     TResult? Function()? logOutEvent,
-    TResult? Function(String avatar)? saveAvatar,
+    TResult? Function(File avatar)? saveAvatar,
   }) {
     return forgotPasswordEvent?.call(email);
   }
@@ -333,11 +349,12 @@ class _$ForgotPasswordEvent implements ForgotPasswordEvent {
     TResult Function()? initialApp,
     TResult Function(String email)? forgotPasswordEvent,
     TResult Function(String email, String password)? loginAccountEvent,
+    TResult Function()? loginSavedAccountEvent,
     TResult Function(String name, String country, String phone, String email,
             String password)?
         signUpEvent,
     TResult Function()? logOutEvent,
-    TResult Function(String avatar)? saveAvatar,
+    TResult Function(File avatar)? saveAvatar,
     required TResult orElse(),
   }) {
     if (forgotPasswordEvent != null) {
@@ -352,6 +369,8 @@ class _$ForgotPasswordEvent implements ForgotPasswordEvent {
     required TResult Function(InitialApp value) initialApp,
     required TResult Function(ForgotPasswordEvent value) forgotPasswordEvent,
     required TResult Function(LoginAccountEvent value) loginAccountEvent,
+    required TResult Function(LoginSavedAccountEvent value)
+        loginSavedAccountEvent,
     required TResult Function(SignUpEvent value) signUpEvent,
     required TResult Function(LogOutEvent value) logOutEvent,
     required TResult Function(SaveAvatarEvent value) saveAvatar,
@@ -365,6 +384,7 @@ class _$ForgotPasswordEvent implements ForgotPasswordEvent {
     TResult? Function(InitialApp value)? initialApp,
     TResult? Function(ForgotPasswordEvent value)? forgotPasswordEvent,
     TResult? Function(LoginAccountEvent value)? loginAccountEvent,
+    TResult? Function(LoginSavedAccountEvent value)? loginSavedAccountEvent,
     TResult? Function(SignUpEvent value)? signUpEvent,
     TResult? Function(LogOutEvent value)? logOutEvent,
     TResult? Function(SaveAvatarEvent value)? saveAvatar,
@@ -378,6 +398,7 @@ class _$ForgotPasswordEvent implements ForgotPasswordEvent {
     TResult Function(InitialApp value)? initialApp,
     TResult Function(ForgotPasswordEvent value)? forgotPasswordEvent,
     TResult Function(LoginAccountEvent value)? loginAccountEvent,
+    TResult Function(LoginSavedAccountEvent value)? loginSavedAccountEvent,
     TResult Function(SignUpEvent value)? signUpEvent,
     TResult Function(LogOutEvent value)? logOutEvent,
     TResult Function(SaveAvatarEvent value)? saveAvatar,
@@ -475,11 +496,12 @@ class _$LoginAccountEvent implements LoginAccountEvent {
     required TResult Function() initialApp,
     required TResult Function(String email) forgotPasswordEvent,
     required TResult Function(String email, String password) loginAccountEvent,
+    required TResult Function() loginSavedAccountEvent,
     required TResult Function(String name, String country, String phone,
             String email, String password)
         signUpEvent,
     required TResult Function() logOutEvent,
-    required TResult Function(String avatar) saveAvatar,
+    required TResult Function(File avatar) saveAvatar,
   }) {
     return loginAccountEvent(email, password);
   }
@@ -490,11 +512,12 @@ class _$LoginAccountEvent implements LoginAccountEvent {
     TResult? Function()? initialApp,
     TResult? Function(String email)? forgotPasswordEvent,
     TResult? Function(String email, String password)? loginAccountEvent,
+    TResult? Function()? loginSavedAccountEvent,
     TResult? Function(String name, String country, String phone, String email,
             String password)?
         signUpEvent,
     TResult? Function()? logOutEvent,
-    TResult? Function(String avatar)? saveAvatar,
+    TResult? Function(File avatar)? saveAvatar,
   }) {
     return loginAccountEvent?.call(email, password);
   }
@@ -505,11 +528,12 @@ class _$LoginAccountEvent implements LoginAccountEvent {
     TResult Function()? initialApp,
     TResult Function(String email)? forgotPasswordEvent,
     TResult Function(String email, String password)? loginAccountEvent,
+    TResult Function()? loginSavedAccountEvent,
     TResult Function(String name, String country, String phone, String email,
             String password)?
         signUpEvent,
     TResult Function()? logOutEvent,
-    TResult Function(String avatar)? saveAvatar,
+    TResult Function(File avatar)? saveAvatar,
     required TResult orElse(),
   }) {
     if (loginAccountEvent != null) {
@@ -524,6 +548,8 @@ class _$LoginAccountEvent implements LoginAccountEvent {
     required TResult Function(InitialApp value) initialApp,
     required TResult Function(ForgotPasswordEvent value) forgotPasswordEvent,
     required TResult Function(LoginAccountEvent value) loginAccountEvent,
+    required TResult Function(LoginSavedAccountEvent value)
+        loginSavedAccountEvent,
     required TResult Function(SignUpEvent value) signUpEvent,
     required TResult Function(LogOutEvent value) logOutEvent,
     required TResult Function(SaveAvatarEvent value) saveAvatar,
@@ -537,6 +563,7 @@ class _$LoginAccountEvent implements LoginAccountEvent {
     TResult? Function(InitialApp value)? initialApp,
     TResult? Function(ForgotPasswordEvent value)? forgotPasswordEvent,
     TResult? Function(LoginAccountEvent value)? loginAccountEvent,
+    TResult? Function(LoginSavedAccountEvent value)? loginSavedAccountEvent,
     TResult? Function(SignUpEvent value)? signUpEvent,
     TResult? Function(LogOutEvent value)? logOutEvent,
     TResult? Function(SaveAvatarEvent value)? saveAvatar,
@@ -550,6 +577,7 @@ class _$LoginAccountEvent implements LoginAccountEvent {
     TResult Function(InitialApp value)? initialApp,
     TResult Function(ForgotPasswordEvent value)? forgotPasswordEvent,
     TResult Function(LoginAccountEvent value)? loginAccountEvent,
+    TResult Function(LoginSavedAccountEvent value)? loginSavedAccountEvent,
     TResult Function(SignUpEvent value)? signUpEvent,
     TResult Function(LogOutEvent value)? logOutEvent,
     TResult Function(SaveAvatarEvent value)? saveAvatar,
@@ -571,6 +599,145 @@ abstract class LoginAccountEvent implements AuthEvent {
   @JsonKey(ignore: true)
   _$$LoginAccountEventCopyWith<_$LoginAccountEvent> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$LoginSavedAccountEventCopyWith<$Res> {
+  factory _$$LoginSavedAccountEventCopyWith(_$LoginSavedAccountEvent value,
+          $Res Function(_$LoginSavedAccountEvent) then) =
+      __$$LoginSavedAccountEventCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$LoginSavedAccountEventCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$LoginSavedAccountEvent>
+    implements _$$LoginSavedAccountEventCopyWith<$Res> {
+  __$$LoginSavedAccountEventCopyWithImpl(_$LoginSavedAccountEvent _value,
+      $Res Function(_$LoginSavedAccountEvent) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$LoginSavedAccountEvent implements LoginSavedAccountEvent {
+  const _$LoginSavedAccountEvent();
+
+  @override
+  String toString() {
+    return 'AuthEvent.loginSavedAccountEvent()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$LoginSavedAccountEvent);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialApp,
+    required TResult Function(String email) forgotPasswordEvent,
+    required TResult Function(String email, String password) loginAccountEvent,
+    required TResult Function() loginSavedAccountEvent,
+    required TResult Function(String name, String country, String phone,
+            String email, String password)
+        signUpEvent,
+    required TResult Function() logOutEvent,
+    required TResult Function(File avatar) saveAvatar,
+  }) {
+    return loginSavedAccountEvent();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialApp,
+    TResult? Function(String email)? forgotPasswordEvent,
+    TResult? Function(String email, String password)? loginAccountEvent,
+    TResult? Function()? loginSavedAccountEvent,
+    TResult? Function(String name, String country, String phone, String email,
+            String password)?
+        signUpEvent,
+    TResult? Function()? logOutEvent,
+    TResult? Function(File avatar)? saveAvatar,
+  }) {
+    return loginSavedAccountEvent?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialApp,
+    TResult Function(String email)? forgotPasswordEvent,
+    TResult Function(String email, String password)? loginAccountEvent,
+    TResult Function()? loginSavedAccountEvent,
+    TResult Function(String name, String country, String phone, String email,
+            String password)?
+        signUpEvent,
+    TResult Function()? logOutEvent,
+    TResult Function(File avatar)? saveAvatar,
+    required TResult orElse(),
+  }) {
+    if (loginSavedAccountEvent != null) {
+      return loginSavedAccountEvent();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(InitialApp value) initialApp,
+    required TResult Function(ForgotPasswordEvent value) forgotPasswordEvent,
+    required TResult Function(LoginAccountEvent value) loginAccountEvent,
+    required TResult Function(LoginSavedAccountEvent value)
+        loginSavedAccountEvent,
+    required TResult Function(SignUpEvent value) signUpEvent,
+    required TResult Function(LogOutEvent value) logOutEvent,
+    required TResult Function(SaveAvatarEvent value) saveAvatar,
+  }) {
+    return loginSavedAccountEvent(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitialApp value)? initialApp,
+    TResult? Function(ForgotPasswordEvent value)? forgotPasswordEvent,
+    TResult? Function(LoginAccountEvent value)? loginAccountEvent,
+    TResult? Function(LoginSavedAccountEvent value)? loginSavedAccountEvent,
+    TResult? Function(SignUpEvent value)? signUpEvent,
+    TResult? Function(LogOutEvent value)? logOutEvent,
+    TResult? Function(SaveAvatarEvent value)? saveAvatar,
+  }) {
+    return loginSavedAccountEvent?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitialApp value)? initialApp,
+    TResult Function(ForgotPasswordEvent value)? forgotPasswordEvent,
+    TResult Function(LoginAccountEvent value)? loginAccountEvent,
+    TResult Function(LoginSavedAccountEvent value)? loginSavedAccountEvent,
+    TResult Function(SignUpEvent value)? signUpEvent,
+    TResult Function(LogOutEvent value)? logOutEvent,
+    TResult Function(SaveAvatarEvent value)? saveAvatar,
+    required TResult orElse(),
+  }) {
+    if (loginSavedAccountEvent != null) {
+      return loginSavedAccountEvent(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class LoginSavedAccountEvent implements AuthEvent {
+  const factory LoginSavedAccountEvent() = _$LoginSavedAccountEvent;
 }
 
 /// @nodoc
@@ -680,11 +847,12 @@ class _$SignUpEvent implements SignUpEvent {
     required TResult Function() initialApp,
     required TResult Function(String email) forgotPasswordEvent,
     required TResult Function(String email, String password) loginAccountEvent,
+    required TResult Function() loginSavedAccountEvent,
     required TResult Function(String name, String country, String phone,
             String email, String password)
         signUpEvent,
     required TResult Function() logOutEvent,
-    required TResult Function(String avatar) saveAvatar,
+    required TResult Function(File avatar) saveAvatar,
   }) {
     return signUpEvent(name, country, phone, email, password);
   }
@@ -695,11 +863,12 @@ class _$SignUpEvent implements SignUpEvent {
     TResult? Function()? initialApp,
     TResult? Function(String email)? forgotPasswordEvent,
     TResult? Function(String email, String password)? loginAccountEvent,
+    TResult? Function()? loginSavedAccountEvent,
     TResult? Function(String name, String country, String phone, String email,
             String password)?
         signUpEvent,
     TResult? Function()? logOutEvent,
-    TResult? Function(String avatar)? saveAvatar,
+    TResult? Function(File avatar)? saveAvatar,
   }) {
     return signUpEvent?.call(name, country, phone, email, password);
   }
@@ -710,11 +879,12 @@ class _$SignUpEvent implements SignUpEvent {
     TResult Function()? initialApp,
     TResult Function(String email)? forgotPasswordEvent,
     TResult Function(String email, String password)? loginAccountEvent,
+    TResult Function()? loginSavedAccountEvent,
     TResult Function(String name, String country, String phone, String email,
             String password)?
         signUpEvent,
     TResult Function()? logOutEvent,
-    TResult Function(String avatar)? saveAvatar,
+    TResult Function(File avatar)? saveAvatar,
     required TResult orElse(),
   }) {
     if (signUpEvent != null) {
@@ -729,6 +899,8 @@ class _$SignUpEvent implements SignUpEvent {
     required TResult Function(InitialApp value) initialApp,
     required TResult Function(ForgotPasswordEvent value) forgotPasswordEvent,
     required TResult Function(LoginAccountEvent value) loginAccountEvent,
+    required TResult Function(LoginSavedAccountEvent value)
+        loginSavedAccountEvent,
     required TResult Function(SignUpEvent value) signUpEvent,
     required TResult Function(LogOutEvent value) logOutEvent,
     required TResult Function(SaveAvatarEvent value) saveAvatar,
@@ -742,6 +914,7 @@ class _$SignUpEvent implements SignUpEvent {
     TResult? Function(InitialApp value)? initialApp,
     TResult? Function(ForgotPasswordEvent value)? forgotPasswordEvent,
     TResult? Function(LoginAccountEvent value)? loginAccountEvent,
+    TResult? Function(LoginSavedAccountEvent value)? loginSavedAccountEvent,
     TResult? Function(SignUpEvent value)? signUpEvent,
     TResult? Function(LogOutEvent value)? logOutEvent,
     TResult? Function(SaveAvatarEvent value)? saveAvatar,
@@ -755,6 +928,7 @@ class _$SignUpEvent implements SignUpEvent {
     TResult Function(InitialApp value)? initialApp,
     TResult Function(ForgotPasswordEvent value)? forgotPasswordEvent,
     TResult Function(LoginAccountEvent value)? loginAccountEvent,
+    TResult Function(LoginSavedAccountEvent value)? loginSavedAccountEvent,
     TResult Function(SignUpEvent value)? signUpEvent,
     TResult Function(LogOutEvent value)? logOutEvent,
     TResult Function(SaveAvatarEvent value)? saveAvatar,
@@ -826,11 +1000,12 @@ class _$LogOutEvent implements LogOutEvent {
     required TResult Function() initialApp,
     required TResult Function(String email) forgotPasswordEvent,
     required TResult Function(String email, String password) loginAccountEvent,
+    required TResult Function() loginSavedAccountEvent,
     required TResult Function(String name, String country, String phone,
             String email, String password)
         signUpEvent,
     required TResult Function() logOutEvent,
-    required TResult Function(String avatar) saveAvatar,
+    required TResult Function(File avatar) saveAvatar,
   }) {
     return logOutEvent();
   }
@@ -841,11 +1016,12 @@ class _$LogOutEvent implements LogOutEvent {
     TResult? Function()? initialApp,
     TResult? Function(String email)? forgotPasswordEvent,
     TResult? Function(String email, String password)? loginAccountEvent,
+    TResult? Function()? loginSavedAccountEvent,
     TResult? Function(String name, String country, String phone, String email,
             String password)?
         signUpEvent,
     TResult? Function()? logOutEvent,
-    TResult? Function(String avatar)? saveAvatar,
+    TResult? Function(File avatar)? saveAvatar,
   }) {
     return logOutEvent?.call();
   }
@@ -856,11 +1032,12 @@ class _$LogOutEvent implements LogOutEvent {
     TResult Function()? initialApp,
     TResult Function(String email)? forgotPasswordEvent,
     TResult Function(String email, String password)? loginAccountEvent,
+    TResult Function()? loginSavedAccountEvent,
     TResult Function(String name, String country, String phone, String email,
             String password)?
         signUpEvent,
     TResult Function()? logOutEvent,
-    TResult Function(String avatar)? saveAvatar,
+    TResult Function(File avatar)? saveAvatar,
     required TResult orElse(),
   }) {
     if (logOutEvent != null) {
@@ -875,6 +1052,8 @@ class _$LogOutEvent implements LogOutEvent {
     required TResult Function(InitialApp value) initialApp,
     required TResult Function(ForgotPasswordEvent value) forgotPasswordEvent,
     required TResult Function(LoginAccountEvent value) loginAccountEvent,
+    required TResult Function(LoginSavedAccountEvent value)
+        loginSavedAccountEvent,
     required TResult Function(SignUpEvent value) signUpEvent,
     required TResult Function(LogOutEvent value) logOutEvent,
     required TResult Function(SaveAvatarEvent value) saveAvatar,
@@ -888,6 +1067,7 @@ class _$LogOutEvent implements LogOutEvent {
     TResult? Function(InitialApp value)? initialApp,
     TResult? Function(ForgotPasswordEvent value)? forgotPasswordEvent,
     TResult? Function(LoginAccountEvent value)? loginAccountEvent,
+    TResult? Function(LoginSavedAccountEvent value)? loginSavedAccountEvent,
     TResult? Function(SignUpEvent value)? signUpEvent,
     TResult? Function(LogOutEvent value)? logOutEvent,
     TResult? Function(SaveAvatarEvent value)? saveAvatar,
@@ -901,6 +1081,7 @@ class _$LogOutEvent implements LogOutEvent {
     TResult Function(InitialApp value)? initialApp,
     TResult Function(ForgotPasswordEvent value)? forgotPasswordEvent,
     TResult Function(LoginAccountEvent value)? loginAccountEvent,
+    TResult Function(LoginSavedAccountEvent value)? loginSavedAccountEvent,
     TResult Function(SignUpEvent value)? signUpEvent,
     TResult Function(LogOutEvent value)? logOutEvent,
     TResult Function(SaveAvatarEvent value)? saveAvatar,
@@ -923,7 +1104,7 @@ abstract class _$$SaveAvatarEventCopyWith<$Res> {
           _$SaveAvatarEvent value, $Res Function(_$SaveAvatarEvent) then) =
       __$$SaveAvatarEventCopyWithImpl<$Res>;
   @useResult
-  $Res call({String avatar});
+  $Res call({File avatar});
 }
 
 /// @nodoc
@@ -943,7 +1124,7 @@ class __$$SaveAvatarEventCopyWithImpl<$Res>
       null == avatar
           ? _value.avatar
           : avatar // ignore: cast_nullable_to_non_nullable
-              as String,
+              as File,
     ));
   }
 }
@@ -954,7 +1135,7 @@ class _$SaveAvatarEvent implements SaveAvatarEvent {
   const _$SaveAvatarEvent(this.avatar);
 
   @override
-  final String avatar;
+  final File avatar;
 
   @override
   String toString() {
@@ -984,11 +1165,12 @@ class _$SaveAvatarEvent implements SaveAvatarEvent {
     required TResult Function() initialApp,
     required TResult Function(String email) forgotPasswordEvent,
     required TResult Function(String email, String password) loginAccountEvent,
+    required TResult Function() loginSavedAccountEvent,
     required TResult Function(String name, String country, String phone,
             String email, String password)
         signUpEvent,
     required TResult Function() logOutEvent,
-    required TResult Function(String avatar) saveAvatar,
+    required TResult Function(File avatar) saveAvatar,
   }) {
     return saveAvatar(avatar);
   }
@@ -999,11 +1181,12 @@ class _$SaveAvatarEvent implements SaveAvatarEvent {
     TResult? Function()? initialApp,
     TResult? Function(String email)? forgotPasswordEvent,
     TResult? Function(String email, String password)? loginAccountEvent,
+    TResult? Function()? loginSavedAccountEvent,
     TResult? Function(String name, String country, String phone, String email,
             String password)?
         signUpEvent,
     TResult? Function()? logOutEvent,
-    TResult? Function(String avatar)? saveAvatar,
+    TResult? Function(File avatar)? saveAvatar,
   }) {
     return saveAvatar?.call(avatar);
   }
@@ -1014,11 +1197,12 @@ class _$SaveAvatarEvent implements SaveAvatarEvent {
     TResult Function()? initialApp,
     TResult Function(String email)? forgotPasswordEvent,
     TResult Function(String email, String password)? loginAccountEvent,
+    TResult Function()? loginSavedAccountEvent,
     TResult Function(String name, String country, String phone, String email,
             String password)?
         signUpEvent,
     TResult Function()? logOutEvent,
-    TResult Function(String avatar)? saveAvatar,
+    TResult Function(File avatar)? saveAvatar,
     required TResult orElse(),
   }) {
     if (saveAvatar != null) {
@@ -1033,6 +1217,8 @@ class _$SaveAvatarEvent implements SaveAvatarEvent {
     required TResult Function(InitialApp value) initialApp,
     required TResult Function(ForgotPasswordEvent value) forgotPasswordEvent,
     required TResult Function(LoginAccountEvent value) loginAccountEvent,
+    required TResult Function(LoginSavedAccountEvent value)
+        loginSavedAccountEvent,
     required TResult Function(SignUpEvent value) signUpEvent,
     required TResult Function(LogOutEvent value) logOutEvent,
     required TResult Function(SaveAvatarEvent value) saveAvatar,
@@ -1046,6 +1232,7 @@ class _$SaveAvatarEvent implements SaveAvatarEvent {
     TResult? Function(InitialApp value)? initialApp,
     TResult? Function(ForgotPasswordEvent value)? forgotPasswordEvent,
     TResult? Function(LoginAccountEvent value)? loginAccountEvent,
+    TResult? Function(LoginSavedAccountEvent value)? loginSavedAccountEvent,
     TResult? Function(SignUpEvent value)? signUpEvent,
     TResult? Function(LogOutEvent value)? logOutEvent,
     TResult? Function(SaveAvatarEvent value)? saveAvatar,
@@ -1059,6 +1246,7 @@ class _$SaveAvatarEvent implements SaveAvatarEvent {
     TResult Function(InitialApp value)? initialApp,
     TResult Function(ForgotPasswordEvent value)? forgotPasswordEvent,
     TResult Function(LoginAccountEvent value)? loginAccountEvent,
+    TResult Function(LoginSavedAccountEvent value)? loginSavedAccountEvent,
     TResult Function(SignUpEvent value)? signUpEvent,
     TResult Function(LogOutEvent value)? logOutEvent,
     TResult Function(SaveAvatarEvent value)? saveAvatar,
@@ -1072,9 +1260,9 @@ class _$SaveAvatarEvent implements SaveAvatarEvent {
 }
 
 abstract class SaveAvatarEvent implements AuthEvent {
-  const factory SaveAvatarEvent(final String avatar) = _$SaveAvatarEvent;
+  const factory SaveAvatarEvent(final File avatar) = _$SaveAvatarEvent;
 
-  String get avatar;
+  File get avatar;
   @JsonKey(ignore: true)
   _$$SaveAvatarEventCopyWith<_$SaveAvatarEvent> get copyWith =>
       throw _privateConstructorUsedError;

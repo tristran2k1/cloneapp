@@ -30,6 +30,7 @@ class _FlightPaymentScreenState extends State<FlightPaymentScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: theme.colorScheme.background,
       body: SafeArea(
@@ -39,13 +40,12 @@ class _FlightPaymentScreenState extends State<FlightPaymentScreen> {
             leading: CustomBackButton(ctx: context),
           ),
           Positioned(
-            top: 144,
+            top: tBarHeight,
             child: SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height - 144 - 25,
+              width: screenSize.width,
+              height: screenSize.height - tBarHeight - tBarTitleHeight,
               child: ListView(
-                padding: const EdgeInsets.symmetric(horizontal: 25.0)
-                    .copyWith(bottom: 25),
+                padding: EdgeInsetsConst.hor25.copyWith(bottom: 25),
                 shrinkWrap: true,
                 children: [
                   _progressCheckout(),

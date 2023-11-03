@@ -35,7 +35,7 @@ class _PromoScreenState extends State<PromoScreen> {
           leading: CustomBackButton(ctx: context),
           title: "Contact Details",
           child: ListView(
-            padding: const EdgeInsets.symmetric(horizontal: Sizes.p25),
+            padding: EdgeInsetsConst.hor25,
             shrinkWrap: true,
             physics: const ClampingScrollPhysics(),
             children: [

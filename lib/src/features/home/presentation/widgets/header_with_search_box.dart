@@ -17,19 +17,20 @@ class HeaderWithSearchBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
     return SizedBox(
-      height: expandedHeight + 25,
+      height: expandedHeight + tBarTitleHeight,
       child: Stack(
         children: <Widget>[
           SvgPicture.asset(
             Assets.images.appbarBackground,
             alignment: Alignment.center,
-            width: MediaQuery.of(context).size.width,
+            width: screenSize.width,
           ),
           SizedBox(
             height: expandedHeight,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              padding: EdgeInsetsConst.hor25,
               child: CustomAppBar(
                 height: expandedHeight,
                 title: Column(

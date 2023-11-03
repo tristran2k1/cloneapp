@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:travo_app/src/constants/constants.dart';
+import 'package:travo_app/src/constants/img_not_found_base64.dart';
 
 part 'user.freezed.dart';
 part 'user.g.dart';
@@ -13,7 +14,7 @@ class UserAccount with _$UserAccount {
     @Default("") String name,
     @Default("") String email,
     @Default("") String phone,
-    @Default(imgNotFoundUrl) String avatar,
+    @Default(imgNotFoundBase64) String avatar,
     @Default("") String country,
   }) = _UserAccount;
 
@@ -40,7 +41,7 @@ class UserAccount with _$UserAccount {
     final phone = data['phone'] as String?;
     final avatar = data['avatar'] != null && data['avatar'] != ""
         ? data['avatar'] as String
-        : imgNotFoundUrl;
+        : imgNotFoundBase64;
     final country = data['country'] as String?;
     return UserAccount(
       id: id,
@@ -50,5 +51,16 @@ class UserAccount with _$UserAccount {
       avatar: avatar,
       country: country ?? "",
     );
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'email': email,
+      'phone': phone,
+      'country': country,
+      'avatar': avatar
+    };
   }
 }

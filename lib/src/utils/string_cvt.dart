@@ -1,6 +1,8 @@
-import 'package:http/http.dart' show get;
 import 'dart:convert';
 import 'dart:io';
+
+import 'package:http/http.dart' show get;
+import 'package:travo_app/src/constants/img_not_found_base64.dart';
 
 import 'logger.dart';
 
@@ -18,10 +20,9 @@ class ImageCvt {
 
       final bytes = response.bodyBytes;
       return base64Encode(bytes);
-    }
-    catch (e) {
+    } catch (e) {
       logger.e(e);
-      return null;
+      return imgNotFoundBase64;
     }
   }
 }

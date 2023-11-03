@@ -4,11 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:travo_app/src/models/hotel/hotel.dart';
 
-import '../../../domain/remote/firestore_services.dart';
+import '../../../infrastructure/remote/firestore_services.dart';
 
+part 'hotel_detail_bloc.freezed.dart';
 part 'hotel_detail_event.dart';
 part 'hotel_detail_state.dart';
-part 'hotel_detail_bloc.freezed.dart';
 
 class HotelDetailBloc extends Bloc<HotelDetailEvent, HotelDetailState> {
   HotelDetailBloc() : super(const HotelDetailState.initial()) {

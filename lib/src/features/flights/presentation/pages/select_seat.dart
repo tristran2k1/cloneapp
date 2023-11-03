@@ -15,16 +15,11 @@ class SelectSeat extends StatefulWidget {
 }
 
 class _SelectSeatState extends State<SelectSeat> {
-  late ValueNotifier<SeatData?> _selectedSeat;
-
-  @override
-  void initState() {
-    _selectedSeat = ValueNotifier(null);
-    super.initState();
-  }
+  final ValueNotifier<SeatData?> _selectedSeat = ValueNotifier(null);
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
     return Scaffold(
         backgroundColor: theme.colorScheme.background,
         body: SafeArea(
@@ -56,8 +51,8 @@ class _SelectSeatState extends State<SelectSeat> {
               Align(
                 alignment: const Alignment(1, 1),
                 child: Container(
-                  padding: const EdgeInsets.only(top: 10.0),
-                  width: MediaQuery.of(context).size.width - 132,
+                  padding: const EdgeInsets.only(top: 10.0, left: 20.0),
+                  width: screenSize.width - 132,
                   child: SingleChildScrollView(
                     child: Column(
                       children: [

@@ -1,14 +1,13 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+class SeatCoordinator {
+  final int row;
+  final String column;
+  final String classseat;
 
-part 'seat_data.freezed.dart';
-
-@freezed
-class SeatCoordinator with _$SeatCoordinator {
-  const factory SeatCoordinator({
-    required int row,
-    required String column,
-    @Default('Economy') String classseat,
-  }) = _SeatCoordinator;
+  const SeatCoordinator({
+    required this.row,
+    required this.column,
+    this.classseat = 'Economy',
+  });
 
   factory SeatCoordinator.fromString(String seat, String? classseat) =>
       SeatCoordinator(
@@ -16,14 +15,23 @@ class SeatCoordinator with _$SeatCoordinator {
         column: seat.substring(1, 2),
         classseat: classseat ?? 'Economy',
       );
+
+  @override
+  bool operator ==(other) =>
+      other is SeatCoordinator &&
+      runtimeType == other.runtimeType &&
+      row == other.row &&
+      column == other.column &&
+      classseat == other.classseat;
+
+  @override
+  int get hashCode => Object.hash(row, column, classseat);
 }
 
-@unfreezed
-class SeatData with _$SeatData {
-  factory SeatData({
-    required SeatCoordinator seat,
-    required bool isBooked,
-  }) = _SeatData;
+class SeatData {
+  final SeatCoordinator seat;
+  final bool isBooked;
+  SeatData({required this.seat, required this.isBooked});
 
   factory SeatData.setBooked(String seat, String? classseat) => SeatData(
         seat: SeatCoordinator.fromString(seat, classseat),

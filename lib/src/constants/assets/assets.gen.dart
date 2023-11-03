@@ -155,6 +155,18 @@ class $AssetsImagesGen {
   /// File path: assets/images/non_smoking_icon.svg
   String get nonSmokingIcon => 'assets/images/non_smoking_icon.svg';
 
+  /// File path: assets/images/onboarding_01.png
+  AssetGenImage get onboarding01 =>
+      const AssetGenImage('assets/images/onboarding_01.png');
+
+  /// File path: assets/images/onboarding_02.png
+  AssetGenImage get onboarding02 =>
+      const AssetGenImage('assets/images/onboarding_02.png');
+
+  /// File path: assets/images/onboarding_03.png
+  AssetGenImage get onboarding03 =>
+      const AssetGenImage('assets/images/onboarding_03.png');
+
   /// File path: assets/images/parking.svg
   String get parking => 'assets/images/parking.svg';
 
@@ -256,6 +268,9 @@ class $AssetsImagesGen {
         moreIcon,
         nonRefundableIcon,
         nonSmokingIcon,
+        onboarding01,
+        onboarding02,
+        onboarding03,
         parking,
         plusIcon,
         pool,

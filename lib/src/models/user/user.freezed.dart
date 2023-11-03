@@ -175,7 +175,7 @@ class _$_UserAccount implements _UserAccount {
       this.name = "",
       this.email = "",
       this.phone = "",
-      this.avatar = imgNotFoundUrl,
+      this.avatar = imgNotFoundBase64,
       this.country = ""});
 
   factory _$_UserAccount.fromJson(Map<String, dynamic> json) =>

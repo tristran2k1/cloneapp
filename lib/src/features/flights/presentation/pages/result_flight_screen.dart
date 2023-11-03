@@ -31,7 +31,8 @@ class _ResultFlightScreenState extends State<ResultFlightScreen> {
 
   @override
   Widget build(BuildContext context) {
-    _panelHeightOpen = MediaQuery.of(context).size.height * .6;
+    final screenSize = MediaQuery.of(context).size;
+    _panelHeightOpen = screenSize.height * .6;
     return BlocProvider(
       create: (context) =>
           FlightBloc()..add(const FlightEvent.flightLoadingEvent()),
@@ -71,9 +72,8 @@ class _ResultFlightScreenState extends State<ResultFlightScreen> {
                         orElse: () => const LoadingWidget(),
                         loadingFlightSuccess: (flights, _, __) {
                           return SizedBox(
-                            width: MediaQuery.of(context).size.width,
-                            height:
-                                MediaQuery.of(context).size.height - 163 - 20,
+                            width: screenSize.width,
+                            height: screenSize.height - 163 - 20,
                             child: Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 25),

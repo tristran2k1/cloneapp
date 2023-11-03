@@ -27,6 +27,7 @@ class CustomFloatingTextField extends StatelessWidget {
     this.prefixIcon,
     this.boxDecoration,
     this.boxPadding,
+    this.onChanged,
   });
 
   final Alignment? alignment;
@@ -52,6 +53,7 @@ class CustomFloatingTextField extends StatelessWidget {
   final FormFieldValidator<String>? validator;
   final Decoration? boxDecoration;
   final EdgeInsets? boxPadding;
+  final Function(String)? onChanged;
   @override
   Widget build(BuildContext context) {
     return alignment != null
@@ -83,6 +85,7 @@ class CustomFloatingTextField extends StatelessWidget {
           maxLines: maxLines ?? 1,
           decoration: decoration,
           validator: validator,
+          onChanged: onChanged,
         ),
       );
   InputDecoration get decoration => InputDecoration(

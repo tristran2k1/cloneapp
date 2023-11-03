@@ -17,20 +17,22 @@ class BookingSelectDateScreen extends StatefulWidget {
 }
 
 class _BookingSelectDateScreenState extends State<BookingSelectDateScreen> {
-  List<DateTime?> _rangeDatePickerValueWithDefaultValue = [
-    DateTime.now().add(const Duration(days: 1)),
-    DateTime.now().add(const Duration(days: 2)),
-  ];
+  late ValueNotifier<List<DateTime?>> _rangeDatePickerValueWithDefaultValue;
 
   @override
   void initState() {
     if (widget.checkinTime != null) {
-      _rangeDatePickerValueWithDefaultValue = [
-        DateTime.tryParse(widget.checkinTime!),
-        DateTime.tryParse(widget.checkoutTime!)
-      ];
-      super.initState();
+      _rangeDatePickerValueWithDefaultValue = ValueNotifier<List<DateTime?>>([
+        DateTime.parse(widget.checkinTime!),
+        DateTime.parse(widget.checkoutTime!)
+      ]);
+    } else {
+      _rangeDatePickerValueWithDefaultValue = ValueNotifier<List<DateTime?>>([
+        DateTime.now().add(const Duration(days: 1)),
+        DateTime.now().add(const Duration(days: 2)),
+      ]);
     }
+    super.initState();
   }
 
   @override
@@ -71,11 +73,14 @@ class _BookingSelectDateScreenState extends State<BookingSelectDateScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          CalendarDatePicker2(
-            config: config,
-            value: _rangeDatePickerValueWithDefaultValue,
-            onValueChanged: (dates) =>
-                setState(() => _rangeDatePickerValueWithDefaultValue = dates),
+          ValueListenableBuilder(
+            valueListenable: _rangeDatePickerValueWithDefaultValue,
+            builder: (_, __, ___) => CalendarDatePicker2(
+              config: config,
+              value: _rangeDatePickerValueWithDefaultValue.value,
+              onValueChanged: (dates) =>
+                  _rangeDatePickerValueWithDefaultValue.value = dates,
+            ),
           ),
           _selectBtn(context),
           Gap.h15,
@@ -85,36 +90,41 @@ class _BookingSelectDateScreenState extends State<BookingSelectDateScreen> {
     );
   }
 
-  CustomElevatedButton _selectBtn(BuildContext context) {
-    return CustomElevatedButton(
-        text: "Select",
-        buttonStyle: CustomButtonStyles.none,
-        decoration: AppDecoration.gradientPrimaryToIndigo.copyWith(
-          borderRadius: BorderRadiusStyle.roundedBorder28,
-        ),
-        onTap: () {
-          if (_rangeDatePickerValueWithDefaultValue.isNotEmpty &&
-              _rangeDatePickerValueWithDefaultValue.length == 2 &&
-              _rangeDatePickerValueWithDefaultValue[0] !=
-                  _rangeDatePickerValueWithDefaultValue[1]) {
-            Navigator.pop(context, _rangeDatePickerValueWithDefaultValue);
-          } else {
-            XToast.error("Please select valid date");
-          }
-        });
+  Widget _selectBtn(BuildContext context) {
+    return ValueListenableBuilder(
+      valueListenable: _rangeDatePickerValueWithDefaultValue,
+      builder: (_, value, __) => CustomElevatedButton(
+          text: "Select",
+          buttonStyle: CustomButtonStyles.none,
+          decoration: AppDecoration.gradientPrimaryToIndigo.copyWith(
+            borderRadius: BorderRadiusStyle.roundedBorder28,
+          ),
+          onTap: () {
+            if (_rangeDatePickerValueWithDefaultValue.value.isNotEmpty &&
+                _rangeDatePickerValueWithDefaultValue.value.length == 2 &&
+                _rangeDatePickerValueWithDefaultValue.value[0] !=
+                    _rangeDatePickerValueWithDefaultValue.value[1]) {
+              Navigator.pop(
+                  context, _rangeDatePickerValueWithDefaultValue.value);
+            } else {
+              XToast.error("Please select valid date");
+            }
+          }),
+    );
   }
 
-  CustomElevatedButton _cancelBtn(BuildContext context) {
-    return CustomElevatedButton(
-        text: "Cancel",
-        buttonStyle: CustomButtonStyles.none,
-        decoration: AppDecoration.gradientPrimaryToIndigo.copyWith(
-          borderRadius: BorderRadiusStyle.roundedBorder28,
-        ),
-        onTap: () {
-          setState(() {
-            _rangeDatePickerValueWithDefaultValue = [];
-          });
-        });
+  Widget _cancelBtn(BuildContext context) {
+    return ValueListenableBuilder(
+      valueListenable: _rangeDatePickerValueWithDefaultValue,
+      builder: (_, value, __) => CustomElevatedButton(
+          text: "Cancel",
+          buttonStyle: CustomButtonStyles.none,
+          decoration: AppDecoration.gradientPrimaryToIndigo.copyWith(
+            borderRadius: BorderRadiusStyle.roundedBorder28,
+          ),
+          onTap: () {
+            _rangeDatePickerValueWithDefaultValue.value = [];
+          }),
+    );
   }
 }

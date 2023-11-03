@@ -54,3 +54,9 @@ class Gap {
 
 const expandedHeight = 200.0;
 const customToolbarHeight = 56.0;
+const tBarHeight = 144.0;
+const tBarTitleHeight = 25.0;
+
+class EdgeInsetsConst {
+  static const hor25 = EdgeInsets.symmetric(horizontal: 25.0);
+}

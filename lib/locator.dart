@@ -10,9 +10,12 @@ import 'package:travo_app/firebase_options.dart';
 import 'package:travo_app/l10n/localization.dart';
 import 'package:travo_app/l10n/localization_bloc.dart';
 import 'package:travo_app/src/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:travo_app/src/features/notification/notification.dart';
 import 'package:travo_app/src/local_data/share_preference.dart';
 import 'package:travo_app/src/utils/utils.dart';
 import 'package:travo_app/theme/theme_bloc.dart';
+
+import 'src/services/firebase_message.dart';
 
 class AppBlocObserver extends BlocObserver {
   const AppBlocObserver();
@@ -47,7 +50,10 @@ Future<void> locator(FutureOr<Widget> Function() builder) async {
 
   _initGetIt();
 
-  await Future.wait(([UserPrefs.instance.initialize()]));
+  await Future.wait([
+    UserPrefs.instance.initialize(),
+    XFirebaseMessage.instance.initialize(),
+  ]);
 
   Bloc.observer = const AppBlocObserver();
 
@@ -66,4 +72,5 @@ void _initGetIt() {
   GetIt.I.registerLazySingleton(() => AuthBloc());
   GetIt.I.registerLazySingleton(() => ThemeBloc());
   GetIt.I.registerLazySingleton(() => LocalizationBloc());
+  GetIt.I.registerLazySingleton(() => NotificationBloc());
 }

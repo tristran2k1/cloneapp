@@ -17,8 +17,9 @@ class FlightTicketDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
     return Container(
-      width: MediaQuery.of(context).size.width,
+      width: screenSize.width,
       decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.all(

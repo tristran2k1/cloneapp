@@ -672,8 +672,6 @@ abstract class _$$CheckoutLoadingSuccessCopyWith<$Res> {
       __$$CheckoutLoadingSuccessCopyWithImpl<$Res>;
   @useResult
   $Res call({RoomModel room});
-
-  $RoomModelCopyWith<$Res> get room;
 }
 
 /// @nodoc
@@ -695,14 +693,6 @@ class __$$CheckoutLoadingSuccessCopyWithImpl<$Res>
           : room // ignore: cast_nullable_to_non_nullable
               as RoomModel,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $RoomModelCopyWith<$Res> get room {
-    return $RoomModelCopyWith<$Res>(_value.room, (value) {
-      return _then(_value.copyWith(room: value));
-    });
   }
 }
 

@@ -1,21 +1,26 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:travo_app/src/constants/constants.dart';
 
-part 'place.freezed.dart';
+class Place {
+  final String id;
+  final String name;
+  final String image; //url
+  final double rating;
+  bool isFavourite;
 
-@unfreezed
-class Place with _$Place {
-  factory Place({
-    required String id,
-    @Default("") String name,
-    @Default(imgNotFoundUrl) String image, //url
-    @Default(false) bool isFavourite,
-    @Default(0) double rating,
-  }) = _Place;
+  Place({
+    required this.id,
+    this.name = "",
+    this.image = imgNotFoundUrl,
+    this.isFavourite = false,
+    this.rating = 0,
+  });
 
-  factory Place.fromFirestore(DocumentSnapshot<Map<String, dynamic>> document,
-      String id, bool? isFavourite) {
+  factory Place.fromFirestore(
+    DocumentSnapshot<Map<String, dynamic>> document,
+    String id,
+    bool? isFavourite,
+  ) {
     final data = document.data() as Map<String, dynamic>;
 
     final name = data['name'] as String?;
@@ -33,11 +38,9 @@ class Place with _$Place {
   }
 }
 
-@unfreezed
-class PlaceList with _$PlaceList {
-  factory PlaceList({
-    @Default([]) List<Place> places,
-  }) = _PlaceList;
+class PlaceList {
+  final List<Place> places;
+  PlaceList({this.places = const []});
 
   factory PlaceList.fromFirestore(QuerySnapshot snapshot) {
     if (snapshot.docs.isNotEmpty) {

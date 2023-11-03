@@ -12,7 +12,7 @@ _$_UserAccount _$$_UserAccountFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String? ?? "",
       email: json['email'] as String? ?? "",
       phone: json['phone'] as String? ?? "",
-      avatar: json['avatar'] as String? ?? imgNotFoundUrl,
+      avatar: json['avatar'] as String? ?? imgNotFoundBase64,
       country: json['country'] as String? ?? "",
     );
 

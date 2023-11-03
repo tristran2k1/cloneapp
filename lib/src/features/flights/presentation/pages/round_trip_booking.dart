@@ -16,11 +16,11 @@ class RoundTripBooking extends StatefulWidget {
 }
 
 class _RoundTripBookingState extends State<RoundTripBooking> {
-  DateTime? _departureTime;
-  DateTime? _returnTime;
+  final ValueNotifier<DateTime?> _departureTime = ValueNotifier(null);
+  final ValueNotifier<DateTime?> _returnTime = ValueNotifier(null);
 
-  int _passengers = 1;
-  String _classSeat = "Economy";
+  final int _passengers = 1;
+  final _classSeat = "Economy";
 
   late TextEditingController _fromPlaceController;
   late TextEditingController _toPlaceController;
@@ -72,111 +72,117 @@ class _RoundTripBookingState extends State<RoundTripBooking> {
       toController: _toPlaceController,
       onTap: () {
         final tmp = _toPlaceController.text;
-        setState(() {
-          _toPlaceController.text = _fromPlaceController.text;
-          _fromPlaceController.text = tmp;
-        });
+        _toPlaceController.text = _fromPlaceController.text;
+        _fromPlaceController.text = tmp;
       },
     );
   }
 
-  BookingFields _pickReturnDate(BuildContext context) {
-    return BookingFields(
-      icon: Assets.images.calendarOrange,
-      title: "Return",
-      value: _getBookingDateValue(_returnTime),
-      onPressed: () async {
-        final DateTime? picked = await showDatePicker(
-          context: context,
-          currentDate: DateTime.now(),
-          initialDate: DateTime.now().add(const Duration(days: 1)),
-          firstDate: DateTime.now().add(const Duration(days: 1)),
-          lastDate: DateTime(2100),
-          initialEntryMode: DatePickerEntryMode.calendarOnly,
-          builder: (context, child) {
-            return Theme(
-              data: Theme.of(context).copyWith(
-                colorScheme: ColorScheme.light(
-                  primary: theme.colorScheme.primary,
-                  onPrimary: appTheme.blueGray900,
-                  onSurface: theme.colorScheme.primary,
+  Widget _pickReturnDate(BuildContext context) {
+    return ValueListenableBuilder(
+      valueListenable: _returnTime,
+      builder: (_, value, __) => BookingFields(
+        icon: Assets.images.calendarOrange,
+        title: "Return",
+        value: _getBookingDateValue(_returnTime.value),
+        onPressed: () async {
+          final DateTime? picked = await showDatePicker(
+            context: context,
+            currentDate: DateTime.now(),
+            initialDate: DateTime.now().add(const Duration(days: 1)),
+            firstDate: DateTime.now().add(const Duration(days: 1)),
+            lastDate: DateTime(2100),
+            initialEntryMode: DatePickerEntryMode.calendarOnly,
+            builder: (context, child) {
+              return Theme(
+                data: Theme.of(context).copyWith(
+                  colorScheme: ColorScheme.light(
+                    primary: theme.colorScheme.primary,
+                    onPrimary: appTheme.blueGray900,
+                    onSurface: theme.colorScheme.primary,
+                  ),
                 ),
-              ),
-              child: child!,
-            );
-          },
-        );
-        if (picked != null) {
-          setState(() {
-            _returnTime = picked;
-          });
-        }
-      },
-    );
-  }
-
-  BookingFields _pickDepartureDate(BuildContext context) {
-    return BookingFields(
-      icon: Assets.images.calendarOrange,
-      title: "Departure",
-      value: _getBookingDateValue(_departureTime),
-      onPressed: () async {
-        final DateTime? picked = await showDatePicker(
-          context: context,
-          currentDate: DateTime.now(),
-          initialDate: DateTime.now().add(const Duration(days: 1)),
-          firstDate: DateTime.now().add(const Duration(days: 1)),
-          lastDate: DateTime(2100),
-          initialEntryMode: DatePickerEntryMode.calendarOnly,
-          builder: (context, child) {
-            return Theme(
-              data: Theme.of(context).copyWith(
-                colorScheme: ColorScheme.light(
-                  primary: theme.colorScheme.primary,
-                  onPrimary: appTheme.blueGray900,
-                  onSurface: theme.colorScheme.primary,
-                ),
-              ),
-              child: child!,
-            );
-          },
-        );
-        if (picked != null) {
-          setState(() {
-            _departureTime = picked;
-          });
-        }
-      },
-    );
-  }
-
-  CustomElevatedButton _searchBtn() {
-    return CustomElevatedButton(
-      text: "Search",
-      buttonStyle: CustomButtonStyles.none,
-      decoration: AppDecoration.gradientPrimaryToIndigo.copyWith(
-        borderRadius: BorderRadiusStyle.roundedBorder28,
+                child: child!,
+              );
+            },
+          );
+          if (picked != null) {
+            _returnTime.value = picked;
+          }
+        },
       ),
-      onTap: () {
-        if (_fromPlaceController.text.isEmpty ||
-            _toPlaceController.text.isEmpty) {
-          return XToast.error("Please fill your departure and destination");
-        }
+    );
+  }
 
-        if (_departureTime == null || _returnTime == null) {
-          return XToast.error("Please select your departure dates");
-        }
+  Widget _pickDepartureDate(BuildContext context) {
+    return ValueListenableBuilder(
+      valueListenable: _departureTime,
+      builder: (_, value, __) => BookingFields(
+        icon: Assets.images.calendarOrange,
+        title: "Departure",
+        value: _getBookingDateValue(_departureTime.value),
+        onPressed: () async {
+          final DateTime? picked = await showDatePicker(
+            context: context,
+            currentDate: DateTime.now(),
+            initialDate: DateTime.now().add(const Duration(days: 1)),
+            firstDate: DateTime.now().add(const Duration(days: 1)),
+            lastDate: DateTime(2100),
+            initialEntryMode: DatePickerEntryMode.calendarOnly,
+            builder: (context, child) {
+              return Theme(
+                data: Theme.of(context).copyWith(
+                  colorScheme: ColorScheme.light(
+                    primary: theme.colorScheme.primary,
+                    onPrimary: appTheme.blueGray900,
+                    onSurface: theme.colorScheme.primary,
+                  ),
+                ),
+                child: child!,
+              );
+            },
+          );
+          if (picked != null) {
+            _departureTime.value = picked;
+          }
+        },
+      ),
+    );
+  }
 
-        return FlightCoordinator().selectFlight(
-          tripInfo: TripInfo(
-            from: _fromPlaceController.text,
-            to: _toPlaceController.text,
-            date: _departureTime,
-            passengers: _passengers,
-            classSeat: _classSeat,
+  Widget _searchBtn() {
+    return ValueListenableBuilder(
+      valueListenable: _departureTime,
+      builder: (_, value, __) => ValueListenableBuilder(
+        valueListenable: _returnTime,
+        builder: (_, value, __) => CustomElevatedButton(
+          text: "Search",
+          buttonStyle: CustomButtonStyles.none,
+          decoration: AppDecoration.gradientPrimaryToIndigo.copyWith(
+            borderRadius: BorderRadiusStyle.roundedBorder28,
           ),
-        );
-      },
+          onTap: () {
+            if (_fromPlaceController.text.isEmpty ||
+                _toPlaceController.text.isEmpty) {
+              return XToast.error("Please fill your departure and destination");
+            }
+
+            if (_departureTime.value == null || _returnTime.value == null) {
+              return XToast.error("Please select your departure dates");
+            }
+
+            return FlightCoordinator().selectFlight(
+              tripInfo: TripInfo(
+                from: _fromPlaceController.text,
+                to: _toPlaceController.text,
+                date: _departureTime.value,
+                passengers: _passengers,
+                classSeat: _classSeat,
+              ),
+            );
+          },
+        ),
+      ),
     );
   }
 

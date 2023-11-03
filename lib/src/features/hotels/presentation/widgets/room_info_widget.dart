@@ -71,7 +71,7 @@ class RoomInfoWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     _price(room.price),
-                    _chooseBtn(room.id, room.hotel),
+                    _chooseBtn(room.id, room.hotel, room.price),
                   ],
                 ),
               ],
@@ -82,7 +82,7 @@ class RoomInfoWidget extends StatelessWidget {
     );
   }
 
-  Widget _chooseBtn(String id, String hotelId) {
+  Widget _chooseBtn(String id, String hotelId, int price) {
     return CustomElevatedButton(
         text: "Choose",
         contentPadding: const EdgeInsets.symmetric(horizontal: 27),
@@ -94,6 +94,7 @@ class RoomInfoWidget extends StatelessWidget {
             uid: UserPrefs().getUser().id,
             roomId: id,
             hotelId: hotelId,
+            price: price,
           );
           HotelCoordinator().showCheckoutScreen(bookingRoom: bookingInfo);
         });

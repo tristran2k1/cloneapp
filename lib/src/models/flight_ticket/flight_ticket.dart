@@ -1,18 +1,23 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+class FlightTicket {
+  final String name;
+  final String flightNo;
+  final String image;
+  final DateTime? departureDate;
+  final DateTime? arrivalDate;
+  final int price;
+  final String gate;
+  String classSeat;
+  String seat;
 
-part 'flight_ticket.freezed.dart';
-
-@unfreezed
-class FlightTicket with _$FlightTicket {
-  factory FlightTicket({
-    @Default("") String name,
-    @Default('') String flightNo,
-    @Default('') String image, // png path
-    DateTime? departureDate,
-    DateTime? arrivalDate,
-    @Default(0) int price,
-    @Default("") String gate,
-    @Default("Economy") String classSeat,
-    @Default("") String seat,
-  }) = _FlightTicket;
+  FlightTicket({
+    this.name = "",
+    this.flightNo = "",
+    this.image = "",
+    this.departureDate,
+    this.arrivalDate,
+    this.price = 0,
+    this.gate = "",
+    this.classSeat = "Economy",
+    this.seat = "",
+  });
 }

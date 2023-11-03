@@ -153,7 +153,7 @@ class CustomImageView extends StatelessWidget {
         fit: fit ?? BoxFit.cover,
         color: color,
       );
-    } else if(base64Image != null && base64Image!.isNotEmpty) {
+    } else if (base64Image != null && base64Image!.isNotEmpty) {
       return Image.memory(
         base64Decode(base64Image!),
         height: height,

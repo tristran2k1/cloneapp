@@ -215,8 +215,6 @@ abstract class _$$ConfirmBookingEventCopyWith<$Res> {
       __$$ConfirmBookingEventCopyWithImpl<$Res>;
   @useResult
   $Res call({BookingRoomModel bookingInfo});
-
-  $BookingRoomModelCopyWith<$Res> get bookingInfo;
 }
 
 /// @nodoc
@@ -238,14 +236,6 @@ class __$$ConfirmBookingEventCopyWithImpl<$Res>
           : bookingInfo // ignore: cast_nullable_to_non_nullable
               as BookingRoomModel,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $BookingRoomModelCopyWith<$Res> get bookingInfo {
-    return $BookingRoomModelCopyWith<$Res>(_value.bookingInfo, (value) {
-      return _then(_value.copyWith(bookingInfo: value));
-    });
   }
 }
 
@@ -830,8 +820,6 @@ abstract class _$$ConfirmLoadingSuccessCopyWith<$Res> {
       __$$ConfirmLoadingSuccessCopyWithImpl<$Res>;
   @useResult
   $Res call({RoomModel room});
-
-  $RoomModelCopyWith<$Res> get room;
 }
 
 /// @nodoc
@@ -853,14 +841,6 @@ class __$$ConfirmLoadingSuccessCopyWithImpl<$Res>
           : room // ignore: cast_nullable_to_non_nullable
               as RoomModel,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $RoomModelCopyWith<$Res> get room {
-    return $RoomModelCopyWith<$Res>(_value.room, (value) {
-      return _then(_value.copyWith(room: value));
-    });
   }
 }
 

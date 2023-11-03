@@ -5,11 +5,11 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:travo_app/src/local_data/share_preference.dart';
 import 'package:travo_app/src/models/place/place.dart';
 
-import '../../../domain/remote/firestore_services.dart';
+import '../../../infrastructure/remote/firestore_services.dart';
 
+part 'home_bloc.freezed.dart';
 part 'home_event.dart';
 part 'home_state.dart';
-part 'home_bloc.freezed.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(const HomeState.initial()) {

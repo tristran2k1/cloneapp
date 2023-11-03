@@ -1,14 +1,12 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+class CheckItem {
+  final String icon;
+  final String name;
+  bool isAvailable;
+  CheckItem({this.icon = "", this.name = "", this.isAvailable = false});
 
-part 'checkitem.freezed.dart';
-
-@unfreezed
-class CheckItem with _$CheckItem {
-  factory CheckItem({
-    @Default('') String icon,
-    @Default('') String name,
-    @Default(false) bool isAvailable,
-  }) = _CheckItem;
+  void changeAvailable(bool value) {
+    isAvailable = value;
+  }
 }
 
 enum HotelSortByOption {

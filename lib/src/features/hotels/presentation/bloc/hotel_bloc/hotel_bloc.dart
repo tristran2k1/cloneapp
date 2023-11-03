@@ -6,17 +6,18 @@ import 'package:travo_app/src/models/checkitem/checkitem.dart';
 import 'package:travo_app/src/models/hotel/hotel.dart';
 import 'package:travo_app/src/utils/utils.dart';
 
-import '../../../domain/remote/firestore_services.dart';
+import '../../../infrastructure/remote/firestore_services.dart';
 
+part 'hotel_bloc.freezed.dart';
 part 'hotel_event.dart';
 part 'hotel_state.dart';
-part 'hotel_bloc.freezed.dart';
 
 class HotelBloc extends Bloc<HotelEvent, HotelState> {
   HotelBloc() : super(const HotelState.initial()) {
     _firestoreService = HotelFirestoreService();
     on<HotelLoadingEvent>(_onHotelLoadingEvent);
     on<FilterByPriceHotelEvent>(_onFilterByPriceHotelEvent);
+    on<ResetHotelEvent>(_onResetHotelEvent);
   }
   late HotelFirestoreService _firestoreService;
   late HotelList _hotelList;
@@ -33,6 +34,11 @@ class HotelBloc extends Bloc<HotelEvent, HotelState> {
       maxPrice = getMaxPrice(_hotelList.hotels.map((e) => e.price).toList());
       emit(HotelState.loadingHotelSuccess(_hotelList, minPrice, maxPrice));
     }
+  }
+
+  Future<void> _onResetHotelEvent(
+      ResetHotelEvent event, Emitter<HotelState> emit) async {
+    emit(HotelState.loadingHotelSuccess(_hotelList, minPrice, maxPrice));
   }
 
   FutureOr<void> _onFilterByPriceHotelEvent(

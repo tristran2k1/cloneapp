@@ -10,10 +10,6 @@ import 'package:travo_app/src/utils/utils.dart';
 
 class ContactDetailScreen extends StatefulWidget {
   const ContactDetailScreen({super.key, required this.user});
-  // final String name;
-  // final String phone;
-  // final String email;
-  // final String country;
   final UserAccount user;
   @override
   State<ContactDetailScreen> createState() => _ContactDetailScreenState();
@@ -24,7 +20,7 @@ class _ContactDetailScreenState extends State<ContactDetailScreen> {
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
 
-  late Country _selectedCountry;
+  late ValueNotifier<Country> _selectedCountry;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -39,16 +35,17 @@ class _ContactDetailScreenState extends State<ContactDetailScreen> {
     }
   }
 
-  String getPhoneNumer(String phone, String phoneCode) {
+  String getPhoneNumber(String phone, String phoneCode) {
     return phone.substring(phoneCode.length).replaceAll(' ', '');
   }
 
   @override
   void initState() {
     final phoneCode = getPhoneCodeByIso(widget.user.country);
-    _selectedCountry = CountryUtils().getCountryByIsoCode(widget.user.country);
+    _selectedCountry =
+        ValueNotifier(CountryUtils().getCountryByIsoCode(widget.user.country));
     _nameController.text = widget.user.name;
-    _phoneController.text = getPhoneNumer(widget.user.phone, phoneCode);
+    _phoneController.text = getPhoneNumber(widget.user.phone, phoneCode);
     _emailController.text = widget.user.email;
     super.initState();
   }
@@ -72,7 +69,7 @@ class _ContactDetailScreenState extends State<ContactDetailScreen> {
           child: Form(
             key: _formKey,
             child: ListView(
-              padding: const EdgeInsets.symmetric(horizontal: Sizes.p25),
+              padding: EdgeInsetsConst.hor25,
               shrinkWrap: true,
               physics: const ClampingScrollPhysics(),
               children: [
@@ -80,13 +77,13 @@ class _ContactDetailScreenState extends State<ContactDetailScreen> {
                 Wrap(
                   runSpacing: Sizes.p20,
                   children: [
-                    _nameTextField,
-                    _setcountry,
-                    _phoneTextField,
+                    _nameTextField(context),
+                    _setCountry(context),
+                    _phoneTextField(context),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        _emailTextField,
+                        _emailTextField(context),
                         Gap.h10,
                         Text("E-ticket will be sent to your E-mail",
                             style: theme.textTheme.labelSmall!
@@ -105,34 +102,40 @@ class _ContactDetailScreenState extends State<ContactDetailScreen> {
     );
   }
 
-  CustomElevatedButton doneBtn(BuildContext context) {
-    return CustomElevatedButton(
-        text: "Done",
-        buttonStyle: CustomButtonStyles.none,
-        decoration: AppDecoration.gradientPrimaryToIndigo.copyWith(
-          borderRadius: BorderRadiusStyle.roundedBorder28,
-        ),
-        onTap: () {
-          if (_formKey.currentState!.validate()) {
-            return Navigator.pop(
-                context,
-                UserAccount(
-                  id: "id",
-                  name: _nameController.text,
-                  phone:
-                      "+${_selectedCountry.phoneCode} ${_phoneController.text}",
-                  email: _emailController.text,
-                  country: _selectedCountry.isoCode.toString(),
-                ));
-          }
-        });
+  Widget doneBtn(BuildContext context) {
+    return ValueListenableBuilder(
+      valueListenable: _selectedCountry,
+      builder: (context, __, ___) => CustomElevatedButton(
+          text: "Done",
+          buttonStyle: CustomButtonStyles.none,
+          decoration: AppDecoration.gradientPrimaryToIndigo.copyWith(
+            borderRadius: BorderRadiusStyle.roundedBorder28,
+          ),
+          onTap: () {
+            if (_formKey.currentState!.validate()) {
+              return Navigator.pop(
+                  context,
+                  UserAccount(
+                    id: "id",
+                    name: _nameController.text,
+                    phone:
+                        "+${_selectedCountry.value.phoneCode} ${_phoneController.text}",
+                    email: _emailController.text,
+                    country: _selectedCountry.value.isoCode.toString(),
+                  ));
+            }
+          }),
+    );
   }
 
-  Widget get _phoneTextField => CustomFloatingTextField(
+  Widget _phoneTextField(BuildContext context) {
+    return ValueListenableBuilder(
+      valueListenable: _selectedCountry,
+      builder: (context, __, ___) => CustomFloatingTextField(
         prefix: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text("+${_selectedCountry.phoneCode}",
+            Text("+${_selectedCountry.value.phoneCode}",
                 style: theme.textTheme.titleSmall),
             Gap.w10,
             Text("|", style: TextStyle(color: appTheme.gray400)),
@@ -152,58 +155,68 @@ class _ContactDetailScreenState extends State<ContactDetailScreen> {
           }
           return null;
         },
-      );
-  Widget get _setcountry => CustomDropDown(
-      icon: Container(
-          margin: const EdgeInsets.only(right: 10),
-          child: const Icon(Entypo.down_open_big)),
-      value: _selectedCountry.name,
-      labelText: context.tr("country"),
+      ),
+    );
+  }
+
+  Widget _setCountry(BuildContext context) {
+    return ValueListenableBuilder(
+      valueListenable: _selectedCountry,
+      builder: (context, __, ___) => CustomDropDown(
+          icon: Container(
+              margin: const EdgeInsets.only(right: 10),
+              child: const Icon(Entypo.down_open_big)),
+          value: _selectedCountry.value.name,
+          labelText: context.tr("country"),
+          labelStyle: CustomTextStyles.bodyMediumGray700,
+          items: countryList
+              .where((country) =>
+                  country.name != null &&
+                  country.phoneCode != null &&
+                  country.name!.length <= 30)
+              .map((country) => country.name!)
+              .toList(),
+          onChanged: (value) {
+            _selectedCountry.value =
+                countryList.firstWhere((country) => country.name == value);
+          }),
+    );
+  }
+
+  Widget _emailTextField(BuildContext context) {
+    return CustomFloatingTextField(
+      controller: _emailController,
+      focusNode: FocusNode(),
+      labelText: context.tr("email"),
       labelStyle: CustomTextStyles.bodyMediumGray700,
-      items: countryList
-          .where((country) =>
-              country.name != null &&
-              country.phoneCode != null &&
-              country.name!.length <= 30)
-          .map((country) => country.name!)
-          .toList(),
-      onChanged: (value) {
-        setState(() {
-          _selectedCountry =
-              countryList.firstWhere((country) => country.name == value);
-        });
-      });
+      hintText: context.tr("email"),
+      textInputType: TextInputType.emailAddress,
+      validator: (value) {
+        if (value == null) {
+          return context.tr("please_enter_your_email");
+        }
+        if (!value.isValidEmail) {
+          return context.tr("please_enter_valid_email");
+        }
+        return null;
+      },
+    );
+  }
 
-  Widget get _emailTextField => CustomFloatingTextField(
-        controller: _emailController,
-        focusNode: FocusNode(),
-        labelText: context.tr("email"),
-        labelStyle: CustomTextStyles.bodyMediumGray700,
-        hintText: context.tr("email"),
-        textInputType: TextInputType.emailAddress,
-        validator: (value) {
-          if (value == null) {
-            return context.tr("please_enter_your_email");
-          }
-          if (!value.isValidEmail) {
-            return context.tr("please_enter_valid_email");
-          }
-          return null;
-        },
-      );
-
-  Widget get _nameTextField => CustomFloatingTextField(
-        controller: _nameController,
-        focusNode: FocusNode(),
-        labelText: context.tr("name"),
-        labelStyle: CustomTextStyles.bodyMediumGray700,
-        hintText: context.tr("hint_name"),
-        textInputType: TextInputType.name,
-        validator: (value) {
-          if (value == null) {
-            return context.tr("please_enter_your_name");
-          }
-          return null;
-        },
-      );
+  Widget _nameTextField(BuildContext context) {
+    return CustomFloatingTextField(
+      controller: _nameController,
+      focusNode: FocusNode(),
+      labelText: context.tr("name"),
+      labelStyle: CustomTextStyles.bodyMediumGray700,
+      hintText: context.tr("hint_name"),
+      textInputType: TextInputType.name,
+      validator: (value) {
+        if (value == null) {
+          return context.tr("please_enter_your_name");
+        }
+        return null;
+      },
+    );
+  }
 }

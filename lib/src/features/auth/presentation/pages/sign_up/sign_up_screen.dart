@@ -72,8 +72,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   child: Form(
                     key: _formKey,
                     child: ListView(
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: Sizes.p25),
+                      padding: EdgeInsetsConst.hor25,
                       shrinkWrap: true,
                       physics: const ClampingScrollPhysics(),
                       children: [

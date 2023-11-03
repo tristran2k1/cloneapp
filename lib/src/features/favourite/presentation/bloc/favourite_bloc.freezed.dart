@@ -618,8 +618,6 @@ abstract class _$$FavouriteLoadingSuccessCopyWith<$Res> {
       __$$FavouriteLoadingSuccessCopyWithImpl<$Res>;
   @useResult
   $Res call({PlaceList places});
-
-  $PlaceListCopyWith<$Res> get places;
 }
 
 /// @nodoc
@@ -641,14 +639,6 @@ class __$$FavouriteLoadingSuccessCopyWithImpl<$Res>
           : places // ignore: cast_nullable_to_non_nullable
               as PlaceList,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $PlaceListCopyWith<$Res> get places {
-    return $PlaceListCopyWith<$Res>(_value.places, (value) {
-      return _then(_value.copyWith(places: value));
-    });
   }
 }
 

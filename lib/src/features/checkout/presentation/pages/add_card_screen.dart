@@ -32,7 +32,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
   final TextEditingController _expController = TextEditingController();
   final TextEditingController _cvvController = TextEditingController();
 
-  late Country _selectedCountry;
+  late ValueNotifier<Country> _selectedCountry;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -47,13 +47,14 @@ class _AddCardScreenState extends State<AddCardScreen> {
     }
   }
 
-  String getPhoneNumer(String phone, String phoneCode) {
+  String getPhoneNumber(String phone, String phoneCode) {
     return phone.substring(phoneCode.length).replaceAll(' ', '');
   }
 
   @override
   void initState() {
-    _selectedCountry = CountryUtils().getCountryByIsoCode(widget.country);
+    _selectedCountry =
+        ValueNotifier(CountryUtils().getCountryByIsoCode(widget.country));
     _nameController.text = widget.name;
     if (widget.cardNumber != null) {
       _cardController.text = widget.cardNumber!;
@@ -83,7 +84,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
           child: Form(
             key: _formKey,
             child: ListView(
-              padding: const EdgeInsets.symmetric(horizontal: Sizes.p25),
+              padding: EdgeInsetsConst.hor25,
               shrinkWrap: true,
               physics: const ClampingScrollPhysics(),
               children: [
@@ -94,7 +95,7 @@ class _AddCardScreenState extends State<AddCardScreen> {
                     _nameTextField,
                     _cardTextField,
                     _expAndCvv,
-                    _setcountry,
+                    _setCountry(context),
                     doneBtn(context),
                   ],
                 ),
@@ -150,50 +151,56 @@ class _AddCardScreenState extends State<AddCardScreen> {
         ],
       );
 
-  CustomElevatedButton doneBtn(BuildContext context) {
-    return CustomElevatedButton(
-        text: "Done",
-        buttonStyle: CustomButtonStyles.none,
-        decoration: AppDecoration.gradientPrimaryToIndigo.copyWith(
-          borderRadius: BorderRadiusStyle.roundedBorder28,
-        ),
-        onTap: () {
-          if (_formKey.currentState!.validate()) {
-            return Navigator.pop(
-                context,
-                CreditPayment(
-                  name: _nameController.text,
-                  cardNumber: _cardController.text,
-                  expiration: _expController.text,
-                  cvv: _cvvController.text,
-                  country: _selectedCountry.isoCode ?? "",
-                ));
-          } else {
-            XToast.error("Please enter valid data");
-          }
-        });
+  Widget doneBtn(BuildContext context) {
+    return ValueListenableBuilder(
+      valueListenable: _selectedCountry,
+      builder: (context, _, __) => CustomElevatedButton(
+          text: "Done",
+          buttonStyle: CustomButtonStyles.none,
+          decoration: AppDecoration.gradientPrimaryToIndigo.copyWith(
+            borderRadius: BorderRadiusStyle.roundedBorder28,
+          ),
+          onTap: () {
+            if (_formKey.currentState!.validate()) {
+              return Navigator.pop(
+                  context,
+                  CreditPayment(
+                    name: _nameController.text,
+                    cardNumber: _cardController.text,
+                    expiration: _expController.text,
+                    cvv: _cvvController.text,
+                    country: _selectedCountry.value.isoCode ?? "",
+                  ));
+            } else {
+              XToast.error("Please enter valid data");
+            }
+          }),
+    );
   }
 
-  Widget get _setcountry => CustomDropDown(
-      icon: Container(
-          margin: const EdgeInsets.only(right: 10),
-          child: const Icon(Entypo.down_open_big)),
-      value: _selectedCountry.name,
-      labelText: context.tr("country"),
-      labelStyle: CustomTextStyles.bodyMediumGray700,
-      items: countryList
-          .where((country) =>
-              country.name != null &&
-              country.phoneCode != null &&
-              country.name!.length <= 30)
-          .map((country) => country.name!)
-          .toList(),
-      onChanged: (value) {
-        setState(() {
-          _selectedCountry =
-              countryList.firstWhere((country) => country.name == value);
-        });
-      });
+  Widget _setCountry(BuildContext context) {
+    return ValueListenableBuilder(
+      valueListenable: _selectedCountry,
+      builder: (context, _, __) => CustomDropDown(
+          icon: Container(
+              margin: const EdgeInsets.only(right: 10),
+              child: const Icon(Entypo.down_open_big)),
+          value: _selectedCountry.value.name,
+          labelText: context.tr("country"),
+          labelStyle: CustomTextStyles.bodyMediumGray700,
+          items: countryList
+              .where((country) =>
+                  country.name != null &&
+                  country.phoneCode != null &&
+                  country.name!.length <= 30)
+              .map((country) => country.name!)
+              .toList(),
+          onChanged: (value) {
+            _selectedCountry.value =
+                countryList.firstWhere((country) => country.name == value);
+          }),
+    );
+  }
 
   Widget get _cardTextField => CustomFloatingTextField(
         controller: _cardController,

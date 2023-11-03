@@ -23,8 +23,7 @@ class _HotelsScreenState extends State<HotelsScreen> {
   final PanelController _panelController = PanelController();
   final ScrollController _scrollController = ScrollController();
 
-  double? _lowerValue;
-  double? _upperValue;
+  final MinMaxModel _changeValueModel = MinMaxModel();
   double _panelHeightOpen = 0;
   HotelSortByOption? _type;
 
@@ -35,7 +34,8 @@ class _HotelsScreenState extends State<HotelsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    _panelHeightOpen = MediaQuery.of(context).size.height * .6;
+    final screenSize = MediaQuery.of(context).size;
+    _panelHeightOpen = screenSize.height * .6;
 
     return BlocProvider(
       create: (context) =>
@@ -46,15 +46,24 @@ class _HotelsScreenState extends State<HotelsScreen> {
             return XToast.error(hotelstate.message);
           }
           if (hotelstate is LoadingHotelSuccess) {
-            setState(() {
-              _lowerValue = hotelstate.minPrice.toDouble();
-              _upperValue = hotelstate.maxPrice.toDouble();
-            });
+            if (_changeValueModel.lower == null) {
+              _changeValueModel.setLower(hotelstate.minPrice.toDouble());
+              _changeValueModel.setUpper(hotelstate.maxPrice.toDouble());
+            }
           }
         },
         child: Scaffold(
           backgroundColor: theme.colorScheme.background,
-          body: SafeArea(
+          body:
+              // RefreshIndicator(
+              //   onRefresh: () async {
+              //     print("object");
+              //     context
+              //         .read<HotelBloc>()
+              //         .add(const HotelEvent.hotelLoadingEvent());
+              //   },
+              //   child:
+              SafeArea(
             child: SlidingUpPanel(
               backdropEnabled: true,
               defaultPanelState: PanelState.CLOSED,
@@ -69,57 +78,15 @@ class _HotelsScreenState extends State<HotelsScreen> {
               panelBuilder: () => _slidingPanel(),
               body: Stack(
                 children: [
-                  AppBarWithTitle(
-                    leading: CustomBackButton(ctx: context),
-                    title: "Hotels",
-                    actions: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 20),
-                        child: Row(
-                          children: [
-                            ActionButton(
-                              icon: Assets.images.searchIcon,
-                              onPressed: () =>
-                                  HotelCoordinator().showSearchScreen(),
-                            ),
-                            ActionButton(
-                              icon: Assets.images.hamburgerIcon,
-                              onPressed: () => _panelController.open(),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  BlocBuilder<HotelBloc, HotelState>(
-                    builder: (context, state) {
-                      return state.maybeWhen(
-                        orElse: () => const LoadingWidget(),
-                        loadingHotelSuccess: (hotels, _, __) => Positioned(
-                          top: 144,
-                          child: SizedBox(
-                            width: MediaQuery.of(context).size.width,
-                            height: MediaQuery.of(context).size.height - 144,
-                            child: ListView(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 25.0),
-                                shrinkWrap: true,
-                                children: List.generate(
-                                    hotels.hotels.length,
-                                    (index) => HotelprofileItemWidget(
-                                          hotel: hotels.hotels[index],
-                                        ))),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
+                  _appbar(context),
+                  _hotelList(context, screenSize),
                 ],
               ),
             ),
           ),
         ),
       ),
+      // ),
     );
   }
 
@@ -177,7 +144,7 @@ class _HotelsScreenState extends State<HotelsScreen> {
             Gap.h20,
             _applyBtn(context),
             Gap.h15,
-            _resetBtn(),
+            _resetBtn(context),
             Gap.h20,
           ],
         ),
@@ -185,7 +152,7 @@ class _HotelsScreenState extends State<HotelsScreen> {
     );
   }
 
-  CustomElevatedButton _resetBtn() {
+  CustomElevatedButton _resetBtn(BuildContext context) {
     return CustomElevatedButton(
         text: "Reset",
         buttonStyle: CustomButtonStyles.none,
@@ -195,7 +162,11 @@ class _HotelsScreenState extends State<HotelsScreen> {
           color: appTheme.indigo40001.withOpacity(0.1),
           borderRadius: BorderRadiusStyle.roundedBorder28,
         ),
-        onTap: () {});
+        onTap: () {
+          // context.read<HotelBloc>().add(const HotelEvent.resetEvent());
+          _scrollController.position.minScrollExtent;
+          _panelController.close();
+        });
   }
 
   Widget _applyBtn(BuildContext context) {
@@ -214,8 +185,8 @@ class _HotelsScreenState extends State<HotelsScreen> {
                     BlocProvider<HotelBloc>.value(
                       value: context.read<HotelBloc>()
                         ..add(HotelEvent.filterByPrice(
-                            _lowerValue?.toInt() ?? minPrice,
-                            _upperValue?.toInt() ?? maxPrice,
+                            _changeValueModel.lower?.toInt() ?? minPrice,
+                            _changeValueModel.upper?.toInt() ?? maxPrice,
                             _type ?? HotelSortByOption.none)),
                     );
                     _scrollController.position.minScrollExtent;
@@ -245,7 +216,10 @@ class _HotelsScreenState extends State<HotelsScreen> {
 
   Widget _budgetSlider(int min, int max) {
     return FlutterSlider(
-      values: [_lowerValue ?? min.toDouble(), _upperValue ?? max.toDouble()],
+      values: [
+        _changeValueModel.lower ?? min.toDouble(),
+        _changeValueModel.upper ?? max.toDouble()
+      ],
       rangeSlider: true,
       max: max.toDouble(),
       min: min.toDouble(),
@@ -274,8 +248,8 @@ class _HotelsScreenState extends State<HotelsScreen> {
             decoration: BoxDecoration(color: Colors.transparent),
           )),
       onDragging: (handlerIndex, lowerValue, upperValue) {
-        _lowerValue = lowerValue;
-        _upperValue = upperValue;
+        _changeValueModel.setLower(lowerValue);
+        _changeValueModel.setUpper(upperValue);
       },
     );
   }
@@ -293,5 +267,71 @@ class _HotelsScreenState extends State<HotelsScreen> {
             color: appTheme.whiteA700,
           )),
     );
+  }
+
+  Widget _appbar(BuildContext context) {
+    return AppBarWithTitle(
+      leading: CustomBackButton(ctx: context),
+      title: "Hotels",
+      actions: [
+        Padding(
+          padding: const EdgeInsets.only(right: 20),
+          child: Row(
+            children: [
+              ActionButton(
+                icon: Assets.images.searchIcon,
+                onPressed: () => HotelCoordinator().showSearchScreen(),
+              ),
+              ActionButton(
+                icon: Assets.images.hamburgerIcon,
+                onPressed: () => _panelController.open(),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _hotelList(BuildContext context, Size screenSize) {
+    return BlocBuilder<HotelBloc, HotelState>(
+      builder: (context, state) {
+        return state.maybeWhen(
+          orElse: () => const LoadingWidget(),
+          loadingHotelSuccess: (hotels, _, __) => Positioned(
+            top: tBarHeight,
+            child: SizedBox(
+              width: screenSize.width,
+              height: screenSize.height - tBarHeight,
+              child: ListView(
+                  padding: EdgeInsetsConst.hor25,
+                  shrinkWrap: true,
+                  children: List.generate(
+                      hotels.hotels.length,
+                      (index) => HotelProfileItemWidget(
+                            hotel: hotels.hotels[index],
+                          ))),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class MinMaxModel with ChangeNotifier {
+  double? lowerValue;
+  double? upperValue;
+  MinMaxModel({this.lowerValue, this.upperValue});
+  double? get lower => lowerValue;
+  double? get upper => upperValue;
+  void setLower(double value) {
+    lowerValue = value;
+    notifyListeners();
+  }
+
+  void setUpper(double value) {
+    upperValue = value;
+    notifyListeners();
   }
 }

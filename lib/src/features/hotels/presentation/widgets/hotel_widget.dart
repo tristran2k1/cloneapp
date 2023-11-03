@@ -6,14 +6,14 @@ import 'package:travo_app/src/constants/constants.dart';
 import 'package:travo_app/src/features/hotels/hotels.dart';
 import 'package:travo_app/src/models/models.dart';
 
-class HotelprofileItemWidget extends StatefulWidget {
-  const HotelprofileItemWidget({super.key, required this.hotel});
+class HotelProfileItemWidget extends StatefulWidget {
+  const HotelProfileItemWidget({super.key, required this.hotel});
   final Hotel hotel;
   @override
-  State<HotelprofileItemWidget> createState() => _HotelprofileItemWidgetState();
+  State<HotelProfileItemWidget> createState() => _HotelProfileItemWidgetState();
 }
 
-class _HotelprofileItemWidgetState extends State<HotelprofileItemWidget> {
+class _HotelProfileItemWidgetState extends State<HotelProfileItemWidget> {
   final ValueNotifier<bool> _isFavourite = ValueNotifier<bool>(false);
   @override
   void initState() {
@@ -23,6 +23,7 @@ class _HotelprofileItemWidgetState extends State<HotelprofileItemWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
     return Container(
       margin: const EdgeInsets.only(bottom: 20),
       padding: const EdgeInsets.only(bottom: 20),
@@ -34,7 +35,7 @@ class _HotelprofileItemWidgetState extends State<HotelprofileItemWidget> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            height: MediaQuery.of(context).size.height * 0.15,
+            height: screenSize.height * 0.15,
             margin: const EdgeInsets.only(right: 20),
             decoration: AppDecoration.fillGray400.copyWith(
               borderRadius: BorderRadiusStyle.customBorderTL12,

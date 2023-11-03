@@ -52,8 +52,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   child: Form(
                     key: _formKey,
                     child: ListView(
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: Sizes.p25),
+                      padding: EdgeInsetsConst.hor25,
                       shrinkWrap: true,
                       children: [
                         Gap.h25,

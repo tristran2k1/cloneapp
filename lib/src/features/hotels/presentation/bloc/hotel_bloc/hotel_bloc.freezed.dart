@@ -22,6 +22,7 @@ mixin _$HotelEvent {
     required TResult Function(
             int minPrice, int maxPrice, HotelSortByOption type)
         filterByPrice,
+    required TResult Function() resetEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -29,6 +30,7 @@ mixin _$HotelEvent {
     TResult? Function()? hotelLoadingEvent,
     TResult? Function(int minPrice, int maxPrice, HotelSortByOption type)?
         filterByPrice,
+    TResult? Function()? resetEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -36,6 +38,7 @@ mixin _$HotelEvent {
     TResult Function()? hotelLoadingEvent,
     TResult Function(int minPrice, int maxPrice, HotelSortByOption type)?
         filterByPrice,
+    TResult Function()? resetEvent,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,18 +46,21 @@ mixin _$HotelEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(HotelLoadingEvent value) hotelLoadingEvent,
     required TResult Function(FilterByPriceHotelEvent value) filterByPrice,
+    required TResult Function(ResetHotelEvent value) resetEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(HotelLoadingEvent value)? hotelLoadingEvent,
     TResult? Function(FilterByPriceHotelEvent value)? filterByPrice,
+    TResult? Function(ResetHotelEvent value)? resetEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(HotelLoadingEvent value)? hotelLoadingEvent,
     TResult Function(FilterByPriceHotelEvent value)? filterByPrice,
+    TResult Function(ResetHotelEvent value)? resetEvent,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -120,6 +126,7 @@ class _$HotelLoadingEvent implements HotelLoadingEvent {
     required TResult Function(
             int minPrice, int maxPrice, HotelSortByOption type)
         filterByPrice,
+    required TResult Function() resetEvent,
   }) {
     return hotelLoadingEvent();
   }
@@ -130,6 +137,7 @@ class _$HotelLoadingEvent implements HotelLoadingEvent {
     TResult? Function()? hotelLoadingEvent,
     TResult? Function(int minPrice, int maxPrice, HotelSortByOption type)?
         filterByPrice,
+    TResult? Function()? resetEvent,
   }) {
     return hotelLoadingEvent?.call();
   }
@@ -140,6 +148,7 @@ class _$HotelLoadingEvent implements HotelLoadingEvent {
     TResult Function()? hotelLoadingEvent,
     TResult Function(int minPrice, int maxPrice, HotelSortByOption type)?
         filterByPrice,
+    TResult Function()? resetEvent,
     required TResult orElse(),
   }) {
     if (hotelLoadingEvent != null) {
@@ -153,6 +162,7 @@ class _$HotelLoadingEvent implements HotelLoadingEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(HotelLoadingEvent value) hotelLoadingEvent,
     required TResult Function(FilterByPriceHotelEvent value) filterByPrice,
+    required TResult Function(ResetHotelEvent value) resetEvent,
   }) {
     return hotelLoadingEvent(this);
   }
@@ -162,6 +172,7 @@ class _$HotelLoadingEvent implements HotelLoadingEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(HotelLoadingEvent value)? hotelLoadingEvent,
     TResult? Function(FilterByPriceHotelEvent value)? filterByPrice,
+    TResult? Function(ResetHotelEvent value)? resetEvent,
   }) {
     return hotelLoadingEvent?.call(this);
   }
@@ -171,6 +182,7 @@ class _$HotelLoadingEvent implements HotelLoadingEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(HotelLoadingEvent value)? hotelLoadingEvent,
     TResult Function(FilterByPriceHotelEvent value)? filterByPrice,
+    TResult Function(ResetHotelEvent value)? resetEvent,
     required TResult orElse(),
   }) {
     if (hotelLoadingEvent != null) {
@@ -271,6 +283,7 @@ class _$FilterByPriceHotelEvent implements FilterByPriceHotelEvent {
     required TResult Function(
             int minPrice, int maxPrice, HotelSortByOption type)
         filterByPrice,
+    required TResult Function() resetEvent,
   }) {
     return filterByPrice(minPrice, maxPrice, type);
   }
@@ -281,6 +294,7 @@ class _$FilterByPriceHotelEvent implements FilterByPriceHotelEvent {
     TResult? Function()? hotelLoadingEvent,
     TResult? Function(int minPrice, int maxPrice, HotelSortByOption type)?
         filterByPrice,
+    TResult? Function()? resetEvent,
   }) {
     return filterByPrice?.call(minPrice, maxPrice, type);
   }
@@ -291,6 +305,7 @@ class _$FilterByPriceHotelEvent implements FilterByPriceHotelEvent {
     TResult Function()? hotelLoadingEvent,
     TResult Function(int minPrice, int maxPrice, HotelSortByOption type)?
         filterByPrice,
+    TResult Function()? resetEvent,
     required TResult orElse(),
   }) {
     if (filterByPrice != null) {
@@ -304,6 +319,7 @@ class _$FilterByPriceHotelEvent implements FilterByPriceHotelEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(HotelLoadingEvent value) hotelLoadingEvent,
     required TResult Function(FilterByPriceHotelEvent value) filterByPrice,
+    required TResult Function(ResetHotelEvent value) resetEvent,
   }) {
     return filterByPrice(this);
   }
@@ -313,6 +329,7 @@ class _$FilterByPriceHotelEvent implements FilterByPriceHotelEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(HotelLoadingEvent value)? hotelLoadingEvent,
     TResult? Function(FilterByPriceHotelEvent value)? filterByPrice,
+    TResult? Function(ResetHotelEvent value)? resetEvent,
   }) {
     return filterByPrice?.call(this);
   }
@@ -322,6 +339,7 @@ class _$FilterByPriceHotelEvent implements FilterByPriceHotelEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(HotelLoadingEvent value)? hotelLoadingEvent,
     TResult Function(FilterByPriceHotelEvent value)? filterByPrice,
+    TResult Function(ResetHotelEvent value)? resetEvent,
     required TResult orElse(),
   }) {
     if (filterByPrice != null) {
@@ -341,6 +359,118 @@ abstract class FilterByPriceHotelEvent implements HotelEvent {
   @JsonKey(ignore: true)
   _$$FilterByPriceHotelEventCopyWith<_$FilterByPriceHotelEvent> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ResetHotelEventCopyWith<$Res> {
+  factory _$$ResetHotelEventCopyWith(
+          _$ResetHotelEvent value, $Res Function(_$ResetHotelEvent) then) =
+      __$$ResetHotelEventCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ResetHotelEventCopyWithImpl<$Res>
+    extends _$HotelEventCopyWithImpl<$Res, _$ResetHotelEvent>
+    implements _$$ResetHotelEventCopyWith<$Res> {
+  __$$ResetHotelEventCopyWithImpl(
+      _$ResetHotelEvent _value, $Res Function(_$ResetHotelEvent) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$ResetHotelEvent implements ResetHotelEvent {
+  const _$ResetHotelEvent();
+
+  @override
+  String toString() {
+    return 'HotelEvent.resetEvent()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$ResetHotelEvent);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() hotelLoadingEvent,
+    required TResult Function(
+            int minPrice, int maxPrice, HotelSortByOption type)
+        filterByPrice,
+    required TResult Function() resetEvent,
+  }) {
+    return resetEvent();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? hotelLoadingEvent,
+    TResult? Function(int minPrice, int maxPrice, HotelSortByOption type)?
+        filterByPrice,
+    TResult? Function()? resetEvent,
+  }) {
+    return resetEvent?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? hotelLoadingEvent,
+    TResult Function(int minPrice, int maxPrice, HotelSortByOption type)?
+        filterByPrice,
+    TResult Function()? resetEvent,
+    required TResult orElse(),
+  }) {
+    if (resetEvent != null) {
+      return resetEvent();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(HotelLoadingEvent value) hotelLoadingEvent,
+    required TResult Function(FilterByPriceHotelEvent value) filterByPrice,
+    required TResult Function(ResetHotelEvent value) resetEvent,
+  }) {
+    return resetEvent(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(HotelLoadingEvent value)? hotelLoadingEvent,
+    TResult? Function(FilterByPriceHotelEvent value)? filterByPrice,
+    TResult? Function(ResetHotelEvent value)? resetEvent,
+  }) {
+    return resetEvent?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(HotelLoadingEvent value)? hotelLoadingEvent,
+    TResult Function(FilterByPriceHotelEvent value)? filterByPrice,
+    TResult Function(ResetHotelEvent value)? resetEvent,
+    required TResult orElse(),
+  }) {
+    if (resetEvent != null) {
+      return resetEvent(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ResetHotelEvent implements HotelEvent {
+  const factory ResetHotelEvent() = _$ResetHotelEvent;
 }
 
 /// @nodoc
@@ -807,8 +937,6 @@ abstract class _$$LoadingHotelSuccessCopyWith<$Res> {
       __$$LoadingHotelSuccessCopyWithImpl<$Res>;
   @useResult
   $Res call({HotelList hotels, int minPrice, int maxPrice});
-
-  $HotelListCopyWith<$Res> get hotels;
 }
 
 /// @nodoc
@@ -840,14 +968,6 @@ class __$$LoadingHotelSuccessCopyWithImpl<$Res>
           : maxPrice // ignore: cast_nullable_to_non_nullable
               as int,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $HotelListCopyWith<$Res> get hotels {
-    return $HotelListCopyWith<$Res>(_value.hotels, (value) {
-      return _then(_value.copyWith(hotels: value));
-    });
   }
 }
 

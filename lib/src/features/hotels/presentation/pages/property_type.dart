@@ -32,7 +32,7 @@ class _PropertyTypeScreenState extends State<PropertyTypeScreen> {
           title: "Property type",
           child: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              padding: EdgeInsetsConst.hor25,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

@@ -17,19 +17,22 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$LocalizationEvent {
   BuildContext get context => throw _privateConstructorUsedError;
+  bool get isEnglish => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(BuildContext context) changeLanguageEvent,
+    required TResult Function(BuildContext context, bool isEnglish)
+        changeLanguageEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(BuildContext context)? changeLanguageEvent,
+    TResult? Function(BuildContext context, bool isEnglish)?
+        changeLanguageEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(BuildContext context)? changeLanguageEvent,
+    TResult Function(BuildContext context, bool isEnglish)? changeLanguageEvent,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -61,7 +64,7 @@ abstract class $LocalizationEventCopyWith<$Res> {
           LocalizationEvent value, $Res Function(LocalizationEvent) then) =
       _$LocalizationEventCopyWithImpl<$Res, LocalizationEvent>;
   @useResult
-  $Res call({BuildContext context});
+  $Res call({BuildContext context, bool isEnglish});
 }
 
 /// @nodoc
@@ -78,12 +81,17 @@ class _$LocalizationEventCopyWithImpl<$Res, $Val extends LocalizationEvent>
   @override
   $Res call({
     Object? context = null,
+    Object? isEnglish = null,
   }) {
     return _then(_value.copyWith(
       context: null == context
           ? _value.context
           : context // ignore: cast_nullable_to_non_nullable
               as BuildContext,
+      isEnglish: null == isEnglish
+          ? _value.isEnglish
+          : isEnglish // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -96,7 +104,7 @@ abstract class _$$ChangeLanguageEventCopyWith<$Res>
       __$$ChangeLanguageEventCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({BuildContext context});
+  $Res call({BuildContext context, bool isEnglish});
 }
 
 /// @nodoc
@@ -111,12 +119,17 @@ class __$$ChangeLanguageEventCopyWithImpl<$Res>
   @override
   $Res call({
     Object? context = null,
+    Object? isEnglish = null,
   }) {
     return _then(_$ChangeLanguageEvent(
       null == context
           ? _value.context
           : context // ignore: cast_nullable_to_non_nullable
               as BuildContext,
+      null == isEnglish
+          ? _value.isEnglish
+          : isEnglish // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -124,14 +137,16 @@ class __$$ChangeLanguageEventCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ChangeLanguageEvent implements ChangeLanguageEvent {
-  const _$ChangeLanguageEvent(this.context);
+  const _$ChangeLanguageEvent(this.context, this.isEnglish);
 
   @override
   final BuildContext context;
+  @override
+  final bool isEnglish;
 
   @override
   String toString() {
-    return 'LocalizationEvent.changeLanguageEvent(context: $context)';
+    return 'LocalizationEvent.changeLanguageEvent(context: $context, isEnglish: $isEnglish)';
   }
 
   @override
@@ -139,11 +154,13 @@ class _$ChangeLanguageEvent implements ChangeLanguageEvent {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ChangeLanguageEvent &&
-            (identical(other.context, context) || other.context == context));
+            (identical(other.context, context) || other.context == context) &&
+            (identical(other.isEnglish, isEnglish) ||
+                other.isEnglish == isEnglish));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, context);
+  int get hashCode => Object.hash(runtimeType, context, isEnglish);
 
   @JsonKey(ignore: true)
   @override
@@ -155,27 +172,29 @@ class _$ChangeLanguageEvent implements ChangeLanguageEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(BuildContext context) changeLanguageEvent,
+    required TResult Function(BuildContext context, bool isEnglish)
+        changeLanguageEvent,
   }) {
-    return changeLanguageEvent(context);
+    return changeLanguageEvent(context, isEnglish);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(BuildContext context)? changeLanguageEvent,
+    TResult? Function(BuildContext context, bool isEnglish)?
+        changeLanguageEvent,
   }) {
-    return changeLanguageEvent?.call(context);
+    return changeLanguageEvent?.call(context, isEnglish);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(BuildContext context)? changeLanguageEvent,
+    TResult Function(BuildContext context, bool isEnglish)? changeLanguageEvent,
     required TResult orElse(),
   }) {
     if (changeLanguageEvent != null) {
-      return changeLanguageEvent(context);
+      return changeLanguageEvent(context, isEnglish);
     }
     return orElse();
   }
@@ -210,11 +229,13 @@ class _$ChangeLanguageEvent implements ChangeLanguageEvent {
 }
 
 abstract class ChangeLanguageEvent implements LocalizationEvent {
-  const factory ChangeLanguageEvent(final BuildContext context) =
-      _$ChangeLanguageEvent;
+  const factory ChangeLanguageEvent(
+      final BuildContext context, final bool isEnglish) = _$ChangeLanguageEvent;
 
   @override
   BuildContext get context;
+  @override
+  bool get isEnglish;
   @override
   @JsonKey(ignore: true)
   _$$ChangeLanguageEventCopyWith<_$ChangeLanguageEvent> get copyWith =>

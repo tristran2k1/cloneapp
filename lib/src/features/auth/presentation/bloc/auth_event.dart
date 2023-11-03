@@ -7,8 +7,9 @@ abstract class AuthEvent with _$AuthEvent {
       ForgotPasswordEvent;
   const factory AuthEvent.loginAccountEvent(String email, String password) =
       LoginAccountEvent;
+  const factory AuthEvent.loginSavedAccountEvent() = LoginSavedAccountEvent;
   const factory AuthEvent.signUpEvent(String name, String country, String phone,
       String email, String password) = SignUpEvent;
   const factory AuthEvent.logOutEvent() = LogOutEvent;
-  const factory AuthEvent.saveAvatar(String avatar) = SaveAvatarEvent;
+  const factory AuthEvent.saveAvatar(File avatar) = SaveAvatarEvent;
 }

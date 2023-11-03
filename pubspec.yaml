@@ -69,6 +69,10 @@ dependencies:
   mobkit_dashed_border: ^0.0.5
   coupon_uikit: ^0.2.0
   image_picker: ^1.0.4
+  introduction_screen: ^3.1.8
+  firebase_storage: ^11.4.0
+  firebase_messaging: ^14.7.2
+  flutter_local_notifications: ^16.1.0
 
 dev_dependencies:
   flutter_test:
